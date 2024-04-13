@@ -443,12 +443,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h1>Enterprise Application: a metamodel to streamline codebase organization</h1>
 <div class="details">
 <span id="author" class="author">Thibault Morin</span><br>
-<span id="revnumber">version 1,</span>
+<span id="revnumber">version 2,</span>
 <span id="revdate">2024-04-13</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
+<li><a href="#_abstract">Abstract</a></li>
 <li><a href="#_the_motivation">The motivation</a></li>
 <li><a href="#_the_concerns">The concerns</a>
 <ul class="sectlevel2">
@@ -474,14 +475,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_the_note_app_example">The Note app example</a></li>
 <li><a href="#_conclusion">Conclusion</a></li>
+<li><a href="#_bibliography">Bibliography</a></li>
+<li><a href="#_colophon">Colophon</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div id="preamble">
+<div class="sect1">
+<h2 id="_abstract">Abstract</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Distributed under the <a href="https://creativecommons.org/licenses/by/4.0:">CC BY 4.0</a> license.</p>
+<p>The article presents a metamodel of a codebase organization to streamline the thought processes involved in the development of enterprise applications. The metamodel is based on Domain Driven Design, Ports and Adapters Architecture, Command and Query Responsibility Segregation, and Location Transparency. It aims to solve prevalent issues in software development such as ensuring business alignment with solutions, enhancing solution reliability and stability, and improving the codebase&#8217;s maintainability and flexibility. Finally, the article provides an exploration of the metamodel usage through practical application examples.</p>
 </div>
 </div>
 </div>
@@ -515,7 +519,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_the_concerns">The concerns</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When embarking into the creation and management of a codebase for enterprise applications several key concerns arise. These concerns are pivotal to the success of the organization, influencing not only the initial development phase but also the long-term viability and adaptability of the solutions crafted. Let&#8217;s delve into these critical areas:</p>
+<p>When embarking into the creation and management of a codebase for enterprise applications several key concerns arise. These concerns are pivotal to the success of the organization, influencing not only the initial development phase but also the long-term viability and adaptability of the solutions crafted. Let&#8217;s delve into these critical areas.</p>
 </div>
 <div class="sect2">
 <h3 id="_alignment_between_the_business_and_the_solutions">Alignment Between the Business and the Solutions</h3>
@@ -549,7 +553,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="_domain_driven_design_ddd">Domain Driven Design (DDD)</h3>
 <div class="paragraph">
-<p>Domain-Driven Design (DDD) is a sophisticated approach to software development that prioritizes the core logic and functionality of the business domain it aims to serve. The essence of DDD lies in its focus on understanding the business domain deeply and modeling software that reflects this understanding, thereby bridging the gap between technical implementation and business strategy. This methodology is particularly beneficial in complex domains where the business rules and processes are intricate and subject to frequent changes.</p>
+<p>Domain-Driven Design (DDD) <a href="#ddd">[ddd]</a> is a sophisticated approach to software development that prioritizes the core logic and functionality of the business domain it aims to serve. The essence of DDD lies in its focus on understanding the business domain deeply and modeling software that reflects this understanding, thereby bridging the gap between technical implementation and business strategy. This methodology is particularly beneficial in complex domains where the business rules and processes are intricate and subject to frequent changes.</p>
 </div>
 <div class="paragraph">
 <p>In my opinion, DDD is an excellent strategy for thoughtful coding, which is crucial in the creation of complex solutions. It offers valuable tools such as the ubiquitous language, strategic patterns, and tactical patterns.</p>
@@ -574,7 +578,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="_ports_and_adapters_architecture">Ports and Adapters Architecture</h3>
 <div class="paragraph">
-<p>The Ports and Adapters Architecture, also known as the Hexagonal Architecture, divides an application into loosely connected components. This division allows the core application to remain unaffected by external technologies and services.</p>
+<p>The Ports and Adapters Architecture <a href="#hexa">[hexa]</a>, also known as the Hexagonal Architecture, divides an application into loosely connected components. This division allows the core application to remain unaffected by external technologies and services.</p>
 </div>
 <div class="paragraph">
 <p>From my viewpoint, the Ports and Adapters Architecture is an exemplary method for devising and managing complex systems. It introduces valuable concepts like the Hexagon, Ports, and Adapters, which steer clear of entangled code and preserve the integrity of the core business logic from external interferences.</p>
@@ -602,7 +606,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="_command_and_query_responsibility_segregation_cqrs">Command and Query Responsibility Segregation (CQRS)</h3>
 <div class="paragraph">
-<p>The Command and Query Responsibility Segregation (CQRS) pattern is a strategic approach that delineates data operations into two distinct categories: queries for reading data and commands for updating it. This division promotes a more streamlined and efficient process for managing data interactions.</p>
+<p>The Command and Query Responsibility Segregation (CQRS) pattern <a href="#cqrs">[cqrs]</a> is a strategic approach that delineates data operations into two distinct categories: queries for reading data and commands for updating it. This division promotes a more streamlined and efficient process for managing data interactions.</p>
 </div>
 <div class="paragraph">
 <p>I view CQRS as a highly effective framework, particularly within the fast-paced, agile development environment where time is a critical factor. Considering commands and queries separately when planning the implementation of a feature facilitates a thorough evaluation and estimation of the feature&#8217;s impact on both the data and the system as a whole.</p>
@@ -627,7 +631,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="_location_transparency">Location Transparency</h3>
 <div class="paragraph">
-<p>Location Transparency is a principle that enables software components to interact seamlessly without being aware of each other&#8217;s physical location on the network. This concept fosters decoupling and enhances scalability.</p>
+<p>Location Transparency <a href="#loctra">[loctra]</a> is a principle that enables software components to interact seamlessly without being aware of each other&#8217;s physical location on the network. This concept fosters decoupling and enhances scalability.</p>
 </div>
 <div class="paragraph">
 <p>I regard Location Transparency as an excellent strategy for avoiding tight coupling between components, such as the hexagons in the Ports and Adapters Architecture, and for simplifying integrations. Essentially, for any given hexagon, we can establish a contract (i.e., a port) and the implementation of a client (i.e., an adapter) that other hexagons can utilize. This client might employ remote communication methods like REST, AMQP, gRPC, or even local communication strategies such as Inversion of Control or in-process communication.</p>
@@ -698,8 +702,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="title">Figure 2. Metamodel of the codebase: the foundation</div>
 </div>
-<div class="sect4">
-<h5 id="_portadapter_architecture">Port/Adapter Architecture</h5>
+</div>
+<div class="sect3">
+<h4 id="_portadapter_architecture">Port/Adapter Architecture</h4>
 <div class="paragraph">
 <p>Typically, the definition of hexagons is influenced by business considerations, as they correspond to the DDD (Domain-Driven Design) Modules. Nonetheless, the internal organization of the hexagons leans towards a technology-centric approach. This includes, firstly, the architectural segregation into core components, ports, and adapters. Secondly, it encompasses the assembly of these hexagons into a cohesive unit: the deliverable.</p>
 </div>
@@ -713,7 +718,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Figure 3. Port/Adapter Architecture: the hexagon</div>
 </div>
 <div class="paragraph">
-<p>For instance, the implemenation of the REST API exposing the services of the core is located in the driving adapter. On the other hand, the implementation of the RDBMS repository is located in the driven adapter.</p>
+<p>For instance, the implementation of the REST API exposing the services of the core is located in the driving adapter. On the other hand, the implementation of the RDBMS repository is located in the driven adapter.</p>
 </div>
 <div class="paragraph">
 <p>The usage of Port/Adapter Architecture leads to the definition of four main component kinds:</p>
@@ -741,8 +746,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Figure 4. Metamodel of the codebase: with the hexagon&#8217;s component</div>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_service_providers_and_service_consumers">Service Providers and Service Consumers</h5>
+<div class="sect3">
+<h4 id="_service_providers_and_service_consumers">Service Providers and Service Consumers</h4>
 <div class="paragraph">
 <p>Typically, an enterprise application consists of various modules that interact with each other. To facilitate smoother integration among these modules, it&#8217;s common practice for a service provider to offer client implementations of its driving ports. This approach allows a service consumer to directly utilize these implementations, saving significant time. From the perspective of the service consumer, these clients serve as externally driven adapters.</p>
 </div>
@@ -775,8 +780,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Figure 6. Metamodel of the codebase: with the service&#8217;s components</div>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_common_stuff">Common stuff</h5>
+<div class="sect3">
+<h4 id="_common_stuff">Common stuff</h4>
 <div class="paragraph">
 <p>Enterprise applications and their components frequently depend on standardized data structures and shared technical functionalities, such as data serialization, authentication &#8230;&#8203; To enhance reusability, it&#8217;s a common practice to establish standard modules according to the type and technology of adapters. For example, one might implement a module that includes the data structures and behaviors necessary for all core modules. Similarly, another module could be developed to incorporate data structures and behaviors specific to driven adapters that utilize RDBMS technology.</p>
 </div>
@@ -797,8 +802,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Figure 7. Metamodel of the codebase: with the common component</div>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_enterprise_integration">Enterprise Integration</h5>
+<div class="sect3">
+<h4 id="_enterprise_integration">Enterprise Integration</h4>
 <div class="paragraph">
 <p>Enterprise applications frequently interface with technological components, systems, and software applications both within an organization and across different domains. Usually, these implementations adhere to Enterprise Integration Patterns and may range from entirely custom solutions to configurations of pre-existing, off-the-shelf products.</p>
 </div>
@@ -826,7 +831,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="paragraph">
 <p>This indicates that although the primary influence on the codebase of an integration component may not stem from the Port/Adapter Architecture, it can still effectively utilize components closely associated with DDD modules, such as common, client, and API components.</p>
-</div>
 </div>
 </div>
 <div class="sect3">
@@ -1265,11 +1269,46 @@ Furthermore, a deliverable component can be introduced to consolidate all the co
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_bibliography">Bibliography</h2>
+<div class="sectionbody">
+<div class="ulist bibliography">
+<ul class="bibliography">
+<li>
+<p><a id="ddd"></a>[ddd] <a href="https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215">Domain-Driven Design: Tackling Complexity in the Heart of Software</a></p>
+</li>
+<li>
+<p><a id="lddd"></a>[lddd] <a href="https://www.amazon.com/Learning-Domain-Driven-Design-Aligning-Architecture/dp/1098100131">Learning Domain-Driven Design: Aligning Software Architecture and Business Strategy</a></p>
+</li>
+<li>
+<p><a id="evst"></a>[evst] <a href="https://leanpub.com/introducing_eventstorming">Introducing EventStorming</a></p>
+</li>
+<li>
+<p><a id="cqrs"></a>[cqrs] <a href="https://martinfowler.com/bliki/CQRS.html">CQRS</a></p>
+</li>
+<li>
+<p><a id="hexa"></a>[hexa] <a href="https://alistair.cockburn.us/hexagonal-architecture/">Hexagonal Architecture</a></p>
+</li>
+<li>
+<p><a id="loctra"></a>[loctra] <a href="https://www.reactivemanifesto.org/glossary#Location-Transparency">Location Transparency</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_colophon">Colophon</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Distributed under the <a href="https://creativecommons.org/licenses/by/4.0:">CC BY 4.0</a> license.</p>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1<br>
-Last updated 2024-04-13 15:52:16 UTC
+Version 2<br>
+Last updated 2024-04-13 16:47:39 UTC
 </div>
 </div>
 </body>
