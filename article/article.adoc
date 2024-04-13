@@ -12,8 +12,7 @@
 [abstract]
 == Abstract
 
-The article presents a metamodel designed to streamline the organization of codebases in enterprise applications, addressing common software development challenges. It discusses the need for agile development approaches that can adapt to complex systems, emphasizing the importance of aligning business objectives with software solutions. The proposed metamodel leverages Domain Driven Design, Ports and Adapters Architecture, Command and Query Responsibility Segregation, and other strategies to enhance reliability, maintainability, and business alignment of the codebase. The article provides a detailed exploration of these methodologies through practical application examples.
-
+The article presents a metamodel of a codebase organization to streamline the thought processes involved in the development of enterprise applications. The metamodel is based on Domain Driven Design, Ports and Adapters Architecture, Command and Query Responsibility Segregation, and Location Transparency. It aims to solve prevalent issues in software development such as ensuring business alignment with solutions, enhancing solution reliability and stability, and improving the codebase's maintainability and flexibility. Finally, the article provides an exploration of the metamodel usage through practical application examples.
 
 == The motivation
 
