@@ -193,7 +193,7 @@ include::metamodel-common.puml[]
 
 ==== Enterprise Integration
 
-Enterprise applications frequently interface with technological components, systems, and software applications both within an organization and across different domains. Usually, these implementations adhere to Enterprise Integration Patterns and may range from entirely custom solutions to configurations of pre-existing, off-the-shelf products.
+Enterprise applications frequently interface with technological components, systems, and software applications both within an organization and across different domains. Usually, these implementations adhere to Enterprise Integration Patterns <<intpat>> and may range from entirely custom solutions to configurations of pre-existing, off-the-shelf products.
 
 This lead to a new component kind:
 
@@ -456,6 +456,8 @@ As illustrated with the Note App example, even a simple feature such as submitti
 * [[[cqrs]]] https://martinfowler.com/bliki/CQRS.html[CQRS]
 * [[[hexa]]] https://alistair.cockburn.us/hexagonal-architecture/[Hexagonal Architecture]
 * [[[loctra]]] https://www.reactivemanifesto.org/glossary#Location-Transparency[Location Transparency]
+* [[[intpat]]] https://martinfowler.com/books/eip.html[Enterprise Integration Patterns: Designing, Building, and Deploying Messaging Solutions]
+
 
 [colophon]
 == Colophon
