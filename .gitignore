@@ -2,3 +2,4 @@
 *.bak
 *.html
 *.pdf
+dist/

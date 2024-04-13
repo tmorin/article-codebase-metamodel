@@ -1,6 +1,6 @@
 = Enterprise Application: a metamodel to streamline codebase organization
 :author: Thibault Morin
-:docdatetime: 2024-04-13
+:revdate: 2024-04-13
 :revnumber: 1
 :toc:
 :icons: font
