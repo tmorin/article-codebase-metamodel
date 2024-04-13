@@ -245,13 +245,13 @@ The catalog provided is just a starting point. Every codebase can have its own u
 
 Certain patterns have strong ties to specific component types within software architecture, depending on the programming paradigm and architectural principles used. This catalog outlines these associations, particularly suited for teams utilizing the Object-Oriented Programming (OOP) paradigm with a layered architecture background. However, it's important to note that teams with a functional programming background and employing reactive architectures would likely interpret and define these patterns differently.
 
-===== Command
+==== Command
 
 The command pattern comes from the Command Query Responsibility Segregation (CQRS) driver. It is a directive that triggers a specific action, often resulting in changes to the state of an application.
 
 The data structure of the command is usually placed in the API component, while the behavior is located in the core component.
 
-===== Query
+==== Query
 
 The query pattern comes from the Command Query Responsibility Segregation (CQRS) driver. It is a request for information or data from a system without changing the state of the system.
 
@@ -260,37 +260,37 @@ The data structure of the query is typically located in the API component, while
 [NOTE]
 CQRS emphasizes the separation of commands and queries which can lead to the design of two distinct models: one for the command and another for the query. Therefore, the behavior of the query could be located into a different component than the behavior of the command.
 
-===== Result
+==== Result
 
 The result pattern comes from the Command Query Responsibility Segregation (CQRS) driver. It is the output or outcome that is returned after the execution of a command or query.
 
 The data structure of the result is typically located in the API component.
 
-===== Event
+==== Event
 
 The event pattern comes from the domain-driven design (DDD) driver. It is a notification that a significant change or action has occurred within the system.
 
 There is a distinction between Domain Events and Integration Events. Domain Events are internal to the system and are kept in the core component, while Integration Events are external and are placed in the API component for long-term use.
 
-===== Aggregate
+==== Aggregate
 
 The aggregate pattern comes from the domain-driven design (DDD) driver. It is a cluster of domain objects that can be treated as a single unit, often with one of the objects being the aggregate root.
 
 The data structure of the aggregate is typically located in the core component.
 
-===== Factory
+==== Factory
 
 The factory pattern comes from the domain-driven design (DDD) driver. It is responsible for creating complex domain objects, ensuring that created objects are valid and in a consistent state.
 
 The behavior of the factory is usually located near the data structure it is associated with.
 
-===== Repository
+==== Repository
 
 The repository pattern comes from the domain-driven design (DDD) driver. It provides methods to add, remove, and update objects within an Aggregate, abstracting the underlying data storage mechanism.
 
 The contract of the repository is defined in the core component, while the implementation is carried out in a driven adapter component.
 
-===== Service
+==== Service
 
 The service pattern comes from the domain-driven design (DDD) driver. It is an operation offered as an interface that stands alone in the model, without encapsulating state, typically to perform calculations or processing activities.
 
@@ -298,37 +298,37 @@ The contract of the service is generally defined in the core component, with the
 
 However, when the core is complex, it is common to share behaviors within the core leveraging on the Service pattern. In that case, the contract part is skipped and the implementation is located in the core component.
 
-===== Policy
+==== Policy
 
 The policy pattern comes from The domain-driven design (DDD) driver. It is a set of rules or guidelines that dictate how business decisions are made or how business processes are conducted.
 
 The behavior of the policy is typically located in the core component.
 
-===== Read Model
+==== Read Model
 
 The read model pattern comes from the EventStorming concepts. It is a model designed specifically for read operations, optimized for querying and displaying data.
 
 The data structure of the read model is typically located in the API component.
 
-===== Process
+==== Process
 
 The process pattern comes from the EventStorming concepts. It is a sequence of actions or steps taken to achieve a particular end in the domain.
 
 The behavior of the process is located in the core component, with its orchestration managed by a driven adapter component.
 
-===== Saga
+==== Saga
 
 The saga pattern comes from the EventStorming concepts. It is a long-running process that handles events and commands, often involving multiple steps and managing the state across them.
 
 The behavior of the saga is located in the core component, with its orchestration managed by a driven adapter component.
 
-===== Timer
+==== Timer
 
 The timer pattern comes from the EventStorming concepts. It is a mechanism that triggers an event or command after a certain period of time or at specific intervals.
 
 The contract for the timer is defined in the core component, with its implementation carried out in a driven adapter component.
 
-===== Facade
+==== Facade
 
 The facade pattern comes from the EventStorming concepts. It is an interface or abstraction layer that simplifies a set of interfaces or classes, often used to integrate systems or manage complexities.
 
