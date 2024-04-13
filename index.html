@@ -443,7 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h1>Enterprise Application: a metamodel to streamline codebase organization</h1>
 <div class="details">
 <span id="author" class="author">Thibault Morin</span><br>
-<span id="revnumber">version 2,</span>
+<span id="revnumber">version 3,</span>
 <span id="revdate">2024-04-13</span>
 </div>
 <div id="toc" class="toc2">
@@ -805,7 +805,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect3">
 <h4 id="_enterprise_integration">Enterprise Integration</h4>
 <div class="paragraph">
-<p>Enterprise applications frequently interface with technological components, systems, and software applications both within an organization and across different domains. Usually, these implementations adhere to Enterprise Integration Patterns and may range from entirely custom solutions to configurations of pre-existing, off-the-shelf products.</p>
+<p>Enterprise applications frequently interface with technological components, systems, and software applications both within an organization and across different domains. Usually, these implementations adhere to Enterprise Integration Patterns <a href="#intpat">[intpat]</a> and may range from entirely custom solutions to configurations of pre-existing, off-the-shelf products.</p>
 </div>
 <div class="paragraph">
 <p>This lead to a new component kind:</p>
@@ -887,8 +887,9 @@ Moreover, patterns help to save time and effort by providing a structured approa
 <div class="paragraph">
 <p>Certain patterns have strong ties to specific component types within software architecture, depending on the programming paradigm and architectural principles used. This catalog outlines these associations, particularly suited for teams utilizing the Object-Oriented Programming (OOP) paradigm with a layered architecture background. However, it&#8217;s important to note that teams with a functional programming background and employing reactive architectures would likely interpret and define these patterns differently.</p>
 </div>
-<div class="sect4">
-<h5 id="_command">Command</h5>
+</div>
+<div class="sect3">
+<h4 id="_command">Command</h4>
 <div class="paragraph">
 <p>The command pattern comes from the Command Query Responsibility Segregation (CQRS) driver. It is a directive that triggers a specific action, often resulting in changes to the state of an application.</p>
 </div>
@@ -896,8 +897,8 @@ Moreover, patterns help to save time and effort by providing a structured approa
 <p>The data structure of the command is usually placed in the API component, while the behavior is located in the core component.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_query">Query</h5>
+<div class="sect3">
+<h4 id="_query">Query</h4>
 <div class="paragraph">
 <p>The query pattern comes from the Command Query Responsibility Segregation (CQRS) driver. It is a request for information or data from a system without changing the state of the system.</p>
 </div>
@@ -917,8 +918,8 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 </table>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_result">Result</h5>
+<div class="sect3">
+<h4 id="_result">Result</h4>
 <div class="paragraph">
 <p>The result pattern comes from the Command Query Responsibility Segregation (CQRS) driver. It is the output or outcome that is returned after the execution of a command or query.</p>
 </div>
@@ -926,8 +927,8 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 <p>The data structure of the result is typically located in the API component.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_event">Event</h5>
+<div class="sect3">
+<h4 id="_event">Event</h4>
 <div class="paragraph">
 <p>The event pattern comes from the domain-driven design (DDD) driver. It is a notification that a significant change or action has occurred within the system.</p>
 </div>
@@ -935,8 +936,8 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 <p>There is a distinction between Domain Events and Integration Events. Domain Events are internal to the system and are kept in the core component, while Integration Events are external and are placed in the API component for long-term use.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_aggregate">Aggregate</h5>
+<div class="sect3">
+<h4 id="_aggregate">Aggregate</h4>
 <div class="paragraph">
 <p>The aggregate pattern comes from the domain-driven design (DDD) driver. It is a cluster of domain objects that can be treated as a single unit, often with one of the objects being the aggregate root.</p>
 </div>
@@ -944,8 +945,8 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 <p>The data structure of the aggregate is typically located in the core component.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_factory">Factory</h5>
+<div class="sect3">
+<h4 id="_factory">Factory</h4>
 <div class="paragraph">
 <p>The factory pattern comes from the domain-driven design (DDD) driver. It is responsible for creating complex domain objects, ensuring that created objects are valid and in a consistent state.</p>
 </div>
@@ -953,8 +954,8 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 <p>The behavior of the factory is usually located near the data structure it is associated with.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_repository">Repository</h5>
+<div class="sect3">
+<h4 id="_repository">Repository</h4>
 <div class="paragraph">
 <p>The repository pattern comes from the domain-driven design (DDD) driver. It provides methods to add, remove, and update objects within an Aggregate, abstracting the underlying data storage mechanism.</p>
 </div>
@@ -962,8 +963,8 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 <p>The contract of the repository is defined in the core component, while the implementation is carried out in a driven adapter component.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_service">Service</h5>
+<div class="sect3">
+<h4 id="_service">Service</h4>
 <div class="paragraph">
 <p>The service pattern comes from the domain-driven design (DDD) driver. It is an operation offered as an interface that stands alone in the model, without encapsulating state, typically to perform calculations or processing activities.</p>
 </div>
@@ -974,8 +975,8 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 <p>However, when the core is complex, it is common to share behaviors within the core leveraging on the Service pattern. In that case, the contract part is skipped and the implementation is located in the core component.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_policy">Policy</h5>
+<div class="sect3">
+<h4 id="_policy">Policy</h4>
 <div class="paragraph">
 <p>The policy pattern comes from The domain-driven design (DDD) driver. It is a set of rules or guidelines that dictate how business decisions are made or how business processes are conducted.</p>
 </div>
@@ -983,8 +984,8 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 <p>The behavior of the policy is typically located in the core component.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_read_model">Read Model</h5>
+<div class="sect3">
+<h4 id="_read_model">Read Model</h4>
 <div class="paragraph">
 <p>The read model pattern comes from the EventStorming concepts. It is a model designed specifically for read operations, optimized for querying and displaying data.</p>
 </div>
@@ -992,8 +993,8 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 <p>The data structure of the read model is typically located in the API component.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_process">Process</h5>
+<div class="sect3">
+<h4 id="_process">Process</h4>
 <div class="paragraph">
 <p>The process pattern comes from the EventStorming concepts. It is a sequence of actions or steps taken to achieve a particular end in the domain.</p>
 </div>
@@ -1001,8 +1002,8 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 <p>The behavior of the process is located in the core component, with its orchestration managed by a driven adapter component.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_saga">Saga</h5>
+<div class="sect3">
+<h4 id="_saga">Saga</h4>
 <div class="paragraph">
 <p>The saga pattern comes from the EventStorming concepts. It is a long-running process that handles events and commands, often involving multiple steps and managing the state across them.</p>
 </div>
@@ -1010,8 +1011,8 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 <p>The behavior of the saga is located in the core component, with its orchestration managed by a driven adapter component.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_timer">Timer</h5>
+<div class="sect3">
+<h4 id="_timer">Timer</h4>
 <div class="paragraph">
 <p>The timer pattern comes from the EventStorming concepts. It is a mechanism that triggers an event or command after a certain period of time or at specific intervals.</p>
 </div>
@@ -1019,14 +1020,13 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 <p>The contract for the timer is defined in the core component, with its implementation carried out in a driven adapter component.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_facade">Facade</h5>
+<div class="sect3">
+<h4 id="_facade">Facade</h4>
 <div class="paragraph">
 <p>The facade pattern comes from the EventStorming concepts. It is an interface or abstraction layer that simplifies a set of interfaces or classes, often used to integrate systems or manage complexities.</p>
 </div>
 <div class="paragraph">
 <p>The contract for the facade is set up in the API component, while its implementation takes place in the core component. The contract is designed to be used by driving adapter components.</p>
-</div>
 </div>
 </div>
 <div class="sect3">
@@ -1292,6 +1292,9 @@ Furthermore, a deliverable component can be introduced to consolidate all the co
 <li>
 <p><a id="loctra"></a>[loctra] <a href="https://www.reactivemanifesto.org/glossary#Location-Transparency">Location Transparency</a></p>
 </li>
+<li>
+<p><a id="intpat"></a>[intpat] <a href="https://martinfowler.com/books/eip.html">Enterprise Integration Patterns: Designing, Building, and Deploying Messaging Solutions</a></p>
+</li>
 </ul>
 </div>
 </div>
@@ -1307,8 +1310,8 @@ Furthermore, a deliverable component can be introduced to consolidate all the co
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 2<br>
-Last updated 2024-04-13 16:47:39 UTC
+Version 3<br>
+Last updated 2024-04-13 18:05:48 UTC
 </div>
 </div>
 </body>
