@@ -1,7 +1,7 @@
 = Enterprise Application: a metamodel to streamline codebase organization
 :author: Thibault Morin
 :revdate: 2024-04-13
-:revnumber: 3
+:revnumber: 4
 :toc:
 :icons: font
 :source-highlighter: coderay
