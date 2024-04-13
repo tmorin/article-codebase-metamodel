@@ -1,0 +1,37 @@
+@startuml
+' inclusions <1>
+!include https://raw.githubusercontent.com/tmorin/plantuml-libs/v13.0.0/distribution/eventstorming/single.puml
+
+UserInterface("CreateNoteForm")
+
+FacadeCommand("SubmitNote")
+
+Command("CreateNote")
+Command("UpdateNote")
+DomainEvent("NoteMutated")
+
+ReadModel("NoteView")
+ReadModel("NotesView")
+
+Aggregate("Note")
+
+Process("NoteIndexer")
+
+CreateNoteForm --> SubmitNote : executes
+
+SubmitNote --> CreateNote : executes
+SubmitNote --> UpdateNote : executes
+
+CreateNote ..> Note : invoked on
+UpdateNote ..> Note : invoked on
+
+CreateNote ---> NoteMutated : generates
+UpdateNote ---> NoteMutated : generates
+
+Note <.. NoteMutated : applied on
+
+NoteMutated ..> NoteIndexer : triggers
+
+NoteIndexer --> NotesView : updates
+NoteIndexer --> NoteView : updates
+@enduml

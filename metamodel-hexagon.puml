@@ -1,0 +1,24 @@
+@startuml
+hide empty members
+
+struct Codebase
+struct Module
+struct Component
+struct Core
+struct DrivenAdapter as "Driven Adapter"
+struct DrivingAdapter as "Driving Adapter"
+struct Deliverable
+struct Executable
+struct Library
+
+Codebase *--> "*" Module
+Module *--> "*" Component
+
+Component <|-- Core
+Component <|-- DrivenAdapter
+Component <|-- DrivingAdapter
+Component <|-- Deliverable
+
+Deliverable <|-- Executable
+Deliverable <|-- Library
+@enduml
