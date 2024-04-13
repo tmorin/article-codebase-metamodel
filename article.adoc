@@ -9,7 +9,7 @@
 :description: A metamodel to streamline the thought processes involved in organizing a code base.
 :copyright: CC BY 4.0
 
-Distributed under the https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1:[{copyright}] license.
+Distributed under the https://creativecommons.org/licenses/by/4.0:[{copyright}] license.
 
 == The motivation
 
