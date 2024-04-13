@@ -9,7 +9,11 @@
 :description: A metamodel to streamline the thought processes involved in organizing a code base.
 :copyright: CC BY 4.0
 
-Distributed under the https://creativecommons.org/licenses/by/4.0:[{copyright}] license.
+[abstract]
+== Abstract
+
+The article presents a metamodel designed to streamline the organization of codebases in enterprise applications, addressing common software development challenges. It discusses the need for agile development approaches that can adapt to complex systems, emphasizing the importance of aligning business objectives with software solutions. The proposed metamodel leverages Domain Driven Design, Ports and Adapters Architecture, Command and Query Responsibility Segregation, and other strategies to enhance reliability, maintainability, and business alignment of the codebase. The article provides a detailed exploration of these methodologies through practical application examples.
+
 
 == The motivation
 
@@ -50,7 +54,7 @@ In the journey of crafting a robust codebase for custom enterprise solutions, se
 
 === Domain Driven Design (DDD)
 
-Domain-Driven Design (DDD) is a sophisticated approach to software development that prioritizes the core logic and functionality of the business domain it aims to serve. The essence of DDD lies in its focus on understanding the business domain deeply and modeling software that reflects this understanding, thereby bridging the gap between technical implementation and business strategy. This methodology is particularly beneficial in complex domains where the business rules and processes are intricate and subject to frequent changes.
+Domain-Driven Design (DDD) <<ddd>> is a sophisticated approach to software development that prioritizes the core logic and functionality of the business domain it aims to serve. The essence of DDD lies in its focus on understanding the business domain deeply and modeling software that reflects this understanding, thereby bridging the gap between technical implementation and business strategy. This methodology is particularly beneficial in complex domains where the business rules and processes are intricate and subject to frequent changes.
 
 In my opinion, DDD is an excellent strategy for thoughtful coding, which is crucial in the creation of complex solutions. It offers valuable tools such as the ubiquitous language, strategic patterns, and tactical patterns.
 
@@ -62,7 +66,7 @@ From my point of view, Domain Driven Development helps to fulfilled the followin
 
 === Ports and Adapters Architecture
 
-The Ports and Adapters Architecture, also known as the Hexagonal Architecture, divides an application into loosely connected components. This division allows the core application to remain unaffected by external technologies and services.
+The Ports and Adapters Architecture <<hexa>>, also known as the Hexagonal Architecture, divides an application into loosely connected components. This division allows the core application to remain unaffected by external technologies and services.
 
 From my viewpoint, the Ports and Adapters Architecture is an exemplary method for devising and managing complex systems. It introduces valuable concepts like the Hexagon, Ports, and Adapters, which steer clear of entangled code and preserve the integrity of the core business logic from external interferences.
 
@@ -76,7 +80,7 @@ I believe the Ports and Adapters Architecture effectively addresses the followin
 
 === Command and Query Responsibility Segregation (CQRS)
 
-The Command and Query Responsibility Segregation (CQRS) pattern is a strategic approach that delineates data operations into two distinct categories: queries for reading data and commands for updating it. This division promotes a more streamlined and efficient process for managing data interactions.
+The Command and Query Responsibility Segregation (CQRS) pattern <<cqrs>> is a strategic approach that delineates data operations into two distinct categories: queries for reading data and commands for updating it. This division promotes a more streamlined and efficient process for managing data interactions.
 
 I view CQRS as a highly effective framework, particularly within the fast-paced, agile development environment where time is a critical factor. Considering commands and queries separately when planning the implementation of a feature facilitates a thorough evaluation and estimation of the feature's impact on both the data and the system as a whole.
 
@@ -88,7 +92,7 @@ From my perspective, CQRS addresses the following concerns:
 
 === Location Transparency
 
-Location Transparency is a principle that enables software components to interact seamlessly without being aware of each other's physical location on the network. This concept fosters decoupling and enhances scalability.
+Location Transparency <<loctra>> is a principle that enables software components to interact seamlessly without being aware of each other's physical location on the network. This concept fosters decoupling and enhances scalability.
 
 I regard Location Transparency as an excellent strategy for avoiding tight coupling between components, such as the hexagons in the Ports and Adapters Architecture, and for simplifying integrations. Essentially, for any given hexagon, we can establish a contract (i.e., a port) and the implementation of a client (i.e., an adapter) that other hexagons can utilize. This client might employ remote communication methods like REST, AMQP, gRPC, or even local communication strategies such as Inversion of Control or in-process communication.
 
@@ -443,3 +447,18 @@ In the journey of crafting robust, efficient, and adaptable enterprise applicati
 The modular approach, utilizing well-defined patterns and strategic component associations, facilitates clear separation of concerns and promotes ease of testing and adaptability. This not only streamlines the development process but also positions the software to seamlessly integrate new functionalities and respond adeptly to evolving business needs.
 
 As illustrated with the Note App example, even a simple feature such as submitting notes can benefit from a structured, methodical approach to design and implementation, ensuring that each component effectively fulfills its role within the overall system. This guide serves as a blueprint for developers and architects aiming to master the art of enterprise software development, fostering an environment where innovation thrives and software excellence is the norm.
+
+[bibliography]
+== Bibliography
+
+* [[[ddd]]] https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215[Domain-Driven Design: Tackling Complexity in the Heart of Software]
+* [[[lddd]]] https://www.amazon.com/Learning-Domain-Driven-Design-Aligning-Architecture/dp/1098100131[Learning Domain-Driven Design: Aligning Software Architecture and Business Strategy]
+* [[[evst]]] https://leanpub.com/introducing_eventstorming[Introducing EventStorming]
+* [[[cqrs]]] https://martinfowler.com/bliki/CQRS.html[CQRS]
+* [[[hexa]]] https://alistair.cockburn.us/hexagonal-architecture/[Hexagonal Architecture]
+* [[[loctra]]] https://www.reactivemanifesto.org/glossary#Location-Transparency[Location Transparency]
+
+[colophon]
+== Colophon
+
+Distributed under the https://creativecommons.org/licenses/by/4.0:[{copyright}] license.
