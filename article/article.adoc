@@ -237,7 +237,7 @@ Moreover, patterns help to save time and effort by providing a structured approa
 
 EventStorming provides excellent starting points to discover patterns because it provides a unified language of concepts primarily from Domain-Driven Design (DDD) and Command Query Responsibility Segregation (CQRS). Additionally, other concepts are defined to encompass common patterns.
 
-The application of these concepts during the design phase is partially explored in this article: https://dev.to/tmorin/enhancing-business-logic-with-plantuml-and-eventstorming-de0:[Enhancing Business Logic with PlantUML and EventStorming]. This resource provides insights into using these concepts effectively to enhance project architecture and workflow.
+The application of these concepts during the design phase is partially explored in this article: https://dev.to/tmorin/enhancing-business-logic-with-plantuml-and-eventstorming-de0[Enhancing Business Logic with PlantUML and EventStorming]. This resource provides insights into using these concepts effectively to enhance project architecture and workflow.
 
 ==== The catalog
 
