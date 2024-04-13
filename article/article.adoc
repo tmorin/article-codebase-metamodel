@@ -139,7 +139,7 @@ The illustration below depicts the hexagon of the Port/Adapter Architecture, sho
 .Port/Adapter Architecture: the hexagon
 image::hexagon-presentation.svg[]
 
-For instance, the implemenation of the REST API exposing the services of the core is located in the driving adapter. On the other hand, the implementation of the RDBMS repository is located in the driven adapter.
+For instance, the implementation of the REST API exposing the services of the core is located in the driving adapter. On the other hand, the implementation of the RDBMS repository is located in the driven adapter.
 
 The usage of Port/Adapter Architecture leads to the definition of four main component kinds:
 
