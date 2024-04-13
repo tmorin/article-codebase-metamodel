@@ -28,7 +28,7 @@ image::archimate-motivation.png[]
 
 == The concerns
 
-When embarking into the creation and management of a codebase for enterprise applications several key concerns arise. These concerns are pivotal to the success of the organization, influencing not only the initial development phase but also the long-term viability and adaptability of the solutions crafted. Let's delve into these critical areas:
+When embarking into the creation and management of a codebase for enterprise applications several key concerns arise. These concerns are pivotal to the success of the organization, influencing not only the initial development phase but also the long-term viability and adaptability of the solutions crafted. Let's delve into these critical areas.
 
 === Alignment Between the Business and the Solutions
 
@@ -130,7 +130,7 @@ In the structure of the codebase, a DDD module is decomposed into individual com
 include::metamodel-module.puml[]
 ----
 
-===== Port/Adapter Architecture
+==== Port/Adapter Architecture
 
 Typically, the definition of hexagons is influenced by business considerations, as they correspond to the DDD (Domain-Driven Design) Modules. Nonetheless, the internal organization of the hexagons leans towards a technology-centric approach. This includes, firstly, the architectural segregation into core components, ports, and adapters. Secondly, it encompasses the assembly of these hexagons into a cohesive unit: the deliverable.
 
@@ -154,7 +154,7 @@ The usage of Port/Adapter Architecture leads to the definition of four main comp
 include::metamodel-hexagon.puml[]
 ----
 
-===== Service Providers and Service Consumers
+==== Service Providers and Service Consumers
 
 Typically, an enterprise application consists of various modules that interact with each other. To facilitate smoother integration among these modules, it's common practice for a service provider to offer client implementations of its driving ports. This approach allows a service consumer to directly utilize these implementations, saving significant time. From the perspective of the service consumer, these clients serve as externally driven adapters.
 
@@ -174,7 +174,7 @@ This lead to two new component kinds:
 include::metamodel-service.puml[]
 ----
 
-===== Common stuff
+==== Common stuff
 
 Enterprise applications and their components frequently depend on standardized data structures and shared technical functionalities, such as data serialization, authentication ... To enhance reusability, it's a common practice to establish standard modules according to the type and technology of adapters. For example, one might implement a module that includes the data structures and behaviors necessary for all core modules. Similarly, another module could be developed to incorporate data structures and behaviors specific to driven adapters that utilize RDBMS technology.
 
@@ -188,7 +188,7 @@ This also lead to a new component kind:
 include::metamodel-common.puml[]
 ----
 
-===== Enterprise Integration
+==== Enterprise Integration
 
 Enterprise applications frequently interface with technological components, systems, and software applications both within an organization and across different domains. Usually, these implementations adhere to Enterprise Integration Patterns and may range from entirely custom solutions to configurations of pre-existing, off-the-shelf products.
 
