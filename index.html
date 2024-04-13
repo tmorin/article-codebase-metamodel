@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.22">
+<meta name="description" content="A metamodel to streamline the thought processes involved in organizing a code base.">
+<meta name="author" content="Thibault Morin">
+<meta name="copyright" content="CC BY 4.0">
+<title>Enterprise Application: a metamodel to streamline codebase organization</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child{border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active,#footnotes .footnote a:first-of-type:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<h1>Enterprise Application: a metamodel to streamline codebase organization</h1>
+<div class="details">
+<span id="author" class="author">Thibault Morin</span><br>
+<span id="revnumber">version 1,</span>
+<span id="revdate">2024-04-13</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_the_motivation">The motivation</a></li>
+<li><a href="#_the_concerns">The concerns</a>
+<ul class="sectlevel2">
+<li><a href="#_alignment_between_the_business_and_the_solutions">Alignment Between the Business and the Solutions</a></li>
+<li><a href="#_reliability_and_stability_of_the_solutions">Reliability and Stability of the Solutions</a></li>
+<li><a href="#_maintainability_and_flexibility_of_the_codebase">Maintainability and Flexibility of the Codebase</a></li>
+</ul>
+</li>
+<li><a href="#_the_drivers">The drivers</a>
+<ul class="sectlevel2">
+<li><a href="#_domain_driven_design_ddd">Domain Driven Design (DDD)</a></li>
+<li><a href="#_ports_and_adapters_architecture">Ports and Adapters Architecture</a></li>
+<li><a href="#_command_and_query_responsibility_segregation_cqrs">Command and Query Responsibility Segregation (CQRS)</a></li>
+<li><a href="#_location_transparency">Location Transparency</a></li>
+<li><a href="#_very_high_code_coverage_level">Very High Code Coverage Level</a></li>
+</ul>
+</li>
+<li><a href="#_the_metamodel">The metamodel</a>
+<ul class="sectlevel2">
+<li><a href="#_divide_to_conquer">Divide to conquer</a></li>
+<li><a href="#_think_less_reuse_more">Think less, reuse more</a></li>
+</ul>
+</li>
+<li><a href="#_the_note_app_example">The Note app example</a></li>
+<li><a href="#_conclusion">Conclusion</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Distributed under the <a href="https://creativecommons.org/licenses/by/4.0:">CC BY 4.0</a> license.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_motivation">The motivation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the fast-paced world of software development, agility has become the guiding principle for teams seeking to innovate and deliver value swiftly. This approach emphasizes rapid development cycles, where features are rolled out incrementally, allowing for quick delivery and early feedback. The agility model has revolutionized the software development process, enhancing efficiency and adaptability. Yet, this very model introduces unique challenges, particularly in the realm of custom solutions for enterprise applications. The inherent complexity of these applications does not seamlessly align with the agility paradigm, where rapid and incremental changes are the norms. Such complexity demands thoughtful consideration and time — commodities often in short supply in agile environments.</p>
+</div>
+<div class="paragraph">
+<p>Despite these challenges, a well-considered approach to software development can significantly streamline the process, even within the intricate landscape of enterprise applications. Embracing heuristics and a mindset of acceptance towards the limitations of time allows us to navigate the complexities more effectively. However, the quest for a one-size-fits-all solution to address these complexities is futile. Solutions are inherently contextual, and a universal strategy that addresses all concerns is, at best, hypothetical.</p>
+</div>
+<div class="paragraph">
+<p>This article explores the complexities of structuring a codebase for creating bespoke solutions in enterprise applications. Drawing on my 15 years of experience focused on custom solutions with long-term projects, I suggest a metamodel that facilitates the design of heuristics to simplify the thought processes.</p>
+</div>
+<div class="paragraph">
+<p>At the core of the metamodel are principles such as Domain Driven Design, the Port/Adapter Architecture, Command and Query Responsibility Segregation, and Location Transparency, all underpinned by a commitment to high code coverage. Together, these elements form the cornerstone of a codebase that not only meets the immediate demands of agility but also addresses the broader concerns of aligning with business goals, ensuring reliability, and maintaining flexibility.</p>
+</div>
+<div class="paragraph">
+<p>The following Archimate Motivation View is a good way to visualize the reasoning behind this proposal.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="archimate-motivation.png" alt="archimate motivation">
+</div>
+<div class="title">Figure 1. Archimate Motivation View</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_concerns">The concerns</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When embarking into the creation and management of a codebase for enterprise applications several key concerns arise. These concerns are pivotal to the success of the organization, influencing not only the initial development phase but also the long-term viability and adaptability of the solutions crafted. Let&#8217;s delve into these critical areas:</p>
+</div>
+<div class="sect2">
+<h3 id="_alignment_between_the_business_and_the_solutions">Alignment Between the Business and the Solutions</h3>
+<div class="paragraph">
+<p>One of the paramount challenges in the development of enterprise applications is ensuring that the final solutions aligns closely with business requirements and objectives. This alignment is not just a desirable attribute but a fundamental necessity for the success of any enterprise. Unfortunately, as many seasoned IT professionals can attest, discrepancies between business expectations and the implemented solutions are not uncommon. These discrepancies can range from minor issues, such as terminology misalignment and business rule misinterpretations, to more significant concerns like flawed data model designs. Such misalignment not only result in financial losses but can also erode the trust between IT service providers, stakeholders, and shareholders, ultimately impacting the project&#8217;s overall success and the organization&#8217;s reputation.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_reliability_and_stability_of_the_solutions">Reliability and Stability of the Solutions</h3>
+<div class="paragraph">
+<p>Reliability and stability are the bedrocks upon which enterprise applications should be built. These characteristics ensure that solutions perform consistently under expected conditions and possesses the resilience needed to withstand unexpected situations. Drawing from my own experience, as well as the collective wisdom of the IT community, it&#8217;s clear that failing to meet these criteria—evidenced by solutions that does not pass User Acceptance Testing (UAT) or falters under unforeseen circumstances—can have dire consequences. These include not just immediate financial losses, but also long-term reputational damage and potential legal ramifications, all of which can significantly set back an organization&#8217;s progress.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_maintainability_and_flexibility_of_the_codebase">Maintainability and Flexibility of the Codebase</h3>
+<div class="paragraph">
+<p>The maintainability and flexibility of a codebase are crucial for the long-term health and scalability of solutions. A well-organized codebase enables developers to understand, modify, and extend the software efficiently, thereby adapting to new requirements or addressing issues as they arise. In contrast, a codebase that resembles a "nightmare"—difficult to decipher, modify, or expand—poses numerous challenges. It can lead to regression bugs, performance bottlenecks, and security vulnerabilities. Moreover, a poorly maintained codebase can affect team morale, diminish job satisfaction, and hinder an organization&#8217;s ability to attract and retain talent. Ensuring that the codebase remains clean, well-documented, and adherent to best practices is not just a technical requirement but a strategic imperative for fostering innovation and maintaining competitive edge.</p>
+</div>
+<div class="paragraph">
+<p>In summary, the organization of a codebase for enterprise applications must address these critical concerns with diligence and foresight. By prioritizing alignment with the domain, reliability, stability, maintainability and flexibility, developers can lay a solid foundation for solutions that not only meets today&#8217;s challenges but is also poised to tackle tomorrow&#8217;s opportunities.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_drivers">The drivers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the journey of crafting a robust codebase for custom enterprise solutions, several key drivers pave the way for addressing common concerns while fostering innovation and efficiency. Let&#8217;s dive into these drivers, sharing insights from a personal perspective on how they contribute significantly to overcoming the challenges identified in the earlier sections.</p>
+</div>
+<div class="sect2">
+<h3 id="_domain_driven_design_ddd">Domain Driven Design (DDD)</h3>
+<div class="paragraph">
+<p>Domain-Driven Design (DDD) is a sophisticated approach to software development that prioritizes the core logic and functionality of the business domain it aims to serve. The essence of DDD lies in its focus on understanding the business domain deeply and modeling software that reflects this understanding, thereby bridging the gap between technical implementation and business strategy. This methodology is particularly beneficial in complex domains where the business rules and processes are intricate and subject to frequent changes.</p>
+</div>
+<div class="paragraph">
+<p>In my opinion, DDD is an excellent strategy for thoughtful coding, which is crucial in the creation of complex solutions. It offers valuable tools such as the ubiquitous language, strategic patterns, and tactical patterns.</p>
+</div>
+<div class="paragraph">
+<p>From my point of view, Domain Driven Development helps to fulfilled the following patterns concerns:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Alignment between the business and implemented solutions: Encourages focus on the core business logic, keeping it separate from external concerns.</p>
+</li>
+<li>
+<p>Reliability and stability of the solutions: Reduces dependencies on external systems and technologies, which can enhance stability.</p>
+</li>
+<li>
+<p>Maintainability and flexibility of the codebase: Makes the application easier to test, maintain, and adapt to new requirements or technologies.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ports_and_adapters_architecture">Ports and Adapters Architecture</h3>
+<div class="paragraph">
+<p>The Ports and Adapters Architecture, also known as the Hexagonal Architecture, divides an application into loosely connected components. This division allows the core application to remain unaffected by external technologies and services.</p>
+</div>
+<div class="paragraph">
+<p>From my viewpoint, the Ports and Adapters Architecture is an exemplary method for devising and managing complex systems. It introduces valuable concepts like the Hexagon, Ports, and Adapters, which steer clear of entangled code and preserve the integrity of the core business logic from external interferences.</p>
+</div>
+<div class="paragraph">
+<p>This architectural style complements the Domain-Driven Design (DDD) approach seamlessly. For instance, a DDD Module could correspond to a Hexagon, a DDD Repository might act as a Port, and the Repository&#8217;s implementation could serve as an Adapter.</p>
+</div>
+<div class="paragraph">
+<p>I believe the Ports and Adapters Architecture effectively addresses the following concerns:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Aligning business goals with implemented solutions: It emphasizes the importance of concentrating on core business logic while isolating it from external distractions.</p>
+</li>
+<li>
+<p>Enhancing the reliability and stability of solutions: By minimizing dependencies on external systems and technologies, it contributes to overall system stability.</p>
+</li>
+<li>
+<p>Improving maintainability and adaptability of the codebase: The architecture simplifies testing, maintenance, and the integration of new requirements or technologies.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_command_and_query_responsibility_segregation_cqrs">Command and Query Responsibility Segregation (CQRS)</h3>
+<div class="paragraph">
+<p>The Command and Query Responsibility Segregation (CQRS) pattern is a strategic approach that delineates data operations into two distinct categories: queries for reading data and commands for updating it. This division promotes a more streamlined and efficient process for managing data interactions.</p>
+</div>
+<div class="paragraph">
+<p>I view CQRS as a highly effective framework, particularly within the fast-paced, agile development environment where time is a critical factor. Considering commands and queries separately when planning the implementation of a feature facilitates a thorough evaluation and estimation of the feature&#8217;s impact on both the data and the system as a whole.</p>
+</div>
+<div class="paragraph">
+<p>From my perspective, CQRS addresses the following concerns:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Alignment between the business and implemented solutions: Encourages a clear separation of concerns, making it easier to understand and implement business logic.</p>
+</li>
+<li>
+<p>Reliability and stability of the solutions: By separating reads and writes, CQRS can improve performance and reduce the risk of data corruption.</p>
+</li>
+<li>
+<p>Maintainability and flexibility of the codebase: CQRS allows for scalability and simplicity in the data management, making them easier to maintain and evolve.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_location_transparency">Location Transparency</h3>
+<div class="paragraph">
+<p>Location Transparency is a principle that enables software components to interact seamlessly without being aware of each other&#8217;s physical location on the network. This concept fosters decoupling and enhances scalability.</p>
+</div>
+<div class="paragraph">
+<p>I regard Location Transparency as an excellent strategy for avoiding tight coupling between components, such as the hexagons in the Ports and Adapters Architecture, and for simplifying integrations. Essentially, for any given hexagon, we can establish a contract (i.e., a port) and the implementation of a client (i.e., an adapter) that other hexagons can utilize. This client might employ remote communication methods like REST, AMQP, gRPC, or even local communication strategies such as Inversion of Control or in-process communication.</p>
+</div>
+<div class="paragraph">
+<p>In my view, Location Transparency addresses the following concerns effectively:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Reliability and stability of the solutions: Enhances the system’s ability to recover from failures and balance loads effectively.</p>
+</li>
+<li>
+<p>Maintainability and flexibility of the codebase: Facilitates easier changes and deployments, as components can be moved or scaled independently.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_very_high_code_coverage_level">Very High Code Coverage Level</h3>
+<div class="paragraph">
+<p>Maintaining a very high level of code coverage is a demanding requirement that pushes developers to write detailed tests for virtually every segment of the code. This demand not only challenges developers to deeply consider the architecture and testability of their code from the beginning but also instills a rigorous discipline in the development process.</p>
+</div>
+<div class="paragraph">
+<p>While the task of writing tests (unit, integration, end-to-end, performance &#8230;&#8203;) may initially seem tedious, my experience suggests that a higher code coverage level significantly enhances the quality of the codebase, particularly in terms of its reliability and stability. The stringent requirement for high code coverage serves as a powerful incentive for developers to produce code that is inherently testable.</p>
+</div>
+<div class="paragraph">
+<p>Furthermore, this constraint often leads to the exploration and adoption of best practices, such as adherence to the SOLID principles and the implementation of Test-Driven Development (TDD). I am convinced that a codebase designed to be easily testable and built upon such best practices is inherently more maintainable and adaptable. In other words, it tends to be well-structured, well-documented, and well-understood &#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>From my perspective, enforcing a very high code coverage level addresses the following concerns:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Reliability and stability of the solutions: High code coverage ensures thorough testing, leading to software that is more reliable and stable, as more code paths are verified against errors and regressions.</p>
+</li>
+<li>
+<p>Maintainability and flexibility of the codebase: The constraint of high code coverage guides developers towards better coding practices which ultimately results in a codebase that is easier to maintain and adapt, e.g. the SOLID principles, the Test-Driven Development (TDD) approach …</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_metamodel">The metamodel</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We previously discussed the concerns and the drivers, let&#8217;s dive into the organization of the codebase.</p>
+</div>
+<div class="sect2">
+<h3 id="_divide_to_conquer">Divide to conquer</h3>
+<div class="paragraph">
+<p>The initial step involves breaking down the codebase.</p>
+</div>
+<div class="sect3">
+<h4 id="_ddd_modules">DDD Modules</h4>
+<div class="paragraph">
+<p>In Domain-Driven Design (DDD), a module functions as a method to divide a complicated system into smaller, more understandable segments. Each module usually embodies a particular segment of the domain, encompassing associated ideas and functions. For example, in an E-Commerce system, there might be a module dedicated to the catalog and another focused on orders, etc.</p>
+</div>
+<div class="paragraph">
+<p>In the structure of the codebase, a DDD module is decomposed into individual components. Each component fulfills a specific function. These functions are defined by the drivers.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="diag-plantuml-md5-fb65d96f1c6a06670ac49d0e8c717abb.png" alt="Diagram" width="127" height="229">
+</div>
+<div class="title">Figure 2. Metamodel of the codebase: the foundation</div>
+</div>
+<div class="sect4">
+<h5 id="_portadapter_architecture">Port/Adapter Architecture</h5>
+<div class="paragraph">
+<p>Typically, the definition of hexagons is influenced by business considerations, as they correspond to the DDD (Domain-Driven Design) Modules. Nonetheless, the internal organization of the hexagons leans towards a technology-centric approach. This includes, firstly, the architectural segregation into core components, ports, and adapters. Secondly, it encompasses the assembly of these hexagons into a cohesive unit: the deliverable.</p>
+</div>
+<div class="paragraph">
+<p>The illustration below depicts the hexagon of the Port/Adapter Architecture, showcasing the core exposing ports which are used or implemented by the adapters. The driving adapters interact with external systems, while the driven adapters encapsulate the implementation of the core&#8217;s contracts.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="hexagon-presentation.svg" alt="hexagon presentation">
+</div>
+<div class="title">Figure 3. Port/Adapter Architecture: the hexagon</div>
+</div>
+<div class="paragraph">
+<p>For instance, the implemenation of the REST API exposing the services of the core is located in the driving adapter. On the other hand, the implementation of the RDBMS repository is located in the driven adapter.</p>
+</div>
+<div class="paragraph">
+<p>The usage of Port/Adapter Architecture leads to the definition of four main component kinds:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Core: the core component contains the business logic and the domain model as well as the ports</p>
+</li>
+<li>
+<p>Driving Adapter: the driving adapter contains implementation leveraging on the respective driving ports in the core</p>
+</li>
+<li>
+<p>Driven Adapter: the driven adapter contains the implementation of the respective driven ports in the core</p>
+</li>
+<li>
+<p>Deliverable: the deliverable component embeds all the components of the hexagon and provides a cohesive unit as an executable or a library</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="diag-plantuml-md5-726c9ed449962ebefbf629716d8a5985.png" alt="Diagram" width="610" height="413">
+</div>
+<div class="title">Figure 4. Metamodel of the codebase: with the hexagon&#8217;s component</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_service_providers_and_service_consumers">Service Providers and Service Consumers</h5>
+<div class="paragraph">
+<p>Typically, an enterprise application consists of various modules that interact with each other. To facilitate smoother integration among these modules, it&#8217;s common practice for a service provider to offer client implementations of its driving ports. This approach allows a service consumer to directly utilize these implementations, saving significant time. From the perspective of the service consumer, these clients serve as externally driven adapters.</p>
+</div>
+<div class="paragraph">
+<p>To further streamline integration, the service provider may also provide access to these driving ports through an API bundle. Consequently, a service consumer can integrate these directly into its core, leveraging the service provider&#8217;s client implementations for seamless interaction without the need for additional integration efforts.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="hexagon-client.svg" alt="hexagon client">
+</div>
+<div class="title">Figure 5. Port/Adapter Architecture: the client and API</div>
+</div>
+<div class="paragraph">
+<p>This lead to two new component kinds:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>API: the api component contains the driving ports of the core</p>
+</li>
+<li>
+<p>Client: the client component contains the implementation of the driving ports</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="diag-plantuml-md5-be935805ca7e58b98c9033426ace25d6.png" alt="Diagram" width="657" height="413">
+</div>
+<div class="title">Figure 6. Metamodel of the codebase: with the service&#8217;s components</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_common_stuff">Common stuff</h5>
+<div class="paragraph">
+<p>Enterprise applications and their components frequently depend on standardized data structures and shared technical functionalities, such as data serialization, authentication &#8230;&#8203; To enhance reusability, it&#8217;s a common practice to establish standard modules according to the type and technology of adapters. For example, one might implement a module that includes the data structures and behaviors necessary for all core modules. Similarly, another module could be developed to incorporate data structures and behaviors specific to driven adapters that utilize RDBMS technology.</p>
+</div>
+<div class="paragraph">
+<p>This also lead to a new component kind:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Common: the common component contains shared data structures and behaviors</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="diag-plantuml-md5-98e03c973f1e4ba9d8d581052c2ef611.png" alt="Diagram" width="781" height="413">
+</div>
+<div class="title">Figure 7. Metamodel of the codebase: with the common component</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_enterprise_integration">Enterprise Integration</h5>
+<div class="paragraph">
+<p>Enterprise applications frequently interface with technological components, systems, and software applications both within an organization and across different domains. Usually, these implementations adhere to Enterprise Integration Patterns and may range from entirely custom solutions to configurations of pre-existing, off-the-shelf products.</p>
+</div>
+<div class="paragraph">
+<p>This lead to a new component kind:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Integration: the integration component contains the implementation of the integration with external systems</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="diag-plantuml-md5-fd42f5af5926ace78a436f1c8e1e8de8.png" alt="Diagram" width="921" height="413">
+</div>
+<div class="title">Figure 8. Metamodel of the codebase: with the integration component</div>
+</div>
+<div class="paragraph">
+<p>Most often, the development of integration components does not depend on the Port/Adapter Architecture. Instead, the creation of these components leans more towards scripting or configuration due to their technical nature rather than being driven by business concerns. This implies that the logic is closely linked to the specific technology and system being integrated.</p>
+</div>
+<div class="paragraph">
+<p>For example, in a Camel application designed for ETL processes, the development is significantly influenced by the Camel framework, particularly its routes and processor concepts. However, the codebase can still be organized in accordance with Domain-Driven Design (DDD) modules, allowing for smooth integration of client components. Ultimately, the final component can incorporate both the integration and client components, along with common elements, to form a unified solution.</p>
+</div>
+<div class="paragraph">
+<p>This indicates that although the primary influence on the codebase of an integration component may not stem from the Port/Adapter Architecture, it can still effectively utilize components closely associated with DDD modules, such as common, client, and API components.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_relationship_between_components">Relationship between components</h4>
+<div class="paragraph">
+<p>Components interact with each other via relationships, which establish dependencies between them. For instance, a core component depends on an API component.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="diag-plantuml-md5-17bf23b3ee604063161df7bd21cf79c8.png" alt="Diagram" width="535" height="413">
+</div>
+<div class="title">Figure 9. Metamodel of the codebase: the relationship</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The common component acts as a shared resource, allowing any component to rely on it. To simplify the diagram and reduce its complexity, the common component is not shown.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_think_less_reuse_more">Think less, reuse more</h3>
+<div class="paragraph">
+<p>A codebase primarily consists of various programming elements such as data structures, functions, classes, interfaces, enums, annotations, configurations, scripts, tests, and more. These elements, or artifacts, are typically organized hierarchically; for example, methods are encapsulated within classes, and classes are grouped into packages. The structure and interrelationships of these artifacts shape the content of the components previously mentioned.</p>
+</div>
+<div class="paragraph">
+<p>Fortunately, it&#8217;s possible to organize the codebase so that its components are easily identifiable and the relationships among them are clear. There are numerous methods to structure the codebase effectively. The drivers we&#8217;ve discussed offer a solid foundation for organizing the codebase. These drivers provide patterns for naming and defining the artifacts and their interactions within the codebase.</p>
+</div>
+<div class="paragraph">
+<p>Patterns are a set of rules and guidelines that help in organizing the component content effectively.
+Moreover, patterns help to save time and effort by providing a structured approach to solving common problems.</p>
+</div>
+<div class="sect3">
+<h4 id="_eventstorming">EventStorming</h4>
+<div class="paragraph">
+<p>EventStorming provides excellent starting points to discover patterns because it provides a unified language of concepts primarily from Domain-Driven Design (DDD) and Command Query Responsibility Segregation (CQRS). Additionally, other concepts are defined to encompass common patterns.</p>
+</div>
+<div class="paragraph">
+<p>The application of these concepts during the design phase is partially explored in this article: <a href="https://dev.to/tmorin/enhancing-business-logic-with-plantuml-and-eventstorming-de0:">Enhancing Business Logic with PlantUML and EventStorming</a>. This resource provides insights into using these concepts effectively to enhance project architecture and workflow.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_the_catalog">The catalog</h4>
+<div class="paragraph">
+<p>The catalog provided is just a starting point. Every codebase can have its own unique set of patterns tailored to its specific needs and requirements. The key is to identify the most relevant patterns and establish a consistent naming convention and description to ensure clarity and maintainability.</p>
+</div>
+<div class="paragraph">
+<p>Certain patterns have strong ties to specific component types within software architecture, depending on the programming paradigm and architectural principles used. This catalog outlines these associations, particularly suited for teams utilizing the Object-Oriented Programming (OOP) paradigm with a layered architecture background. However, it&#8217;s important to note that teams with a functional programming background and employing reactive architectures would likely interpret and define these patterns differently.</p>
+</div>
+<div class="sect4">
+<h5 id="_command">Command</h5>
+<div class="paragraph">
+<p>The command pattern comes from the Command Query Responsibility Segregation (CQRS) driver. It is a directive that triggers a specific action, often resulting in changes to the state of an application.</p>
+</div>
+<div class="paragraph">
+<p>The data structure of the command is usually placed in the API component, while the behavior is located in the core component.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_query">Query</h5>
+<div class="paragraph">
+<p>The query pattern comes from the Command Query Responsibility Segregation (CQRS) driver. It is a request for information or data from a system without changing the state of the system.</p>
+</div>
+<div class="paragraph">
+<p>The data structure of the query is typically located in the API component, while the behavior is situated in the core component.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+CQRS emphasizes the separation of commands and queries which can lead to the design of two distinct models: one for the command and another for the query. Therefore, the behavior of the query could be located into a different component than the behavior of the command.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_result">Result</h5>
+<div class="paragraph">
+<p>The result pattern comes from the Command Query Responsibility Segregation (CQRS) driver. It is the output or outcome that is returned after the execution of a command or query.</p>
+</div>
+<div class="paragraph">
+<p>The data structure of the result is typically located in the API component.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_event">Event</h5>
+<div class="paragraph">
+<p>The event pattern comes from the domain-driven design (DDD) driver. It is a notification that a significant change or action has occurred within the system.</p>
+</div>
+<div class="paragraph">
+<p>There is a distinction between Domain Events and Integration Events. Domain Events are internal to the system and are kept in the core component, while Integration Events are external and are placed in the API component for long-term use.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_aggregate">Aggregate</h5>
+<div class="paragraph">
+<p>The aggregate pattern comes from the domain-driven design (DDD) driver. It is a cluster of domain objects that can be treated as a single unit, often with one of the objects being the aggregate root.</p>
+</div>
+<div class="paragraph">
+<p>The data structure of the aggregate is typically located in the core component.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_factory">Factory</h5>
+<div class="paragraph">
+<p>The factory pattern comes from the domain-driven design (DDD) driver. It is responsible for creating complex domain objects, ensuring that created objects are valid and in a consistent state.</p>
+</div>
+<div class="paragraph">
+<p>The behavior of the factory is usually located near the data structure it is associated with.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_repository">Repository</h5>
+<div class="paragraph">
+<p>The repository pattern comes from the domain-driven design (DDD) driver. It provides methods to add, remove, and update objects within an Aggregate, abstracting the underlying data storage mechanism.</p>
+</div>
+<div class="paragraph">
+<p>The contract of the repository is defined in the core component, while the implementation is carried out in a driven adapter component.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_service">Service</h5>
+<div class="paragraph">
+<p>The service pattern comes from the domain-driven design (DDD) driver. It is an operation offered as an interface that stands alone in the model, without encapsulating state, typically to perform calculations or processing activities.</p>
+</div>
+<div class="paragraph">
+<p>The contract of the service is generally defined in the core component, with the implementation in a driven adapter component.</p>
+</div>
+<div class="paragraph">
+<p>However, when the core is complex, it is common to share behaviors within the core leveraging on the Service pattern. In that case, the contract part is skipped and the implementation is located in the core component.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_policy">Policy</h5>
+<div class="paragraph">
+<p>The policy pattern comes from The domain-driven design (DDD) driver. It is a set of rules or guidelines that dictate how business decisions are made or how business processes are conducted.</p>
+</div>
+<div class="paragraph">
+<p>The behavior of the policy is typically located in the core component.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_read_model">Read Model</h5>
+<div class="paragraph">
+<p>The read model pattern comes from the EventStorming concepts. It is a model designed specifically for read operations, optimized for querying and displaying data.</p>
+</div>
+<div class="paragraph">
+<p>The data structure of the read model is typically located in the API component.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_process">Process</h5>
+<div class="paragraph">
+<p>The process pattern comes from the EventStorming concepts. It is a sequence of actions or steps taken to achieve a particular end in the domain.</p>
+</div>
+<div class="paragraph">
+<p>The behavior of the process is located in the core component, with its orchestration managed by a driven adapter component.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_saga">Saga</h5>
+<div class="paragraph">
+<p>The saga pattern comes from the EventStorming concepts. It is a long-running process that handles events and commands, often involving multiple steps and managing the state across them.</p>
+</div>
+<div class="paragraph">
+<p>The behavior of the saga is located in the core component, with its orchestration managed by a driven adapter component.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_timer">Timer</h5>
+<div class="paragraph">
+<p>The timer pattern comes from the EventStorming concepts. It is a mechanism that triggers an event or command after a certain period of time or at specific intervals.</p>
+</div>
+<div class="paragraph">
+<p>The contract for the timer is defined in the core component, with its implementation carried out in a driven adapter component.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_facade">Facade</h5>
+<div class="paragraph">
+<p>The facade pattern comes from the EventStorming concepts. It is an interface or abstraction layer that simplifies a set of interfaces or classes, often used to integrate systems or manage complexities.</p>
+</div>
+<div class="paragraph">
+<p>The contract for the facade is set up in the API component, while its implementation takes place in the core component. The contract is designed to be used by driving adapter components.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_usage_of_the_patterns">Usage of the patterns</h4>
+<div class="paragraph">
+<p>Patterns are essential to draft heuristics and guidelines for the development of a codebase. They provide a common language and a shared understanding among team members, ensuring consistency and clarity in the codebase.</p>
+</div>
+<div class="paragraph">
+<p>For example, the Command pattern is defined with a data structure and a behavior. That means, the programing artifacts associated with the Command pattern are already known. Therefore, when creation or updating a command, the team members know what to do and what to expect. Moreover, a pattern provides a systematic approach, therefore efforts can be estimated more accurately.</p>
+</div>
+<div class="paragraph">
+<p>Moreover, a pattern doesn&#8217;t exist in isolation. It is often linked to other patterns. For instance, a Command can be linked to an Aggregate and an Aggregate can be linked to a Repository. Therefore, when dealing with an Aggregate, we can easily evaluate the impact of the changes on the Command and the Repository. Again, the predictability of the effort is better.</p>
+</div>
+<div class="paragraph">
+<p>Finally, leveraging on the systematic approach of the patterns, the tests can be written more easily because the programing artifacts to test are already known. Therefore, the code coverage can be increased more easily.</p>
+</div>
+<div class="paragraph">
+<p>For instance, consider a diagram that outlines the design of a command and an aggregate. The objective of the command is to create an instance of an aggregate and then persist it. Four patterns are utilized in this design: Command, Aggregate, Factory, and Repository. This structured approach not only clarifies the roles and relationships within the system but also ensures a coherent and testable architecture.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="diag-plantuml-md5-e793d23bb3c8cbfc970a7caf8df48ee3.png" alt="Diagram" width="259" height="305">
+</div>
+<div class="title">Figure 10. The submission of notes</div>
+</div>
+<div class="paragraph">
+<p>The implementation of these patterns is relatively straightforward:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>define the data structure of the command in the API component</p>
+</li>
+<li>
+<p>define the behavior of the command in the core component</p>
+</li>
+<li>
+<p>define the data structure of the aggregate in the core component</p>
+</li>
+<li>
+<p>define the behavior of the factory in the core component</p>
+</li>
+<li>
+<p>define the contract of the repository in the core component</p>
+</li>
+<li>
+<p>define the realization of the repository in the driven adapter component</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>As the system evolves, the aggregate will likely incorporate additional behaviors, and it may become necessary to introduce more patterns. This incremental development helps in making the implicit aspects of the system explicit, ensuring clarity and maintainability. By systematically expanding and refining these components, developers can effectively manage complexity and enhance the robustness of the application.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_note_app_example">The Note app example</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To explain these concepts, let&#8217;s consider a simple Note App as an example. This application offers various functionalities centered around the concept of notes, which are organized into a Note module. As previously discussed, the Note module is made up of several components, and these components are implemented using different patterns.</p>
+</div>
+<div class="paragraph">
+<p>We will explore the feature of submitting notes to understand this further.</p>
+</div>
+<div class="paragraph">
+<p>The feature we&#8217;re discussing is designed to either create a new note or update an existing one, and to update the indices that are associated with the notes. This functionality allows users to efficiently manage and retrieve their notes within the app.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="diag-plantuml-md5-c30faed64659c92a273e89a4e76156a0.png" alt="Diagram" width="329" height="797">
+</div>
+<div class="title">Figure 11. The submission of notes</div>
+</div>
+<div class="paragraph">
+<p>On the server side, the functionality is exposed through a Facade Command named <code>SubmitNote</code>. A facade command acts as a coordinator, orchestrating the execution of other commands within the system.</p>
+</div>
+<div class="paragraph">
+<p>Similar to other commands, a facade command comprises both a data structure and behavior. The data structure, along with the contract detailing the behavior, are located within the API component. The implementation of this behavior is managed in the core, and the application of the facade command occurs within the driving adapter.</p>
+</div>
+<div class="paragraph">
+<p>For instance, various implementations might be developed to use this command: one could handle it synchronously via REST, while another might facilitate asynchronous operations using AMQP (Advanced Message Queuing Protocol). This setup provides flexibility in how the command is executed, catering to different operational needs.</p>
+</div>
+<div class="paragraph">
+<p>The <code>CreateNote</code> and <code>UpdateNote</code> commands, which are orchestrated by the <code>SubmitNote</code> command, also consist of data structures and behaviors. However, unlike the facade command, these commands reside solely within the core component. This is because they are not exposed externally; they function internally to manage the creation and updating of notes as part of the system&#8217;s back-end operations. This setup ensures that these commands are encapsulated within the system, maintaining a clear separation between internal processing and external interfaces.</p>
+</div>
+<div class="paragraph">
+<p>The execution of the command involves managing the <code>Note</code> aggregate, which necessitates the use of a repository. The contract for this repository is defined within the core component, specifying how the Note aggregates are to be managed, accessed, and persisted. The actual implementation of the repository, however, takes place in a driven adapter component.</p>
+</div>
+<div class="paragraph">
+<p>This structure allows for multiple implementations of the repository to suit different storage technologies and requirements. For example, one implementation might be designed for a Relational Database Management System (RDBMS), providing structured query capabilities and transaction support. Another implementation might be optimized for a NoSQL database, which can offer scalability and flexibility for unstructured data. This flexibility ensures that the application can adapt to various data storage strategies as needed.</p>
+</div>
+<div class="paragraph">
+<p>The result of executing the command is the <code>NoteMutated</code> domain event. This domain event serves as a notification within the system, indicating that a significant change or action has taken place. Given their role in signaling internal system changes, domain events like <code>NoteMutated</code> are housed within the core component. This placement ensures that they are not exposed to or used by external modules, maintaining a clear boundary between the system&#8217;s internal operations and its external interfaces. This arrangement helps to encapsulate the system&#8217;s domain logic and maintain the integrity of its internal processes.</p>
+</div>
+<div class="paragraph">
+<p>The <code>NoteMutated</code> domain event serves as the catalyst for the <code>NoteIndexer</code> process, which is tasked with updating the indices related to the notes. This process is strategically housed within the core component of the system.</p>
+</div>
+<div class="paragraph">
+<p>The <code>NoteIndexer</code> process updates two read models, <code>NoteView</code> and <code>NotesView</code>, both of which are accessible to external users and therefore located in the API component. The state of these read models is managed by a repository. The specifications for how the repository should operate are outlined in the core component&#8217;s contract, while the actual implementation of this repository is carried out in a driven adapter component. This setup ensures that the read models are both accessible externally and reliably maintained, aligning with the system’s data integrity and accessibility requirements.</p>
+</div>
+<div class="paragraph">
+<p>The codebase can be structured as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>codebase</p>
+<div class="ulist">
+<ul>
+<li>
+<p>note (DDD Module)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>api</p>
+<div class="ulist">
+<ul>
+<li>
+<p>SubmitNote (Facade Command)</p>
+</li>
+<li>
+<p>NoteView (Read Model)</p>
+</li>
+<li>
+<p>NotesView (Read Model)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>core</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Note (Aggregate)</p>
+</li>
+<li>
+<p>CreateNote (Command)</p>
+</li>
+<li>
+<p>UpdateNote (Command)</p>
+</li>
+<li>
+<p>NoteMutated (Domain Event)</p>
+</li>
+<li>
+<p>NoteIndexer (Process)</p>
+</li>
+<li>
+<p>NoteRepository (Repository, Contract)</p>
+</li>
+<li>
+<p>NoteViewRepository (Repository, Contract)</p>
+</li>
+<li>
+<p>NotesViewRepository (Repository, Contract)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>adapter-rest (driving adapter)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>SubmitNoteHandler (Facade Command Handler)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>adapter-amqp (driving adapter)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>SubmitNoteHandler (Facade Command Handler)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>adapter-rdbms (driven adapter)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>NoteRepository (Repository, Realization)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>adapter-nosql (driven adapter)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>NoteViewRepository (Repository, Realization)</p>
+</li>
+<li>
+<p>NotesViewRepository (Repository, Realization)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Additional components can indeed be incorporated to enhance functionality and integration within the system.
+Furthermore, a deliverable component can be introduced to consolidate all the components of the Note module. This deliverable would encapsulate the functionality of the entire module, providing an executable that exposes both REST and AMQP interfaces. Such a component not only simplifies deployment but also ensures that all services related to the Note module are accessible through unified endpoints, enhancing the system&#8217;s interoperability and ease of use.</p>
+</div>
+<div class="paragraph">
+<p>A UML diagram can be designed according to the codebase to visualize the structure of the Note module.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="diag-plantuml-md5-52ab723a5476de384c82291061dd0694.png" alt="Diagram" width="736" height="377">
+</div>
+<div class="title">Figure 12. The components of the Note module</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion">Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the journey of crafting robust, efficient, and adaptable enterprise applications, the organization of the codebase is paramount. This detailed guide has traversed the intricacies of designing and managing a codebase tailored for complex enterprise solutions, highlighting essential architectural patterns such as Domain Driven Design, Ports and Adapters Architecture, Command and Query Responsibility Segregation, and Location Transparency. By systematically applying these frameworks and maintaining high code coverage, developers can ensure alignment with business objectives while achieving a balance between reliability, maintainability, and flexibility.</p>
+</div>
+<div class="paragraph">
+<p>The modular approach, utilizing well-defined patterns and strategic component associations, facilitates clear separation of concerns and promotes ease of testing and adaptability. This not only streamlines the development process but also positions the software to seamlessly integrate new functionalities and respond adeptly to evolving business needs.</p>
+</div>
+<div class="paragraph">
+<p>As illustrated with the Note App example, even a simple feature such as submitting notes can benefit from a structured, methodical approach to design and implementation, ensuring that each component effectively fulfills its role within the overall system. This guide serves as a blueprint for developers and architects aiming to master the art of enterprise software development, fostering an environment where innovation thrives and software excellence is the norm.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 1<br>
+Last updated 2024-04-13 15:48:40 UTC
+</div>
+</div>
+</body>
+</html>
