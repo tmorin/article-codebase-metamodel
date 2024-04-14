@@ -443,8 +443,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h1>Enterprise Application: a metamodel to streamline codebase organization</h1>
 <div class="details">
 <span id="author" class="author">Thibault Morin</span><br>
-<span id="revnumber">version 4,</span>
-<span id="revdate">2024-04-13</span>
+<span id="revnumber">version 5,</span>
+<span id="revdate">2024-04-14</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -487,6 +487,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>The article presents a metamodel of a codebase organization to streamline the thought processes involved in the development of enterprise applications. The metamodel is based on Domain Driven Design, Ports and Adapters Architecture, Command and Query Responsibility Segregation, and Location Transparency. It aims to solve prevalent issues in software development such as ensuring business alignment with solutions, enhancing solution reliability and stability, and improving the codebase&#8217;s maintainability and flexibility. Finally, the article provides an exploration of the metamodel usage through practical application examples.</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="diag-plantuml-md5-98475db2082a6faac3a16f2032e3df97.png" alt="Diagram" width="921" height="413">
+</div>
+<div class="title">Figure 1. The codebase metamodel</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="diag-plantuml-md5-c0272129c6ebd92430b97abdc5b6e6f2.png" alt="Diagram" width="765" height="376">
+</div>
+<div class="title">Figure 2. The pattern catalog</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -511,7 +523,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <img src="archimate-motivation.png" alt="archimate motivation">
 </div>
-<div class="title">Figure 1. Archimate Motivation View</div>
+<div class="title">Figure 3. Archimate Motivation View</div>
 </div>
 </div>
 </div>
@@ -700,7 +712,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <img src="diag-plantuml-md5-fb65d96f1c6a06670ac49d0e8c717abb.png" alt="Diagram" width="127" height="229">
 </div>
-<div class="title">Figure 2. Metamodel of the codebase: the foundation</div>
+<div class="title">Figure 4. Metamodel of the codebase: the foundation</div>
 </div>
 </div>
 <div class="sect3">
@@ -715,7 +727,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <img src="hexagon-presentation.svg" alt="hexagon presentation">
 </div>
-<div class="title">Figure 3. Port/Adapter Architecture: the hexagon</div>
+<div class="title">Figure 5. Port/Adapter Architecture: the hexagon</div>
 </div>
 <div class="paragraph">
 <p>For instance, the implementation of the REST API exposing the services of the core is located in the driving adapter. On the other hand, the implementation of the RDBMS repository is located in the driven adapter.</p>
@@ -743,7 +755,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <img src="diag-plantuml-md5-726c9ed449962ebefbf629716d8a5985.png" alt="Diagram" width="610" height="413">
 </div>
-<div class="title">Figure 4. Metamodel of the codebase: with the hexagon&#8217;s component</div>
+<div class="title">Figure 6. Metamodel of the codebase: with the hexagon&#8217;s component</div>
 </div>
 </div>
 <div class="sect3">
@@ -758,7 +770,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <img src="hexagon-client.svg" alt="hexagon client">
 </div>
-<div class="title">Figure 5. Port/Adapter Architecture: the client and API</div>
+<div class="title">Figure 7. Port/Adapter Architecture: the client and API</div>
 </div>
 <div class="paragraph">
 <p>This lead to two new component kinds:</p>
@@ -777,7 +789,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <img src="diag-plantuml-md5-be935805ca7e58b98c9033426ace25d6.png" alt="Diagram" width="657" height="413">
 </div>
-<div class="title">Figure 6. Metamodel of the codebase: with the service&#8217;s components</div>
+<div class="title">Figure 8. Metamodel of the codebase: with the service&#8217;s components</div>
 </div>
 </div>
 <div class="sect3">
@@ -799,7 +811,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <img src="diag-plantuml-md5-98e03c973f1e4ba9d8d581052c2ef611.png" alt="Diagram" width="781" height="413">
 </div>
-<div class="title">Figure 7. Metamodel of the codebase: with the common component</div>
+<div class="title">Figure 9. Metamodel of the codebase: with the common component</div>
 </div>
 </div>
 <div class="sect3">
@@ -821,7 +833,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <img src="diag-plantuml-md5-fd42f5af5926ace78a436f1c8e1e8de8.png" alt="Diagram" width="921" height="413">
 </div>
-<div class="title">Figure 8. Metamodel of the codebase: with the integration component</div>
+<div class="title">Figure 10. Metamodel of the codebase: with the integration component</div>
 </div>
 <div class="paragraph">
 <p>Most often, the development of integration components does not depend on the Port/Adapter Architecture. Instead, the creation of these components leans more towards scripting or configuration due to their technical nature rather than being driven by business concerns. This implies that the logic is closely linked to the specific technology and system being integrated.</p>
@@ -842,7 +854,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <img src="diag-plantuml-md5-17bf23b3ee604063161df7bd21cf79c8.png" alt="Diagram" width="535" height="413">
 </div>
-<div class="title">Figure 9. Metamodel of the codebase: the relationship</div>
+<div class="title">Figure 11. Metamodel of the codebase: the relationships</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -870,8 +882,17 @@ The common component acts as a shared resource, allowing any component to rely o
 <p>Patterns are a set of rules and guidelines that help in organizing the component content effectively.
 Moreover, patterns help to save time and effort by providing a structured approach to solving common problems.</p>
 </div>
+<div class="paragraph">
+<p>The following diagram illustrates the metamodel of the codebase, showcasing the relationships between the components and the patterns.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="diag-plantuml-md5-98475db2082a6faac3a16f2032e3df97.png" alt="Diagram" width="921" height="413">
+</div>
+<div class="title">Figure 12. Metamodel of the codebase</div>
+</div>
 <div class="sect3">
-<h4 id="_eventstorming">EventStorming</h4>
+<h4 id="_eventstorming_co">EventStorming &amp; co</h4>
 <div class="paragraph">
 <p>EventStorming provides excellent starting points to discover patterns because it provides a unified language of concepts primarily from Domain-Driven Design (DDD) and Command Query Responsibility Segregation (CQRS). Additionally, other concepts are defined to encompass common patterns.</p>
 </div>
@@ -882,10 +903,19 @@ Moreover, patterns help to save time and effort by providing a structured approa
 <div class="sect3">
 <h4 id="_the_catalog">The catalog</h4>
 <div class="paragraph">
-<p>The catalog provided is just a starting point. Every codebase can have its own unique set of patterns tailored to its specific needs and requirements. The key is to identify the most relevant patterns and establish a consistent naming convention and description to ensure clarity and maintainability.</p>
+<p>The purpose of the catalog is to associate patterns with components, providing a clear understanding of the relationships between them.</p>
 </div>
 <div class="paragraph">
-<p>Certain patterns have strong ties to specific component types within software architecture, depending on the programming paradigm and architectural principles used. This catalog outlines these associations, particularly suited for teams utilizing the Object-Oriented Programming (OOP) paradigm with a layered architecture background. However, it&#8217;s important to note that teams with a functional programming background and employing reactive architectures would likely interpret and define these patterns differently.</p>
+<p>From my point view, there isn&#8217;t a unique catalogue but there is a catalog by codebase owner. A codebase owner is a group of developers. It can be a team, a team of team, an organization &#8230;&#8203; Moreover, the culture of the codebase owner has a direct impact on the catalog. For instance, a team with a strong background Object-Oriented Programming (OOP) and Layered Architecture would have a different catalog than a team with a strong background in Functional Programming and Reactive Architecture.</p>
+</div>
+<div class="paragraph">
+<p>Therefore, the presented patterns are just a starting point. The catalog should be tailored to the codebase owner. The key is to identify the most relevant patterns and establish a consistent naming convention and description to ensure clarity and maintainability.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="diag-plantuml-md5-c0272129c6ebd92430b97abdc5b6e6f2.png" alt="Diagram" width="765" height="376">
+</div>
+<div class="title">Figure 13. Overview of the patterns</div>
 </div>
 </div>
 <div class="sect3">
@@ -1003,15 +1033,6 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 </div>
 </div>
 <div class="sect3">
-<h4 id="_saga">Saga</h4>
-<div class="paragraph">
-<p>The saga pattern comes from the EventStorming concepts. It is a long-running process that handles events and commands, often involving multiple steps and managing the state across them.</p>
-</div>
-<div class="paragraph">
-<p>The behavior of the saga is located in the core component, with its orchestration managed by a driven adapter component.</p>
-</div>
-</div>
-<div class="sect3">
 <h4 id="_timer">Timer</h4>
 <div class="paragraph">
 <p>The timer pattern comes from the EventStorming concepts. It is a mechanism that triggers an event or command after a certain period of time or at specific intervals.</p>
@@ -1021,12 +1042,24 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 </div>
 </div>
 <div class="sect3">
+<h4 id="_saga">Saga</h4>
+<div class="paragraph">
+<p>The saga pattern comes from the distributed system ecosystem <a href="#saga">[saga]</a>. It is a long-running process that handles events and commands, often involving multiple steps and managing the state across them.</p>
+</div>
+<div class="paragraph">
+<p>The behavior of the saga is located in the core component, with its orchestration managed by a driven adapter component.</p>
+</div>
+</div>
+<div class="sect3">
 <h4 id="_facade">Facade</h4>
 <div class="paragraph">
-<p>The facade pattern comes from the EventStorming concepts. It is an interface or abstraction layer that simplifies a set of interfaces or classes, often used to integrate systems or manage complexities.</p>
+<p>The facade pattern comes from the famous gang of four book <a href="#despat">[despat]</a>. It is an interface or abstraction layer that simplifies a set of interfaces or classes, often used to integrate systems or manage complexities.</p>
 </div>
 <div class="paragraph">
 <p>The contract for the facade is set up in the API component, while its implementation takes place in the core component. The contract is designed to be used by driving adapter components.</p>
+</div>
+<div class="paragraph">
+<p>When implementing a client component, the Facade is contract of the client implementation.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1050,7 +1083,7 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 <div class="content">
 <img src="diag-plantuml-md5-e793d23bb3c8cbfc970a7caf8df48ee3.png" alt="Diagram" width="259" height="305">
 </div>
-<div class="title">Figure 10. The submission of notes</div>
+<div class="title">Figure 14. The submission of notes</div>
 </div>
 <div class="paragraph">
 <p>The implementation of these patterns is relatively straightforward:</p>
@@ -1100,7 +1133,7 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 <div class="content">
 <img src="diag-plantuml-md5-c30faed64659c92a273e89a4e76156a0.png" alt="Diagram" width="329" height="797">
 </div>
-<div class="title">Figure 11. The submission of notes</div>
+<div class="title">Figure 15. The submission of notes</div>
 </div>
 <div class="paragraph">
 <p>On the server side, the functionality is exposed through a Facade Command named <code>SubmitNote</code>. A facade command acts as a coordinator, orchestrating the execution of other commands within the system.</p>
@@ -1251,7 +1284,7 @@ Furthermore, a deliverable component can be introduced to consolidate all the co
 <div class="content">
 <img src="diag-plantuml-md5-52ab723a5476de384c82291061dd0694.png" alt="Diagram" width="736" height="377">
 </div>
-<div class="title">Figure 12. The components of the Note module</div>
+<div class="title">Figure 16. The components of the Note module</div>
 </div>
 </div>
 </div>
@@ -1275,25 +1308,31 @@ Furthermore, a deliverable component can be introduced to consolidate all the co
 <div class="ulist bibliography">
 <ul class="bibliography">
 <li>
-<p><a id="ddd"></a>[ddd] <a href="https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215">Domain-Driven Design: Tackling Complexity in the Heart of Software</a></p>
+<p><a id="ddd"></a>[ddd] <a href="https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215">Domain-Driven Design: Tackling Complexity in the Heart of Software by  Eric Evans</a></p>
 </li>
 <li>
-<p><a id="lddd"></a>[lddd] <a href="https://www.amazon.com/Learning-Domain-Driven-Design-Aligning-Architecture/dp/1098100131">Learning Domain-Driven Design: Aligning Software Architecture and Business Strategy</a></p>
+<p><a id="lddd"></a>[lddd] <a href="https://www.amazon.com/Learning-Domain-Driven-Design-Aligning-Architecture/dp/1098100131">Learning Domain-Driven Design: Aligning Software Architecture and Business Strategy by Vlad Khononov</a></p>
 </li>
 <li>
-<p><a id="evst"></a>[evst] <a href="https://leanpub.com/introducing_eventstorming">Introducing EventStorming</a></p>
+<p><a id="evst"></a>[evst] <a href="https://leanpub.com/introducing_eventstorming">Introducing EventStorming by Alberto Brandolini</a></p>
 </li>
 <li>
-<p><a id="cqrs"></a>[cqrs] <a href="https://martinfowler.com/bliki/CQRS.html">CQRS</a></p>
+<p><a id="cqrs"></a>[cqrs] <a href="https://martinfowler.com/bliki/CQRS.html">martinFowler.com - CQRS</a></p>
 </li>
 <li>
-<p><a id="hexa"></a>[hexa] <a href="https://alistair.cockburn.us/hexagonal-architecture/">Hexagonal Architecture</a></p>
+<p><a id="hexa"></a>[hexa] <a href="https://alistair.cockburn.us/hexagonal-architecture/">alistair.cockburn.us -  Hexagonal Architecture</a></p>
 </li>
 <li>
-<p><a id="loctra"></a>[loctra] <a href="https://www.reactivemanifesto.org/glossary#Location-Transparency">Location Transparency</a></p>
+<p><a id="loctra"></a>[loctra] <a href="https://www.reactivemanifesto.org/glossary#Location-Transparency">reactivemanifesto.org - Location Transparency</a></p>
 </li>
 <li>
-<p><a id="intpat"></a>[intpat] <a href="https://martinfowler.com/books/eip.html">Enterprise Integration Patterns: Designing, Building, and Deploying Messaging Solutions</a></p>
+<p><a id="intpat"></a>[intpat] <a href="https://martinfowler.com/books/eip.html">martinFowler.com - Enterprise Integration Patterns: Designing, Building, and Deploying Messaging Solutions</a></p>
+</li>
+<li>
+<p><a id="despat"></a>[despat] <a href="https://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612">Design Patterns: Elements of Reusable Object-Oriented Software by Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides</a></p>
+</li>
+<li>
+<p><a id="saga"></a>[saga] <a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/saga.html">AWS - Cloud design patterns, architectures, and implementations - Saga patterns</a></p>
 </li>
 </ul>
 </div>
@@ -1310,8 +1349,8 @@ Furthermore, a deliverable component can be introduced to consolidate all the co
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 4<br>
-Last updated 2024-04-13 18:57:49 UTC
+Version 5<br>
+Last updated 2024-04-14 16:44:19 UTC
 </div>
 </div>
 </body>
