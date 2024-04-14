@@ -443,7 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h1>Enterprise Application: a metamodel to streamline codebase organization</h1>
 <div class="details">
 <span id="author" class="author">Thibault Morin</span><br>
-<span id="revnumber">version 5,</span>
+<span id="revnumber">version 6,</span>
 <span id="revdate">2024-04-14</span>
 </div>
 <div id="toc" class="toc2">
@@ -1061,6 +1061,9 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 <div class="paragraph">
 <p>When implementing a client component, the Facade is contract of the client implementation.</p>
 </div>
+<div class="paragraph">
+<p>From my perspective, the Facade pattern effectively supports Location Transparency. Essentially, when a core element relies solely on API components equipped with facades, it remains unaware of the actual locations of the implementations associated with those facades. This setup allows for an initial use of local implementations housed within library components, with the option to later transition to remote implementations contained in application components, accessible via client components. Consequently, for users of the facade, this transition merely appears as a shift from a library component to a client component.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_usage_of_the_patterns">Usage of the patterns</h4>
@@ -1349,8 +1352,8 @@ Furthermore, a deliverable component can be introduced to consolidate all the co
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 5<br>
-Last updated 2024-04-14 16:44:19 UTC
+Version 6<br>
+Last updated 2024-04-14 18:17:57 UTC
 </div>
 </div>
 </body>
