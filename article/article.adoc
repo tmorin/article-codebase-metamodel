@@ -364,6 +364,8 @@ The contract for the facade is set up in the API component, while its implementa
 
 When implementing a client component, the Facade is contract of the client implementation.
 
+From my perspective, the Facade pattern effectively supports Location Transparency. Essentially, when a core element relies solely on API components equipped with facades, it remains unaware of the actual locations of the implementations associated with those facades. This setup allows for an initial use of local implementations housed within library components, with the option to later transition to remote implementations contained in application components, accessible via client components. Consequently, for users of the facade, this transition merely appears as a shift from a library component to a client component.
+
 ==== Usage of the patterns
 
 Patterns are essential to draft heuristics and guidelines for the development of a codebase. They provide a common language and a shared understanding among team members, ensuring consistency and clarity in the codebase.
