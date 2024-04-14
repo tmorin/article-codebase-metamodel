@@ -14,6 +14,18 @@
 
 The article presents a metamodel of a codebase organization to streamline the thought processes involved in the development of enterprise applications. The metamodel is based on Domain Driven Design, Ports and Adapters Architecture, Command and Query Responsibility Segregation, and Location Transparency. It aims to solve prevalent issues in software development such as ensuring business alignment with solutions, enhancing solution reliability and stability, and improving the codebase's maintainability and flexibility. Finally, the article provides an exploration of the metamodel usage through practical application examples.
 
+.The codebase metamodel
+[plantuml, format="png"]
+----
+include::metamodel.puml[]
+----
+
+.The pattern catalog
+[plantuml, format="png"]
+----
+include::patterns-overview.puml[]
+----
+
 == The motivation
 
 In the fast-paced world of software development, agility has become the guiding principle for teams seeking to innovate and deliver value swiftly. This approach emphasizes rapid development cycles, where features are rolled out incrementally, allowing for quick delivery and early feedback. The agility model has revolutionized the software development process, enhancing efficiency and adaptability. Yet, this very model introduces unique challenges, particularly in the realm of custom solutions for enterprise applications. The inherent complexity of these applications does not seamlessly align with the agility paradigm, where rapid and incremental changes are the norms. Such complexity demands thoughtful consideration and time — commodities often in short supply in agile environments.
@@ -215,7 +227,7 @@ This indicates that although the primary influence on the codebase of an integra
 
 Components interact with each other via relationships, which establish dependencies between them. For instance, a core component depends on an API component.
 
-.Metamodel of the codebase: the relationship
+.Metamodel of the codebase: the relationships
 [plantuml, format="png"]
 ----
 include::metamodel-relationship.puml[]
@@ -233,7 +245,15 @@ Fortunately, it's possible to organize the codebase so that its components are e
 Patterns are a set of rules and guidelines that help in organizing the component content effectively.
 Moreover, patterns help to save time and effort by providing a structured approach to solving common problems.
 
-==== EventStorming
+The following diagram illustrates the metamodel of the codebase, showcasing the relationships between the components and the patterns.
+
+.Metamodel of the codebase
+[plantuml, format="png"]
+----
+include::metamodel.puml[]
+----
+
+==== EventStorming & co
 
 EventStorming provides excellent starting points to discover patterns because it provides a unified language of concepts primarily from Domain-Driven Design (DDD) and Command Query Responsibility Segregation (CQRS). Additionally, other concepts are defined to encompass common patterns.
 
@@ -241,9 +261,17 @@ The application of these concepts during the design phase is partially explored 
 
 ==== The catalog
 
-The catalog provided is just a starting point. Every codebase can have its own unique set of patterns tailored to its specific needs and requirements. The key is to identify the most relevant patterns and establish a consistent naming convention and description to ensure clarity and maintainability.
+The purpose of the catalog is to associate patterns with components, providing a clear understanding of the relationships between them.
 
-Certain patterns have strong ties to specific component types within software architecture, depending on the programming paradigm and architectural principles used. This catalog outlines these associations, particularly suited for teams utilizing the Object-Oriented Programming (OOP) paradigm with a layered architecture background. However, it's important to note that teams with a functional programming background and employing reactive architectures would likely interpret and define these patterns differently.
+From my point view, there isn't a unique catalogue but there is a catalog by codebase owner. A codebase owner is a group of developers. It can be a team, a team of team, an organization ... Moreover, the culture of the codebase owner has a direct impact on the catalog. For instance, a team with a strong background Object-Oriented Programming (OOP) and Layered Architecture would have a different catalog than a team with a strong background in Functional Programming and Reactive Architecture.
+
+Therefore, the presented patterns are just a starting point. The catalog should be tailored to the codebase owner. The key is to identify the most relevant patterns and establish a consistent naming convention and description to ensure clarity and maintainability.
+
+.Overview of the patterns
+[plantuml, format="png"]
+----
+include::patterns-overview.puml[]
+----
 
 ==== Command
 
@@ -316,23 +344,25 @@ The process pattern comes from the EventStorming concepts. It is a sequence of a
 
 The behavior of the process is located in the core component, with its orchestration managed by a driven adapter component.
 
-==== Saga
-
-The saga pattern comes from the EventStorming concepts. It is a long-running process that handles events and commands, often involving multiple steps and managing the state across them.
-
-The behavior of the saga is located in the core component, with its orchestration managed by a driven adapter component.
-
 ==== Timer
 
 The timer pattern comes from the EventStorming concepts. It is a mechanism that triggers an event or command after a certain period of time or at specific intervals.
 
 The contract for the timer is defined in the core component, with its implementation carried out in a driven adapter component.
 
+==== Saga
+
+The saga pattern comes from the distributed system ecosystem <<saga>>. It is a long-running process that handles events and commands, often involving multiple steps and managing the state across them.
+
+The behavior of the saga is located in the core component, with its orchestration managed by a driven adapter component.
+
 ==== Facade
 
-The facade pattern comes from the EventStorming concepts. It is an interface or abstraction layer that simplifies a set of interfaces or classes, often used to integrate systems or manage complexities.
+The facade pattern comes from the famous gang of four book <<despat>>. It is an interface or abstraction layer that simplifies a set of interfaces or classes, often used to integrate systems or manage complexities.
 
 The contract for the facade is set up in the API component, while its implementation takes place in the core component. The contract is designed to be used by driving adapter components.
+
+When implementing a client component, the Facade is contract of the client implementation.
 
 ==== Usage of the patterns
 
@@ -450,14 +480,15 @@ As illustrated with the Note App example, even a simple feature such as submitti
 [bibliography]
 == Bibliography
 
-* [[[ddd]]] https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215[Domain-Driven Design: Tackling Complexity in the Heart of Software]
-* [[[lddd]]] https://www.amazon.com/Learning-Domain-Driven-Design-Aligning-Architecture/dp/1098100131[Learning Domain-Driven Design: Aligning Software Architecture and Business Strategy]
-* [[[evst]]] https://leanpub.com/introducing_eventstorming[Introducing EventStorming]
-* [[[cqrs]]] https://martinfowler.com/bliki/CQRS.html[CQRS]
-* [[[hexa]]] https://alistair.cockburn.us/hexagonal-architecture/[Hexagonal Architecture]
-* [[[loctra]]] https://www.reactivemanifesto.org/glossary#Location-Transparency[Location Transparency]
-* [[[intpat]]] https://martinfowler.com/books/eip.html[Enterprise Integration Patterns: Designing, Building, and Deploying Messaging Solutions]
-
+* [[[ddd]]] https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215[Domain-Driven Design: Tackling Complexity in the Heart of Software by  Eric Evans]
+* [[[lddd]]] https://www.amazon.com/Learning-Domain-Driven-Design-Aligning-Architecture/dp/1098100131[Learning Domain-Driven Design: Aligning Software Architecture and Business Strategy by Vlad Khononov]
+* [[[evst]]] https://leanpub.com/introducing_eventstorming[Introducing EventStorming by Alberto Brandolini]
+* [[[cqrs]]] https://martinfowler.com/bliki/CQRS.html[martinFowler.com - CQRS]
+* [[[hexa]]] https://alistair.cockburn.us/hexagonal-architecture/[alistair.cockburn.us -  Hexagonal Architecture]
+* [[[loctra]]] https://www.reactivemanifesto.org/glossary#Location-Transparency[reactivemanifesto.org - Location Transparency]
+* [[[intpat]]] https://martinfowler.com/books/eip.html[martinFowler.com - Enterprise Integration Patterns: Designing, Building, and Deploying Messaging Solutions]
+* [[[despat]]] https://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612[Design Patterns: Elements of Reusable Object-Oriented Software by Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides]
+* [[[saga]]] https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/saga.html[AWS - Cloud design patterns, architectures, and implementations - Saga patterns]
 
 [colophon]
 == Colophon

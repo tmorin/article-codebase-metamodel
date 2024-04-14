@@ -1,0 +1,24 @@
+@startwbs
+* Patterns
+** CQRS
+***_ Command
+***_ Query
+***_ Result
+** DDD
+***_ Event
+****_ Integration Event
+****_ Domain Event
+***_ Aggregate
+***_ Factory
+***_ Repository
+***_ Service
+***_ Policy
+** EventStorming
+***_ Read Model
+***_ Process
+***_ Timer
+** Distributed System
+***_ Saga
+** Gang Of Four
+***_ Facade
+@endwbs
