@@ -1,7 +1,7 @@
 = Enterprise Application: a metamodel to streamline codebase organization
 :author: Thibault Morin
-:revdate: 2024-04-14
-:revnumber: 6
+:revdate: 2024-04-16
+:revnumber: 7
 :toc:
 :icons: font
 :source-highlighter: coderay
@@ -12,7 +12,7 @@
 [abstract]
 == Abstract
 
-The article presents a metamodel of a codebase organization to streamline the thought processes involved in the development of enterprise applications. The metamodel is based on Domain Driven Design, Ports and Adapters Architecture, Command and Query Responsibility Segregation, and Location Transparency. It aims to solve prevalent issues in software development such as ensuring business alignment with solutions, enhancing solution reliability and stability, and improving the codebase's maintainability and flexibility. Finally, the article provides an exploration of the metamodel usage through practical application examples.
+The article presents a metamodel of a codebase organization and a pattern catalog to streamline the thought processes involved in the development of enterprise applications. The metamodel is based on Domain Driven Design, Ports and Adapters Architecture, Command and Query Responsibility Segregation, and Location Transparency. It aims to solve prevalent issues in software development such as ensuring business alignment with solutions, enhancing solution reliability and stability, and improving the codebase's maintainability and flexibility. Finally, the article provides an exploration of the metamodel usage through practical application examples.
 
 .The codebase metamodel
 [plantuml, format="png"]
