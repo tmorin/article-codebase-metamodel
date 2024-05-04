@@ -1,0 +1,9 @@
+@startuml
+package codebase {
+    package api {
+        card result
+        card view
+    }
+}
+result o-r-> "*" view : "      "
+@enduml

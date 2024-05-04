@@ -1,0 +1,15 @@
+@startuml
+package codebase {
+    package api {
+        card command
+        card result
+    }
+    package core {
+        card handler
+        card scenario
+    }
+}
+handler .u.> command : <<use>>
+handler .u.> result : <<use>>
+scenario .r.> handler : <<use>>
+@enduml

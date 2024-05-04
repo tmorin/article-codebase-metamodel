@@ -255,7 +255,7 @@ include::metamodel.puml[]
 
 ==== EventStorming & co
 
-EventStorming provides excellent starting points to discover patterns because it provides a unified language of concepts primarily from Domain-Driven Design (DDD) and Command Query Responsibility Segregation (CQRS). Additionally, other concepts are defined to encompass common patterns.
+EventStorming provides excellent starting points to discover patterns because it provides a unified language of concepts primarily from Domain-Driven Design (DDD) and Command and Query Responsibility Segregation (CQRS). Additionally, other concepts are defined to encompass common patterns.
 
 The application of these concepts during the design phase is partially explored in this article: https://dev.to/tmorin/enhancing-business-logic-with-plantuml-and-eventstorming-de0[Enhancing Business Logic with PlantUML and EventStorming]. This resource provides insights into using these concepts effectively to enhance project architecture and workflow.
 
@@ -275,24 +275,118 @@ include::patterns-overview.puml[]
 
 ==== Command
 
-The command pattern comes from the Command Query Responsibility Segregation (CQRS) driver. It is a directive that triggers a specific action, often resulting in changes to the state of an application.
+The Command pattern comes from the Command and Query Responsibility Segregation (CQRS) driver. It is an action (i.e. the command) that expects to change to the state of an application. Optionally, a result can be provided to the producer to inform of the command's outcome.
 
-The data structure of the command is usually placed in the API component, while the behavior is located in the core component.
+The data structures for the command and the result are usually placed in the API component, while the behavior is located in the core component.
+
+The command's behavior (i.e. the handler) can be tested in isolation using regular Unit Tests or Integration Tests linked solely to core artifacts. However, acceptance scenarios can be implemented based on the core component's artifacts, allowing driven adapters to validate their implementations from the core component's point of view.
+
+.Relationships of the Command Pattern
+[plantuml, format="png"]
+----
+include::patterns-command.puml[]
+----
+
+===== Examples
+
+The following snippet shows the definition of a command.
+
+.The data structure of a Command
+[source,java]
+----
+include::../example/java/src/main/api/todoapp/api/CreateTodoListCommand.java[]
+----
+
+The command above is handled by the handler described below.
+
+.The behavior of a command
+[source,java]
+----
+include::../example/java/src/main/core/todoapp/core/CreateTodoListHandler.java[]
+----
+
+As mentioned earlier, scenarios can be implemented by the core to validate the driven adapter behaviors.
+
+.A scenario validating the command behavior
+[source,java]
+----
+include::../example/java/src/main/core/todoapp/core/CreateTodoListScenario.java[]
+----
 
 ==== Query
 
-The query pattern comes from the Command Query Responsibility Segregation (CQRS) driver. It is a request for information or data from a system without changing the state of the system.
+The Query pattern comes from the Command and Query Responsibility Segregation (CQRS) driver. It is an action (i.e. the query) that request for information about to the state of an application. As a response, a result is provided to the producer.
 
-The data structure of the query is typically located in the API component, while the behavior is situated in the core component.
+The data structures for the query and the result are usually placed in the API component, while the behavior is located in the core component.
 
 [NOTE]
-CQRS emphasizes the separation of commands and queries which can lead to the design of two distinct models: one for the command and another for the query. Therefore, the behavior of the query could be located into a different component than the behavior of the command.
+CQRS emphasizes the separation of commands and queries, which can lead to the design of two distinct models: one for commands and another for queries. Therefore, the behavior of the query could be located in a different component than the behavior of the command, such as a sibling core component designed specifically for query handling.
+
+Like for the commands, the query's behavior (i.e. the handler) can be tested in isolation using regular Unit Tests or Integration Tests linked solely to core artifacts. However, acceptance scenarios can be implemented based on the core component's artifacts, allowing driven adapters to validate their implementations from the core component's point of view.
+
+.Relationships of the Query Pattern
+[plantuml, format="png"]
+----
+include::patterns-query.puml[]
+----
+
+===== Examples
+
+The following snippet shows the definition of a query.
+
+.The data structure of a Query
+[source,java]
+----
+include::../example/java/src/main/api/todoapp/api/ListTodoListsQuery.java[]
+----
+
+The following snippet shows the definition of a result.
+
+.The data structure of a Result
+[source,java]
+----
+include::../example/java/src/main/api/todoapp/api/ListTodoListsResult.java[]
+----
+
+The query above is handled by the handler described below.
+
+.The behavior of a query
+[source,java]
+----
+include::../example/java/src/main/core/todoapp/core/ListTodoListsHandler.java[]
+----
+
+As mentioned earlier, scenarios can be implemented by the core to validate the driven adapter behaviors.
+
+.A scenario validating the query behavior
+[source,java]
+----
+include::../example/java/src/main/core/todoapp/core/ListTodoListsScenario.java[]
+----
 
 ==== Result
 
-The result pattern comes from the Command Query Responsibility Segregation (CQRS) driver. It is the output or outcome that is returned after the execution of a command or query.
+The Result pattern comes from the Command and Query Responsibility Segregation (CQRS) driver. It is the output or outcome that is returned after the execution of a command or query.
 
 The data structure of the result is typically located in the API component.
+
+A result is usually a container for views, also called Read Model.
+
+.Relationships of the Result Pattern
+[plantuml, format="png"]
+----
+include::patterns-result.puml[]
+----
+
+===== Examples
+
+The following snippet shows the definition of a result.
+
+.The data structure of a Result
+[source,java]
+----
+include::../example/java/src/main/api/todoapp/api/ListTodoListsResult.java[]
+----
 
 ==== Event
 
