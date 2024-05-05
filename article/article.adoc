@@ -1,7 +1,7 @@
 = Enterprise Application: a metamodel to streamline codebase organization
 :author: Thibault Morin
-:revdate: 2024-04-16
-:revnumber: 7
+:revdate: 2024-05-04
+:revnumber: 8
 :toc:
 :icons: font
 :source-highlighter: coderay
@@ -28,15 +28,37 @@ include::patterns-overview.puml[]
 
 == The motivation
 
-In the fast-paced world of software development, agility has become the guiding principle for teams seeking to innovate and deliver value swiftly. This approach emphasizes rapid development cycles, where features are rolled out incrementally, allowing for quick delivery and early feedback. The agility model has revolutionized the software development process, enhancing efficiency and adaptability. Yet, this very model introduces unique challenges, particularly in the realm of custom solutions for enterprise applications. The inherent complexity of these applications does not seamlessly align with the agility paradigm, where rapid and incremental changes are the norms. Such complexity demands thoughtful consideration and time — commodities often in short supply in agile environments.
+In Software Development, agility has become the guiding principle for teams willing to innovate and deliver value efficiently.
+This approach emphasizes rapid development cycles allowing for quick delivery and early feedback because changes are rolled out iteratively and incrementally.
+However, agility introduces challenges, particularly in the realm of custom solutions for enterprise applications.
+The inherent complexity of these applications does not seamlessly align with the agility paradigm.
+Such complexity demands thoughtful consideration and time — commodities often in short supply in agile environments.
 
-Despite these challenges, a well-considered approach to software development can significantly streamline the process, even within the intricate landscape of enterprise applications. Embracing heuristics and a mindset of acceptance towards the limitations of time allows us to navigate the complexities more effectively. However, the quest for a one-size-fits-all solution to address these complexities is futile. Solutions are inherently contextual, and a universal strategy that addresses all concerns is, at best, hypothetical.
+Nevertheless, as Bill Mollison phrased it decades ago, _the problem is the solution_ <<pbsol>>.
+Therefore, the handling of the complexity must be adapted to align with the quick pace of development emphasized by agility.
+The time required for decision-making when handling complexity can be optimized by adopting a streamlined approach to software development supporting the design of heuristics.
 
-This article explores the complexities of structuring a codebase for creating bespoke solutions in enterprise applications. Drawing on my 15 years of experience focused on custom solutions with long-term projects, I suggest a metamodel that facilitates the design of heuristics to simplify the thought processes.
+When dealing with enterprise applications, the codebase is the repository of complexity.
+Therefore, the organization of the codebase is pivotal to the success of an efficient decision-making process.
 
-At the core of the metamodel are principles such as Domain Driven Design, the Port/Adapter Architecture, Command and Query Responsibility Segregation, and Location Transparency, all underpinned by a commitment to high code coverage. Together, these elements form the cornerstone of a codebase that not only meets the immediate demands of agility but also addresses the broader concerns of aligning with business goals, ensuring reliability, and maintaining flexibility.
+This article explores the streamlining of codebases supporting the development of enterprise applications.
+The outcome is a metamodel that facilitates the design of heuristics to simplify decision-making processes.
 
-The following Archimate Motivation View is a good way to visualize the reasoning behind this proposal.
+The metamodel is driven by the following concerns:
+
+- The alignment between the business and the implemented solutions.
+- The reliability and stability of the solutions.
+- The maintainability and flexibility of the codebase.
+
+The metamodel is built on the following approaches:
+
+- Domain Driven Design (DDD).
+- Ports and Adapters Architecture.
+- Command and Query Responsibility Segregation (CQRS).
+- Location Transparency.
+- Very High Code Coverage Level.
+
+The following Archimate Motivation View visualizes the reasoning behind this proposal.
 
 .Archimate Motivation View
 image::archimate-motivation.png[]
@@ -576,6 +598,8 @@ As illustrated with the Note App example, even a simple feature such as submitti
 [bibliography]
 == Bibliography
 
+* [[[pbsol]]] https://www.permaculture.org.uk/principles/problem-solution[
+The Permaculture Association: The problem is the solution]
 * [[[ddd]]] https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215[Domain-Driven Design: Tackling Complexity in the Heart of Software by  Eric Evans]
 * [[[lddd]]] https://www.amazon.com/Learning-Domain-Driven-Design-Aligning-Architecture/dp/1098100131[Learning Domain-Driven Design: Aligning Software Architecture and Business Strategy by Vlad Khononov]
 * [[[evst]]] https://leanpub.com/introducing_eventstorming[Introducing EventStorming by Alberto Brandolini]
