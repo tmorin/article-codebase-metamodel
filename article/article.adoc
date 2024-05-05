@@ -612,11 +612,14 @@ By systematically expanding and refining these components, developers can effect
 
 == The Note app example
 
-To explain these concepts, let's consider a simple Note App as an example. This application offers various functionalities centered around the concept of notes, which are organized into a Note module. As previously discussed, the Note module is made up of several components, and these components are implemented using different patterns.
+To explain these concepts, let's consider a simple Note App as an example.
+This application offers various functionalities centered around the concept of notes, which are organized into a Note module.
+As previously discussed, the Note module is made up of several components, and these components are implemented using different patterns.
 
 We will explore the feature of submitting notes to understand this further.
 
-The feature we're discussing is designed to either create a new note or update an existing one, and to update the indices that are associated with the notes. This functionality allows users to efficiently manage and retrieve their notes within the app.
+The feature we're discussing is designed to either create a new note or update an existing one, and to update the indices that are associated with the notes.
+This functionality allows users to efficiently manage and retrieve their notes within the app.
 
 .The submission of notes
 [plantuml, format="png"]
@@ -624,23 +627,43 @@ The feature we're discussing is designed to either create a new note or update a
 include::app-illustration.puml[]
 ----
 
-On the server side, the functionality is exposed through a Facade Command named `SubmitNote`. A facade command acts as a coordinator, orchestrating the execution of other commands within the system.
+On the server side, the functionality is exposed through a Facade Command named `SubmitNote`.
+A Facade Command acts as a coordinator, orchestrating the execution of other commands within the system.
 
-Similar to other commands, a facade command comprises both a data structure and behavior. The data structure, along with the contract detailing the behavior, are located within the API component. The implementation of this behavior is managed in the core, and the application of the facade command occurs within the driving adapter.
+Similar to other commands, a Facade Command comprises both a data structure and behavior.
+The data structure, along with the contract detailing the behavior, are located within the API component.
+The implementation of this behavior is managed in the core, and the application of the Facade Command occurs within the driving adapter.
 
-For instance, various implementations might be developed to use this command: one could handle it synchronously via REST, while another might facilitate asynchronous operations using AMQP (Advanced Message Queuing Protocol). This setup provides flexibility in how the command is executed, catering to different operational needs.
+For instance, various implementations might be developed to use this command: one could handle it synchronously via REST, while another might facilitate asynchronous operations using AMQP (Advanced Message Queuing Protocol).
+This setup provides flexibility in how the command is executed, catering to different operational needs.
 
-The `CreateNote` and `UpdateNote` commands, which are orchestrated by the `SubmitNote` command, also consist of data structures and behaviors. However, unlike the facade command, these commands reside solely within the core component. This is because they are not exposed externally; they function internally to manage the creation and updating of notes as part of the system's back-end operations. This setup ensures that these commands are encapsulated within the system, maintaining a clear separation between internal processing and external interfaces.
+The `CreateNote` and `UpdateNote` commands, which are orchestrated by the `SubmitNote` command, also consist of data structures and behaviors.
+However, unlike the Facade Command, these commands reside solely within the core component.
+This is because they are not exposed externally; they function internally to manage the creation and updating of notes as part of the system's back-end operations.
+This setup ensures that these commands are encapsulated within the system, maintaining a clear separation between internal processing and external interfaces.
 
-The execution of the command involves managing the `Note` aggregate, which necessitates the use of a repository. The contract for this repository is defined within the core component, specifying how the Note aggregates are to be managed, accessed, and persisted. The actual implementation of the repository, however, takes place in a driven adapter component.
+The execution of the command involves managing the `Note` Aggregate, which necessitates the use of a Repository.
+The contract for this Repository is defined within the core component, specifying how the Note Aggregates are to be managed, accessed, and persisted.
+The actual implementation of the Repository, however, takes place in a driven adapter component.
 
-This structure allows for multiple implementations of the repository to suit different storage technologies and requirements. For example, one implementation might be designed for a Relational Database Management System (RDBMS), providing structured query capabilities and transaction support. Another implementation might be optimized for a NoSQL database, which can offer scalability and flexibility for unstructured data. This flexibility ensures that the application can adapt to various data storage strategies as needed.
+This structure allows for multiple implementations of the Repository to suit different storage technologies and requirements.
+For example, one implementation might be designed for a Relational Database Management System (RDBMS), providing structured query capabilities and transaction support.
+Another implementation might be optimized for a NoSQL database, which can offer scalability and flexibility for unstructured data.
+This flexibility ensures that the application can adapt to various data storage strategies as needed.
 
-The result of executing the command is the `NoteMutated` domain event. This domain event serves as a notification within the system, indicating that a significant change or action has taken place. Given their role in signaling internal system changes, domain events like `NoteMutated` are housed within the core component. This placement ensures that they are not exposed to or used by external modules, maintaining a clear boundary between the system's internal operations and its external interfaces. This arrangement helps to encapsulate the system's domain logic and maintain the integrity of its internal processes.
+The result of executing the command is the `NoteMutated` Domain Event.
+This domain event serves as a notification within the system, indicating that a significant change or action has taken place.
+Given their role in signaling internal system changes, Domain Events like `NoteMutated` are housed within the core component.
+This placement ensures that they are not exposed to or used by external modules, maintaining a clear boundary between the system's internal operations and its external interfaces.
+This arrangement helps to encapsulate the system's domain logic and maintain the integrity of its internal processes.
 
-The `NoteMutated` domain event serves as the catalyst for the `NoteIndexer` process, which is tasked with updating the indices related to the notes. This process is strategically housed within the core component of the system.
+The `NoteMutated` Domain Event serves as the catalyst for the `NoteIndexer` process, which is tasked with updating the indices related to the notes.
+This process is strategically housed within the core component of the system.
 
-The `NoteIndexer` process updates two read models, `NoteView` and `NotesView`, both of which are accessible to external users and therefore located in the API component. The state of these read models is managed by a repository. The specifications for how the repository should operate are outlined in the core component's contract, while the actual implementation of this repository is carried out in a driven adapter component. This setup ensures that the read models are both accessible externally and reliably maintained, aligning with the system’s data integrity and accessibility requirements.
+The `NoteIndexer` process updates two read models, `NoteView` and `NotesView`, both of which are accessible to external users and therefore located in the API component.
+The state of these read models is managed by a repository.
+The specifications for how the repository should operate are outlined in the core component's contract, while the actual implementation of this repository is carried out in a driven adapter component.
+This setup ensures that the read models are both accessible externally and reliably maintained, aligning with the system’s data integrity and accessibility requirements.
 
 The codebase can be structured as follows:
 
@@ -676,7 +699,9 @@ The codebase can be structured as follows:
 **** NotesViewRepository (Repository, Realization)
 
 Additional components can indeed be incorporated to enhance functionality and integration within the system.
-Furthermore, a deliverable component can be introduced to consolidate all the components of the Note module. This deliverable would encapsulate the functionality of the entire module, providing an executable that exposes both REST and AMQP interfaces. Such a component not only simplifies deployment but also ensures that all services related to the Note module are accessible through unified endpoints, enhancing the system's interoperability and ease of use.
+Furthermore, a deliverable component can be introduced to consolidate all the components of the Note module.
+This deliverable would encapsulate the functionality of the entire module, providing an executable that exposes both REST and AMQP interfaces.
+Such a component not only simplifies deployment but also ensures that all services related to the Note module are accessible through unified endpoints, enhancing the system's interoperability and ease of use.
 
 A UML diagram can be designed according to the codebase to visualize the structure of the Note module.
 
@@ -688,11 +713,15 @@ include::app-modules.puml[]
 
 == Conclusion
 
-In the journey of crafting robust, efficient, and adaptable enterprise applications, the organization of the codebase is paramount. This detailed guide has traversed the intricacies of designing and managing a codebase tailored for complex enterprise solutions, highlighting essential architectural patterns such as Domain Driven Design, Ports and Adapters Architecture, Command and Query Responsibility Segregation, and Location Transparency. By systematically applying these frameworks and maintaining high code coverage, developers can ensure alignment with business objectives while achieving a balance between reliability, maintainability, and flexibility.
+In the journey of crafting robust, efficient, and adaptable enterprise applications, the organization of the codebase is paramount.
+This detailed guide has traversed the intricacies of designing and managing a codebase tailored for complex enterprise solutions, highlighting essential architectural patterns such as Domain Driven Design, Ports and Adapters Architecture, Command and Query Responsibility Segregation, and Location Transparency.
+By systematically applying these frameworks and maintaining high code coverage, developers can ensure alignment with business objectives while achieving a balance between reliability, maintainability, and flexibility.
 
-The modular approach, utilizing well-defined patterns and strategic component associations, facilitates clear separation of concerns and promotes ease of testing and adaptability. This not only streamlines the development process but also positions the software to seamlessly integrate new functionalities and respond adeptly to evolving business needs.
+The modular approach, utilizing well-defined patterns and strategic component associations, facilitates clear separation of concerns and promotes ease of testing and adaptability.
+This not only streamlines the development process but also positions the software to seamlessly integrate new functionalities and respond adeptly to evolving business needs.
 
-As illustrated with the Note App example, even a simple feature such as submitting notes can benefit from a structured, methodical approach to design and implementation, ensuring that each component effectively fulfills its role within the overall system. This guide serves as a blueprint for developers and architects aiming to master the art of enterprise software development, fostering an environment where innovation thrives and software excellence is the norm.
+As illustrated with the Note App example, even a simple feature such as submitting notes can benefit from a structured, methodical approach to design and implementation, ensuring that each component effectively fulfills its role within the overall system.
+This guide serves as a blueprint for developers and architects aiming to master the art of enterprise software development, fostering an environment where innovation thrives and software excellence is the norm.
 
 [bibliography]
 == Bibliography
