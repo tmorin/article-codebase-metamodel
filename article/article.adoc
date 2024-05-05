@@ -65,21 +65,35 @@ image::archimate-motivation.png[]
 
 == The concerns
 
-When embarking into the creation and management of a codebase for enterprise applications several key concerns arise. These concerns are pivotal to the success of the organization, influencing not only the initial development phase but also the long-term viability and adaptability of the solutions crafted. Let's delve into these critical areas.
+When embarking into the creation and management of a codebase for enterprise applications several key concerns arise.
+These concerns are pivotal to the success of the organization, influencing not only the initial development phase but also the long-term viability and adaptability of the solutions crafted.
+Let's delve into these critical areas.
 
 === Alignment Between the Business and the Solutions
 
-One of the paramount challenges in the development of enterprise applications is ensuring that the final solutions aligns closely with business requirements and objectives. This alignment is not just a desirable attribute but a fundamental necessity for the success of any enterprise. Unfortunately, as many seasoned IT professionals can attest, discrepancies between business expectations and the implemented solutions are not uncommon. These discrepancies can range from minor issues, such as terminology misalignment and business rule misinterpretations, to more significant concerns like flawed data model designs. Such misalignment not only result in financial losses but can also erode the trust between IT service providers, stakeholders, and shareholders, ultimately impacting the project's overall success and the organization's reputation.
+One of the most significant challenges in developing enterprise applications is ensuring that the final solutions align closely with business requirements and objectives.
+This alignment is not just desirable but a fundamental necessity for the success of any enterprise.
+
+Unfortunately, as many seasoned IT professionals can attest, discrepancies between business expectations and the implemented solutions are not uncommon.
+These discrepancies can range from minor issues like terminology misalignment and business rule misinterpretations to more significant concerns like flawed data model designs.
 
 === Reliability and Stability of the Solutions
 
-Reliability and stability are the bedrocks upon which enterprise applications should be built. These characteristics ensure that solutions perform consistently under expected conditions and possesses the resilience needed to withstand unexpected situations. Drawing from my own experience, as well as the collective wisdom of the IT community, it's clear that failing to meet these criteria—evidenced by solutions that does not pass User Acceptance Testing (UAT) or falters under unforeseen circumstances—can have dire consequences. These include not just immediate financial losses, but also long-term reputational damage and potential legal ramifications, all of which can significantly set back an organization's progress.
+Any enterprise applications must be reliable and stable.
+These characteristics ensure that solutions perform consistently under expected conditions and possess the resilience needed to withstand unexpected situations.
+
+Yet too much IT projects are failing to meet these expectations, leading to system failures, data breaches, and service disruptions.
+Causes of these failures can be traced back to various factors, including inadequate testing, poor design choices, insufficient contingency planning and so on.
+However, the root causes are often a lack of time when taking decisions and a lack of willingness to invest in quality.
 
 === Maintainability and Flexibility of the Codebase
 
-The maintainability and flexibility of a codebase are crucial for the long-term health and scalability of solutions. A well-organized codebase enables developers to understand, modify, and extend the software efficiently, thereby adapting to new requirements or addressing issues as they arise. In contrast, a codebase that resembles a "nightmare"—difficult to decipher, modify, or expand—poses numerous challenges. It can lead to regression bugs, performance bottlenecks, and security vulnerabilities. Moreover, a poorly maintained codebase can affect team morale, diminish job satisfaction, and hinder an organization's ability to attract and retain talent. Ensuring that the codebase remains clean, well-documented, and adherent to best practices is not just a technical requirement but a strategic imperative for fostering innovation and maintaining competitive edge.
+The maintainability and flexibility of a codebase are crucial for the long-term health and scalability of solutions.
 
-In summary, the organization of a codebase for enterprise applications must address these critical concerns with diligence and foresight. By prioritizing alignment with the domain, reliability, stability, maintainability and flexibility, developers can lay a solid foundation for solutions that not only meets today's challenges but is also poised to tackle tomorrow's opportunities.
+A well-organized codebase enables developers to understand, modify, and extend the software efficiently, thereby adapting to new requirements or addressing issues as they arise.
+In contrast, a codebase that resembles a _nightmare_ (i.e. difficult to decipher, modify or expand) poses numerous challenges.
+It can lead to regressions, performance issues, security vulnerabilities ...
+Moreover, a poorly maintained codebase can affect team morale, diminish job satisfaction, and hinder an organization's ability to attract and retain talents.
 
 == The drivers
 
