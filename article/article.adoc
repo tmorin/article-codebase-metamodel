@@ -172,17 +172,25 @@ Enforcing a very high code coverage level addresses the following concerns:
 
 == The metamodel
 
-We previously discussed the concerns and the drivers, let's dive into the organization of the codebase.
+A metamodel is a model that defines the structure and relationships of the elements within a model.
+Therefore, the metamodel of codebases is a model that defines the structure and relationships of the components within codebases.
+
+The first step is to break down the codebase into components.
+Once the components are identified, the relationships between them can be established.
+Finally, the patterns can be associated with the components to provide a clear understanding of the relationships between them.
 
 === Divide to conquer
 
-The initial step involves breaking down the codebase.
+This section is about breaking down the codebase into components and establishing relationships between them.
 
 ==== DDD Modules
 
-In Domain-Driven Design (DDD), a module functions as a method to divide a complicated system into smaller, more understandable segments. Each module usually embodies a particular segment of the domain, encompassing associated ideas and functions. For example, in an E-Commerce system, there might be a module dedicated to the catalog and another focused on orders, etc.
+In Domain-Driven Design (DDD), a DDD Module functions as a method to divide a complicated system into smaller, more understandable segments.
+Each module usually embodies a particular segment of the domain, encompassing associated ideas and functions.
+For example, in an E-Commerce system, there might be a module dedicated to the catalog and another focused on orders, etc.
 
-In the structure of the codebase, a DDD module is decomposed into individual components. Each component fulfills a specific function. These functions are defined by the drivers.
+In the structure of the codebase, a DDD module is decomposed into individual components.
+Each component fulfills a specific function. These functions are defined by the drivers.
 
 .Metamodel of the codebase: the foundation
 [plantuml, format="png"]
@@ -192,21 +200,27 @@ include::metamodel-module.puml[]
 
 ==== Port/Adapter Architecture
 
-Typically, the definition of hexagons is influenced by business considerations, as they correspond to the DDD (Domain-Driven Design) Modules. Nonetheless, the internal organization of the hexagons leans towards a technology-centric approach. This includes, firstly, the architectural segregation into core components, ports, and adapters. Secondly, it encompasses the assembly of these hexagons into a cohesive unit: the deliverable.
+A DDD Module can be easily associated with the Ports and Adapters Architecture where the module is the hexagon because a hexagon is influenced by business considerations.
 
-The illustration below depicts the hexagon of the Port/Adapter Architecture, showcasing the core exposing ports which are used or implemented by the adapters. The driving adapters interact with external systems, while the driven adapters encapsulate the implementation of the core's contracts.
+However, the internal organization of the hexagons leans towards a technology-centric approach.
+This includes, firstly, the architectural segregation into core components, ports, and adapters.
+Secondly, it encompasses the assembly of these hexagons into a cohesive unit: the deliverable.
+
+The illustration below depicts the hexagon of the Port/Adapter Architecture, showcasing the core exposing ports which are used or implemented by the adapters.
+The driving adapters interact with external systems, while the driven adapters encapsulate the implementation of the core's contracts.
 
 .Port/Adapter Architecture: the hexagon
 image::hexagon-presentation.svg[]
 
-For instance, the implementation of the REST API exposing the services of the core is located in the driving adapter. On the other hand, the implementation of the RDBMS repository is located in the driven adapter.
+For instance, the implementation of the REST API exposing the services of the core is located in the driving adapter.
+On the other hand, the implementation of the RDBMS repository is located in the driven adapter.
 
 The usage of Port/Adapter Architecture leads to the definition of four main component kinds:
 
-- Core: the core component contains the business logic and the domain model as well as the ports
-- Driving Adapter: the driving adapter contains implementation leveraging on the respective driving ports in the core
-- Driven Adapter: the driven adapter contains the implementation of the respective driven ports in the core
-- Deliverable: the deliverable component embeds all the components of the hexagon and provides a cohesive unit as an executable or a library
+- *Core*: the core component contains the business logic and the domain model as well as the ports.
+- *Driving Adapter*: the driving adapter contains implementation leveraging on the respective driving ports in the core.
+- *Driven Adapter*: the driven adapter contains the implementation of the respective driven ports in the core.
+- *Deliverable*: the deliverable component embeds all the components of the hexagon and provides a cohesive unit as an executable or a library.
 
 .Metamodel of the codebase: with the hexagon's component
 [plantuml, format="png"]
@@ -216,17 +230,21 @@ include::metamodel-hexagon.puml[]
 
 ==== Service Providers and Service Consumers
 
-Typically, an enterprise application consists of various modules that interact with each other. To facilitate smoother integration among these modules, it's common practice for a service provider to offer client implementations of its driving ports. This approach allows a service consumer to directly utilize these implementations, saving significant time. From the perspective of the service consumer, these clients serve as externally driven adapters.
+Usually, an enterprise application consists of various modules that interact with each other.
+To facilitate smoother integration among these modules, it's common practice for a service provider to offer client implementations of its driving ports.
+This approach allows a service consumer to directly utilize these implementations, saving significant time.
+From the perspective of the service consumer, these clients serve as externally driven adapters.
 
-To further streamline integration, the service provider may also provide access to these driving ports through an API bundle. Consequently, a service consumer can integrate these directly into its core, leveraging the service provider's client implementations for seamless interaction without the need for additional integration efforts.
+To further streamline integration, the service provider may also provide access to these driving ports through an API bundle.
+Consequently, a service consumer can integrate these directly into its core, leveraging the service provider's client implementations for seamless interaction without the need for additional integration efforts.
 
 .Port/Adapter Architecture: the client and API
 image::hexagon-client.svg[]
 
 This lead to two new component kinds:
 
-- API: the api component contains the driving ports of the core
-- Client: the client component contains the implementation of the driving ports
+- *API*: the api component contains the driving ports of the core.
+- *Client*: the client component contains the implementation of the driving ports.
 
 .Metamodel of the codebase: with the service's components
 [plantuml, format="png"]
@@ -236,11 +254,14 @@ include::metamodel-service.puml[]
 
 ==== Common stuff
 
-Enterprise applications and their components frequently depend on standardized data structures and shared technical functionalities, such as data serialization, authentication ... To enhance reusability, it's a common practice to establish standard modules according to the type and technology of adapters. For example, one might implement a module that includes the data structures and behaviors necessary for all core modules. Similarly, another module could be developed to incorporate data structures and behaviors specific to driven adapters that utilize RDBMS technology.
+Enterprise applications and their components frequently depend on standardized data structures and shared technical functionalities, such as data serialization, authentication ...
+To enhance reusability, it's a common practice to establish standard modules according to the type and technology of adapters.
+For example, one might implement a module that includes the data structures and behaviors necessary for all core modules.
+Similarly, another module could be developed to incorporate data structures and behaviors specific to driven adapters that utilize RDBMS technology.
 
 This also lead to a new component kind:
 
-- Common: the common component contains shared data structures and behaviors
+- *Common*: the common component contains shared data structures and behaviors.
 
 .Metamodel of the codebase: with the common component
 [plantuml, format="png"]
@@ -250,11 +271,12 @@ include::metamodel-common.puml[]
 
 ==== Enterprise Integration
 
-Enterprise applications frequently interface with technological components, systems, and software applications both within an organization and across different domains. Usually, these implementations adhere to Enterprise Integration Patterns <<intpat>> and may range from entirely custom solutions to configurations of pre-existing, off-the-shelf products.
+Enterprise applications frequently interface with technological components, systems, and software applications both within an organization and across different domains.
+Usually, these implementations adhere to Enterprise Integration Patterns <<intpat>> and may range from entirely custom solutions to configurations of pre-existing, off-the-shelf products.
 
 This lead to a new component kind:
 
-- Integration: the integration component contains the implementation of the integration with external systems
+- *Integration*: the integration component contains the implementation of the integration with external systems.
 
 .Metamodel of the codebase: with the integration component
 [plantuml, format="png"]
@@ -262,15 +284,20 @@ This lead to a new component kind:
 include::metamodel-integration.puml[]
 ----
 
-Most often, the development of integration components does not depend on the Port/Adapter Architecture. Instead, the creation of these components leans more towards scripting or configuration due to their technical nature rather than being driven by business concerns. This implies that the logic is closely linked to the specific technology and system being integrated.
+Most often, the development of integration components does not depend on the Port/Adapter Architecture.
+Instead, the creation of these components are more scripting or configuration to their technical nature rather than being driven by business concerns.
+This implies that the logic is closely linked to the specific technology and system being integrated.
 
-For example, in a Camel application designed for ETL processes, the development is significantly influenced by the Camel framework, particularly its routes and processor concepts. However, the codebase can still be organized in accordance with Domain-Driven Design (DDD) modules, allowing for smooth integration of client components. Ultimately, the final component can incorporate both the integration and client components, along with common elements, to form a unified solution.
+For example, in a Camel application designed for ETL processes, the development is significantly influenced by the Camel framework, particularly its routes and processor concepts.
+However, the codebase can still be organized in accordance with DDD modules, allowing for smooth integration of client components.
+Ultimately, the final component can incorporate both the integration and client components, along with common elements, to form a unified solution.
 
-This indicates that although the primary influence on the codebase of an integration component may not stem from the Port/Adapter Architecture, it can still effectively utilize components closely associated with DDD modules, such as common, client, and API components.
+This indicates that although the primary influence on the codebase of an integration component may not be the Port/Adapter Architecture, it can still effectively utilize components closely associated this architecture, such as common, client, and API components.
 
 ==== Relationship between components
 
-Components interact with each other via relationships, which establish dependencies between them. For instance, a core component depends on an API component.
+Components interact with each other via relationships, which establish dependencies between them.
+For instance, a core component depends on an API component.
 
 .Metamodel of the codebase: the relationships
 [plantuml, format="png"]
@@ -279,13 +306,19 @@ include::metamodel-relationship.puml[]
 ----
 
 [NOTE]
-The common component acts as a shared resource, allowing any component to rely on it. To simplify the diagram and reduce its complexity, the common component is not shown.
+The common component acts as a shared resource, allowing any component to rely on it.
+To simplify the diagram and reduce its complexity, the common component is not shown.
 
 === Think less, reuse more
 
-A codebase primarily consists of various programming elements such as data structures, functions, classes, interfaces, enums, annotations, configurations, scripts, tests, and more. These elements, or artifacts, are typically organized hierarchically; for example, methods are encapsulated within classes, and classes are grouped into packages. The structure and interrelationships of these artifacts shape the content of the components previously mentioned.
+A codebase primarily consists of various programming elements such as data structures, functions, classes, interfaces, enums, annotations, configurations, scripts, tests, and more.
+These elements, or artifacts, are typically organized hierarchically; for example, methods are encapsulated within classes, and classes are grouped into packages.
+The structure and interrelationships of these artifacts shape the content of the components previously mentioned.
 
-Fortunately, it's possible to organize the codebase so that its components are easily identifiable and the relationships among them are clear. There are numerous methods to structure the codebase effectively. The drivers we've discussed offer a solid foundation for organizing the codebase. These drivers provide patterns for naming and defining the artifacts and their interactions within the codebase.
+Fortunately, it's possible to organize the codebase so that its components are easily identifiable and the relationships among them are clear.
+There are numerous methods to structure the codebase effectively.
+The drivers we've discussed offer a solid foundation for organizing the codebase.
+These drivers provide patterns for naming and defining the artifacts and their interactions within the codebase.
 
 Patterns are a set of rules and guidelines that help in organizing the component content effectively.
 Moreover, patterns help to save time and effort by providing a structured approach to solving common problems.
@@ -300,17 +333,25 @@ include::metamodel.puml[]
 
 ==== EventStorming & co
 
-EventStorming provides excellent starting points to discover patterns because it provides a unified language of concepts primarily from Domain-Driven Design (DDD) and Command and Query Responsibility Segregation (CQRS). Additionally, other concepts are defined to encompass common patterns.
+EventStorming provides excellent starting points to discover patterns because it provides a unified language of concepts primarily from Domain-Driven Design (DDD) and Command and Query Responsibility Segregation (CQRS).
+Additionally, other concepts are defined to encompass common patterns.
 
-The application of these concepts during the design phase is partially explored in this article: https://dev.to/tmorin/enhancing-business-logic-with-plantuml-and-eventstorming-de0[Enhancing Business Logic with PlantUML and EventStorming]. This resource provides insights into using these concepts effectively to enhance project architecture and workflow.
+The application of these concepts during the design phase is partially explored in this article: https://dev.to/tmorin/enhancing-business-logic-with-plantuml-and-eventstorming-de0[Enhancing Business Logic with PlantUML and EventStorming].
+This resource provides insights to use these concepts effectively in order to enhance project architecture and workflow.
 
 ==== The catalog
 
 The purpose of the catalog is to associate patterns with components, providing a clear understanding of the relationships between them.
 
-From my point view, there isn't a unique catalogue but there is a catalog by codebase owner. A codebase owner is a group of developers. It can be a team, a team of team, an organization ... Moreover, the culture of the codebase owner has a direct impact on the catalog. For instance, a team with a strong background Object-Oriented Programming (OOP) and Layered Architecture would have a different catalog than a team with a strong background in Functional Programming and Reactive Architecture.
+There isn't a unique catalogue but there is a catalog by codebase owner.
+A codebase owner is a group of developers.
+It can be a team, a team of team, an organization ...
+Moreover, the culture of the codebase owner has a direct impact on the catalog.
+For instance, a team with a strong background Object-Oriented Programming (OOP) and Layered Architecture would have a different catalog than a team with a strong background in Functional Programming and Reactive Architecture.
 
-Therefore, the presented patterns are just a starting point. The catalog should be tailored to the codebase owner. The key is to identify the most relevant patterns and establish a consistent naming convention and description to ensure clarity and maintainability.
+Therefore, the presented patterns are just a starting point.
+The catalog should be tailored to the codebase owner.
+The key is to identify the most relevant patterns and establish a consistent naming convention and description to ensure clarity and maintainability.
 
 .Overview of the patterns
 [plantuml, format="png"]
@@ -320,11 +361,14 @@ include::patterns-overview.puml[]
 
 ==== Command
 
-The Command pattern comes from the Command and Query Responsibility Segregation (CQRS) driver. It is an action (i.e. the command) that expects to change to the state of an application. Optionally, a result can be provided to the producer to inform of the command's outcome.
+The Command pattern comes from the Command and Query Responsibility Segregation (CQRS) driver.
+It is an action (i.e. the command) that expects to change to the state of an application.
+Optionally, a result can be provided to the producer to inform of the command's outcome.
 
 The data structures for the command and the result are usually placed in the API component, while the behavior is located in the core component.
 
-The command's behavior (i.e. the handler) can be tested in isolation using regular Unit Tests or Integration Tests linked solely to core artifacts. However, acceptance scenarios can be implemented based on the core component's artifacts, allowing driven adapters to validate their implementations from the core component's point of view.
+The command's behavior (i.e. the handler) can be tested in isolation using regular Unit Tests or Integration Tests linked solely to core artifacts.
+However, acceptance scenarios can be implemented based on the core component's artifacts, allowing driven adapters to validate their implementations from the core component's point of view.
 
 .Relationships of the Command Pattern
 [plantuml, format="png"]
@@ -360,14 +404,17 @@ include::../example/java/src/main/core/todoapp/core/CreateTodoListScenario.java[
 
 ==== Query
 
-The Query pattern comes from the Command and Query Responsibility Segregation (CQRS) driver. It is an action (i.e. the query) that request for information about to the state of an application. As a response, a result is provided to the producer.
+The Query pattern comes from the Command and Query Responsibility Segregation (CQRS) driver.
+It is an action (i.e. the query) that request for information about to the state of an application. As a response, a result is provided to the producer.
 
 The data structures for the query and the result are usually placed in the API component, while the behavior is located in the core component.
 
 [NOTE]
-CQRS emphasizes the separation of commands and queries, which can lead to the design of two distinct models: one for commands and another for queries. Therefore, the behavior of the query could be located in a different component than the behavior of the command, such as a sibling core component designed specifically for query handling.
+CQRS emphasizes the separation of commands and queries, which can lead to the design of two distinct models: one for commands and another for queries.
+Therefore, the behavior of the query could be located in a different component than the behavior of the command, such as a sibling core component designed specifically for query handling.
 
-Like for the commands, the query's behavior (i.e. the handler) can be tested in isolation using regular Unit Tests or Integration Tests linked solely to core artifacts. However, acceptance scenarios can be implemented based on the core component's artifacts, allowing driven adapters to validate their implementations from the core component's point of view.
+Like for the commands, the query's behavior (i.e. the handler) can be tested in isolation using regular Unit Tests or Integration Tests linked solely to core artifacts.
+However, acceptance scenarios can be implemented based on the core component's artifacts, allowing driven adapters to validate their implementations from the core component's point of view.
 
 .Relationships of the Query Pattern
 [plantuml, format="png"]
@@ -411,7 +458,8 @@ include::../example/java/src/main/core/todoapp/core/ListTodoListsScenario.java[]
 
 ==== Result
 
-The Result pattern comes from the Command and Query Responsibility Segregation (CQRS) driver. It is the output or outcome that is returned after the execution of a command or query.
+The Result pattern comes from the Command and Query Responsibility Segregation (CQRS) driver.
+It is the output or outcome that is returned after the execution of a command or query.
 
 The data structure of the result is typically located in the API component.
 
@@ -435,31 +483,37 @@ include::../example/java/src/main/api/todoapp/api/ListTodoListsResult.java[]
 
 ==== Event
 
-The event pattern comes from the domain-driven design (DDD) driver. It is a notification that a significant change or action has occurred within the system.
+The Event pattern comes from the domain-driven design (DDD) driver.
+It is a notification that a significant change or action has occurred within the system.
 
-There is a distinction between Domain Events and Integration Events. Domain Events are internal to the system and are kept in the core component, while Integration Events are external and are placed in the API component for long-term use.
+There is a distinction between Domain Events and Integration Events.
+Domain Events are internal to the system and are kept in the core component, while Integration Events are external and are placed in the API component for long-term use.
 
 ==== Aggregate
 
-The aggregate pattern comes from the domain-driven design (DDD) driver. It is a cluster of domain objects that can be treated as a single unit, often with one of the objects being the aggregate root.
+The Aggregate pattern comes from the domain-driven design (DDD) driver.
+It is a cluster of domain objects that can be treated as a single unit, often with one of the objects being the Aggregate Root.
 
-The data structure of the aggregate is typically located in the core component.
+The data structure of the Aggregate is typically located in the core component.
 
 ==== Factory
 
-The factory pattern comes from the domain-driven design (DDD) driver. It is responsible for creating complex domain objects, ensuring that created objects are valid and in a consistent state.
+Despite the Gang of Four book <<despat>> defining it a long time ago, the Factory concept used in this article's context comes from the Domain-Driven Design (DDD) driver.
+It is responsible for creating complex domain objects, ensuring that created objects are valid and in a consistent state.
 
-The behavior of the factory is usually located near the data structure it is associated with.
+The behavior of the Factory is usually located near the data structure it is associated with.
 
 ==== Repository
 
-The repository pattern comes from the domain-driven design (DDD) driver. It provides methods to add, remove, and update objects within an Aggregate, abstracting the underlying data storage mechanism.
+The Repository pattern comes from the domain-driven design (DDD) driver.
+It provides methods to add, remove, and update objects within an Aggregate, abstracting the underlying data storage mechanism.
 
 The contract of the repository is defined in the core component, while the implementation is carried out in a driven adapter component.
 
 ==== Service
 
-The service pattern comes from the domain-driven design (DDD) driver. It is an operation offered as an interface that stands alone in the model, without encapsulating state, typically to perform calculations or processing activities.
+The service pattern comes from the domain-driven design (DDD) driver.
+It is an operation offered as an interface that stands alone in the model, without encapsulating state, typically to perform calculations or processing activities.
 
 The contract of the service is generally defined in the core component, with the implementation in a driven adapter component.
 
@@ -467,55 +521,75 @@ However, when the core is complex, it is common to share behaviors within the co
 
 ==== Policy
 
-The policy pattern comes from The domain-driven design (DDD) driver. It is a set of rules or guidelines that dictate how business decisions are made or how business processes are conducted.
+The policy pattern comes from The domain-driven design (DDD) driver.
+It is a set of rules or guidelines that dictate how business decisions are made or how business processes are conducted.
 
 The behavior of the policy is typically located in the core component.
 
 ==== Read Model
 
-The read model pattern comes from the EventStorming concepts. It is a model designed specifically for read operations, optimized for querying and displaying data.
+The read model pattern comes from the EventStorming concepts and can be seen as a side effect of CQRS.
+It is a model designed specifically for read operations, optimized for querying and displaying data.
 
 The data structure of the read model is typically located in the API component.
 
 ==== Process
 
-The process pattern comes from the EventStorming concepts. It is a sequence of actions or steps taken to achieve a particular end in the domain.
+The process pattern comes from the EventStorming concepts.
+It is a sequence of actions or steps taken to achieve a particular end in the domain.
+Usually, a process is implemented using the Business Process Model and Notation (BPMN) standard.
 
 The behavior of the process is located in the core component, with its orchestration managed by a driven adapter component.
 
 ==== Timer
 
-The timer pattern comes from the EventStorming concepts. It is a mechanism that triggers an event or command after a certain period of time or at specific intervals.
+The timer pattern comes from the EventStorming concepts.
+It is a mechanism that triggers an event or command after a certain period of time or at specific intervals.
 
 The contract for the timer is defined in the core component, with its implementation carried out in a driven adapter component.
 
 ==== Saga
 
-The saga pattern comes from the distributed system ecosystem <<saga>>. It is a long-running process that handles events and commands, often involving multiple steps and managing the state across them.
+The saga pattern comes from the distributed system ecosystem <<saga>>.
+It is a long-running process that handles events and commands, often involving multiple steps and managing the state across them.
+Saga differs from the process pattern in that it is designed to react to events and commands, while the process pattern is more deterministic.
 
 The behavior of the saga is located in the core component, with its orchestration managed by a driven adapter component.
 
 ==== Facade
 
-The facade pattern comes from the famous gang of four book <<despat>>. It is an interface or abstraction layer that simplifies a set of interfaces or classes, often used to integrate systems or manage complexities.
+The facade pattern comes from the famous Gang of Four book <<despat>>.
+It is an interface or abstraction layer that simplifies a set of interfaces or classes, often used to integrate systems or manage complexities.
 
-The contract for the facade is set up in the API component, while its implementation takes place in the core component. The contract is designed to be used by driving adapter components.
+The contract for the facade is set up in the API component, while its implementation takes place in the core component.
+The contract is designed to be used by driving adapter components.
 
-When implementing a client component, the Facade is contract of the client implementation.
+When implementing a client component, the Facade is the contract of the client implementation.
 
-From my perspective, the Facade pattern effectively supports Location Transparency. Essentially, when a core element relies solely on API components equipped with facades, it remains unaware of the actual locations of the implementations associated with those facades. This setup allows for an initial use of local implementations housed within library components, with the option to later transition to remote implementations contained in application components, accessible via client components. Consequently, for users of the facade, this transition merely appears as a shift from a library component to a client component.
+The Facade pattern is a Location Transparency enabler.
+Essentially, when a core element relies solely on API components equipped with facades, it remains unaware of the actual locations of the implementations associated with those facades.
+This setup allows for an initial use of local implementations housed within library components, with the option to later transition to remote implementations contained in application components, accessible via client components.
+Consequently, for users of the facade, this transition merely appears as a shift from a library component to a client component.
 
 ==== Usage of the patterns
 
-Patterns are essential to draft heuristics and guidelines for the development of a codebase. They provide a common language and a shared understanding among team members, ensuring consistency and clarity in the codebase.
+Patterns are essential to draft heuristics and guidelines for the development of a codebase.
+They provide a common language and a shared understanding among team members, ensuring consistency and clarity in the codebase.
 
-For example, the Command pattern is defined with a data structure and a behavior. That means, the programing artifacts associated with the Command pattern are already known. Therefore, when creation or updating a command, the team members know what to do and what to expect. Moreover, a pattern provides a systematic approach, therefore efforts can be estimated more accurately.
+For example, the Command pattern is defined with a data structure and a behavior.
+That means, the programing artifacts associated with the Command pattern are already known. Therefore, when creation or updating a command, the team members know what to do and what to expect. Moreover, a pattern provides a systematic approach, therefore efforts can be estimated more accurately.
 
-Moreover, a pattern doesn't exist in isolation. It is often linked to other patterns. For instance, a Command can be linked to an Aggregate and an Aggregate can be linked to a Repository. Therefore, when dealing with an Aggregate, we can easily evaluate the impact of the changes on the Command and the Repository. Again, the predictability of the effort is better.
+Moreover, a pattern doesn't exist in isolation. It is often linked to other patterns.
+For instance, a Command can be linked to an Aggregate and an Aggregate can be linked to a Repository.
+Therefore, when dealing with an Aggregate, we can easily evaluate the impact of the changes on the Command and the Repository.
+Again, the predictability of the effort is better.
 
 Finally, leveraging on the systematic approach of the patterns, the tests can be written more easily because the programing artifacts to test are already known. Therefore, the code coverage can be increased more easily.
 
-For instance, consider a diagram that outlines the design of a command and an aggregate. The objective of the command is to create an instance of an aggregate and then persist it. Four patterns are utilized in this design: Command, Aggregate, Factory, and Repository. This structured approach not only clarifies the roles and relationships within the system but also ensures a coherent and testable architecture.
+For instance, consider a diagram that outlines the design of a command and an aggregate.
+The objective of the command is to create an instance of an aggregate and then persist it.
+Four patterns are utilized in this design: Command, Aggregate, Factory, and Repository.
+This structured approach not only clarifies the roles and relationships within the system but also ensures a coherent and testable architecture.
 
 .The submission of notes
 [plantuml, format="png"]
@@ -525,14 +599,16 @@ include::patterns-illustration.puml[]
 
 The implementation of these patterns is relatively straightforward:
 
-1. define the data structure of the command in the API component
-2. define the behavior of the command in the core component
-3. define the data structure of the aggregate in the core component
-4. define the behavior of the factory in the core component
-5. define the contract of the repository in the core component
-6. define the realization of the repository in the driven adapter component
+1. Define the data structure of the command in the API component.
+2. Define the behavior of the command in the core component.
+3. Define the data structure of the aggregate in the core component.
+4. Define the behavior of the factory in the core component.
+5. Define the contract of the repository in the core component.
+6. Define the realization of the repository in the driven adapter component.
 
-As the system evolves, the aggregate will likely incorporate additional behaviors, and it may become necessary to introduce more patterns. This incremental development helps in making the implicit aspects of the system explicit, ensuring clarity and maintainability. By systematically expanding and refining these components, developers can effectively manage complexity and enhance the robustness of the application.
+As the system evolves, the aggregate will likely incorporate additional behaviors, and it may become necessary to introduce more patterns.
+This incremental development helps in making the implicit aspects of the system explicit, ensuring clarity and maintainability.
+By systematically expanding and refining these components, developers can effectively manage complexity and enhance the robustness of the application.
 
 == The Note app example
 
