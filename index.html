@@ -437,14 +437,103 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+/*! Stylesheet for CodeRay to loosely match GitHub themes | MIT License */
+pre.CodeRay{background:#f7f7f8}
+.CodeRay .line-numbers{border-right:1px solid;opacity:.35;padding:0 .5em 0 0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+.CodeRay span.line-numbers{display:inline-block;margin-right:.75em}
+.CodeRay .line-numbers strong{color:#000}
+table.CodeRay{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.CodeRay td{vertical-align:top;line-height:inherit}
+table.CodeRay td.line-numbers{text-align:right}
+table.CodeRay td.code{padding:0 0 0 .75em}
+.CodeRay .debug{color:#fff!important;background:navy!important}
+.CodeRay .annotation{color:#007}
+.CodeRay .attribute-name{color:navy}
+.CodeRay .attribute-value{color:#700}
+.CodeRay .binary{color:#509}
+.CodeRay .comment{color:#998;font-style:italic}
+.CodeRay .char{color:#04d}
+.CodeRay .char .content{color:#04d}
+.CodeRay .char .delimiter{color:#039}
+.CodeRay .class{color:#458;font-weight:bold}
+.CodeRay .complex{color:#a08}
+.CodeRay .constant,.CodeRay .predefined-constant{color:teal}
+.CodeRay .color{color:#099}
+.CodeRay .class-variable{color:#369}
+.CodeRay .decorator{color:#b0b}
+.CodeRay .definition{color:#099}
+.CodeRay .delimiter{color:#000}
+.CodeRay .doc{color:#970}
+.CodeRay .doctype{color:#34b}
+.CodeRay .doc-string{color:#d42}
+.CodeRay .escape{color:#666}
+.CodeRay .entity{color:#800}
+.CodeRay .error{color:#808}
+.CodeRay .exception{color:inherit}
+.CodeRay .filename{color:#099}
+.CodeRay .function{color:#900;font-weight:bold}
+.CodeRay .global-variable{color:teal}
+.CodeRay .hex{color:#058}
+.CodeRay .integer,.CodeRay .float{color:#099}
+.CodeRay .include{color:#555}
+.CodeRay .inline{color:#000}
+.CodeRay .inline .inline{background:#ccc}
+.CodeRay .inline .inline .inline{background:#bbb}
+.CodeRay .inline .inline-delimiter{color:#d14}
+.CodeRay .inline-delimiter{color:#d14}
+.CodeRay .important{color:#555;font-weight:bold}
+.CodeRay .interpreted{color:#b2b}
+.CodeRay .instance-variable{color:teal}
+.CodeRay .label{color:#970}
+.CodeRay .local-variable{color:#963}
+.CodeRay .octal{color:#40e}
+.CodeRay .predefined{color:#369}
+.CodeRay .preprocessor{color:#579}
+.CodeRay .pseudo-class{color:#555}
+.CodeRay .directive{font-weight:bold}
+.CodeRay .type{font-weight:bold}
+.CodeRay .predefined-type{color:inherit}
+.CodeRay .reserved,.CodeRay .keyword{color:#000;font-weight:bold}
+.CodeRay .key{color:#808}
+.CodeRay .key .delimiter{color:#606}
+.CodeRay .key .char{color:#80f}
+.CodeRay .value{color:#088}
+.CodeRay .regexp .delimiter{color:#808}
+.CodeRay .regexp .content{color:#808}
+.CodeRay .regexp .modifier{color:#808}
+.CodeRay .regexp .char{color:#d14}
+.CodeRay .regexp .function{color:#404;font-weight:bold}
+.CodeRay .string{color:#d20}
+.CodeRay .string .string .string{background:#ffd0d0}
+.CodeRay .string .content{color:#d14}
+.CodeRay .string .char{color:#d14}
+.CodeRay .string .delimiter{color:#d14}
+.CodeRay .shell{color:#d14}
+.CodeRay .shell .delimiter{color:#d14}
+.CodeRay .symbol{color:#990073}
+.CodeRay .symbol .content{color:#a60}
+.CodeRay .symbol .delimiter{color:#630}
+.CodeRay .tag{color:teal}
+.CodeRay .tag-special{color:#d70}
+.CodeRay .variable{color:#036}
+.CodeRay .insert{background:#afa}
+.CodeRay .delete{background:#faa}
+.CodeRay .change{color:#aaf;background:#007}
+.CodeRay .head{color:#f8f;background:#505}
+.CodeRay .insert .insert{color:#080}
+.CodeRay .delete .delete{color:#800}
+.CodeRay .change .change{color:#66f}
+.CodeRay .head .head{color:#f4f}
+</style>
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
 <h1>Enterprise Application: a metamodel to streamline codebase organization</h1>
 <div class="details">
 <span id="author" class="author">Thibault Morin</span><br>
-<span id="revnumber">version 7,</span>
-<span id="revdate">2024-04-16</span>
+<span id="revnumber">version 8,</span>
+<span id="revdate">2024-05-04</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -460,9 +549,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_the_drivers">The drivers</a>
 <ul class="sectlevel2">
-<li><a href="#_domain_driven_design_ddd">Domain Driven Design (DDD)</a></li>
+<li><a href="#_domain_driven_design">Domain Driven Design</a></li>
 <li><a href="#_ports_and_adapters_architecture">Ports and Adapters Architecture</a></li>
-<li><a href="#_command_and_query_responsibility_segregation_cqrs">Command and Query Responsibility Segregation (CQRS)</a></li>
+<li><a href="#_command_and_query_responsibility_segregation">Command and Query Responsibility Segregation</a></li>
 <li><a href="#_location_transparency">Location Transparency</a></li>
 <li><a href="#_very_high_code_coverage_level">Very High Code Coverage Level</a></li>
 </ul>
@@ -505,19 +594,65 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_the_motivation">The motivation</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In the fast-paced world of software development, agility has become the guiding principle for teams seeking to innovate and deliver value swiftly. This approach emphasizes rapid development cycles, where features are rolled out incrementally, allowing for quick delivery and early feedback. The agility model has revolutionized the software development process, enhancing efficiency and adaptability. Yet, this very model introduces unique challenges, particularly in the realm of custom solutions for enterprise applications. The inherent complexity of these applications does not seamlessly align with the agility paradigm, where rapid and incremental changes are the norms. Such complexity demands thoughtful consideration and time — commodities often in short supply in agile environments.</p>
+<p>In Software Development, agility has become the guiding principle for teams willing to innovate and deliver value efficiently.
+This approach emphasizes rapid development cycles allowing for quick delivery and early feedback because changes are rolled out iteratively and incrementally.
+However, agility introduces challenges, particularly in the realm of custom solutions for enterprise applications.
+The inherent complexity of these applications does not seamlessly align with the agility paradigm.
+Such complexity demands thoughtful consideration and time — commodities often in short supply in agile environments.</p>
 </div>
 <div class="paragraph">
-<p>Despite these challenges, a well-considered approach to software development can significantly streamline the process, even within the intricate landscape of enterprise applications. Embracing heuristics and a mindset of acceptance towards the limitations of time allows us to navigate the complexities more effectively. However, the quest for a one-size-fits-all solution to address these complexities is futile. Solutions are inherently contextual, and a universal strategy that addresses all concerns is, at best, hypothetical.</p>
+<p>Nevertheless, as Bill Mollison phrased it decades ago, <em>the problem is the solution</em> <a href="#pbsol">[pbsol]</a>.
+Therefore, the handling of the complexity must be adapted to align with the quick pace of development emphasized by agility.
+The time required for decision-making when handling complexity can be optimized by adopting a streamlined approach to software development supporting the design of heuristics.</p>
 </div>
 <div class="paragraph">
-<p>This article explores the complexities of structuring a codebase for creating bespoke solutions in enterprise applications. Drawing on my 15 years of experience focused on custom solutions with long-term projects, I suggest a metamodel that facilitates the design of heuristics to simplify the thought processes.</p>
+<p>When dealing with enterprise applications, the codebase is the repository of complexity.
+Therefore, the organization of the codebase is pivotal to the success of an efficient decision-making process.</p>
 </div>
 <div class="paragraph">
-<p>At the core of the metamodel are principles such as Domain Driven Design, the Port/Adapter Architecture, Command and Query Responsibility Segregation, and Location Transparency, all underpinned by a commitment to high code coverage. Together, these elements form the cornerstone of a codebase that not only meets the immediate demands of agility but also addresses the broader concerns of aligning with business goals, ensuring reliability, and maintaining flexibility.</p>
+<p>This article explores the streamlining of codebases supporting the development of enterprise applications.
+The outcome is a metamodel that facilitates the design of heuristics to simplify decision-making processes.</p>
 </div>
 <div class="paragraph">
-<p>The following Archimate Motivation View is a good way to visualize the reasoning behind this proposal.</p>
+<p>The metamodel is driven by the following concerns:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The alignment between the business and the implemented solutions.</p>
+</li>
+<li>
+<p>The reliability and stability of the solutions.</p>
+</li>
+<li>
+<p>The maintainability and flexibility of the codebase.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The metamodel is built on the following approaches:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Domain Driven Design (DDD).</p>
+</li>
+<li>
+<p>Ports and Adapters Architecture.</p>
+</li>
+<li>
+<p>Command and Query Responsibility Segregation (CQRS).</p>
+</li>
+<li>
+<p>Location Transparency.</p>
+</li>
+<li>
+<p>Very High Code Coverage Level.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following Archimate Motivation View visualizes the reasoning behind this proposal.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -531,27 +666,43 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_the_concerns">The concerns</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When embarking into the creation and management of a codebase for enterprise applications several key concerns arise. These concerns are pivotal to the success of the organization, influencing not only the initial development phase but also the long-term viability and adaptability of the solutions crafted. Let&#8217;s delve into these critical areas.</p>
+<p>When embarking into the creation and management of a codebase for enterprise applications several key concerns arise.
+These concerns are pivotal to the success of the organization, influencing not only the initial development phase but also the long-term viability and adaptability of the solutions crafted.
+Let&#8217;s delve into these critical areas.</p>
 </div>
 <div class="sect2">
 <h3 id="_alignment_between_the_business_and_the_solutions">Alignment Between the Business and the Solutions</h3>
 <div class="paragraph">
-<p>One of the paramount challenges in the development of enterprise applications is ensuring that the final solutions aligns closely with business requirements and objectives. This alignment is not just a desirable attribute but a fundamental necessity for the success of any enterprise. Unfortunately, as many seasoned IT professionals can attest, discrepancies between business expectations and the implemented solutions are not uncommon. These discrepancies can range from minor issues, such as terminology misalignment and business rule misinterpretations, to more significant concerns like flawed data model designs. Such misalignment not only result in financial losses but can also erode the trust between IT service providers, stakeholders, and shareholders, ultimately impacting the project&#8217;s overall success and the organization&#8217;s reputation.</p>
+<p>One of the most significant challenges in developing enterprise applications is ensuring that the final solutions align closely with business requirements and objectives.
+This alignment is not just desirable but a fundamental necessity for the success of any enterprise.</p>
+</div>
+<div class="paragraph">
+<p>Unfortunately, as many seasoned IT professionals can attest, discrepancies between business expectations and the implemented solutions are not uncommon.
+These discrepancies can range from minor issues like terminology misalignment and business rule misinterpretations to more significant concerns like flawed data model designs.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_reliability_and_stability_of_the_solutions">Reliability and Stability of the Solutions</h3>
 <div class="paragraph">
-<p>Reliability and stability are the bedrocks upon which enterprise applications should be built. These characteristics ensure that solutions perform consistently under expected conditions and possesses the resilience needed to withstand unexpected situations. Drawing from my own experience, as well as the collective wisdom of the IT community, it&#8217;s clear that failing to meet these criteria—evidenced by solutions that does not pass User Acceptance Testing (UAT) or falters under unforeseen circumstances—can have dire consequences. These include not just immediate financial losses, but also long-term reputational damage and potential legal ramifications, all of which can significantly set back an organization&#8217;s progress.</p>
+<p>Any enterprise applications must be reliable and stable.
+These characteristics ensure that solutions perform consistently under expected conditions and possess the resilience needed to withstand unexpected situations.</p>
+</div>
+<div class="paragraph">
+<p>Yet too much IT projects are failing to meet these expectations, leading to system failures, data breaches, and service disruptions.
+Causes of these failures can be traced back to various factors, including inadequate testing, poor design choices, insufficient contingency planning and so on.
+However, the root causes are often a lack of time when taking decisions and a lack of willingness to invest in quality.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_maintainability_and_flexibility_of_the_codebase">Maintainability and Flexibility of the Codebase</h3>
 <div class="paragraph">
-<p>The maintainability and flexibility of a codebase are crucial for the long-term health and scalability of solutions. A well-organized codebase enables developers to understand, modify, and extend the software efficiently, thereby adapting to new requirements or addressing issues as they arise. In contrast, a codebase that resembles a "nightmare"—difficult to decipher, modify, or expand—poses numerous challenges. It can lead to regression bugs, performance bottlenecks, and security vulnerabilities. Moreover, a poorly maintained codebase can affect team morale, diminish job satisfaction, and hinder an organization&#8217;s ability to attract and retain talent. Ensuring that the codebase remains clean, well-documented, and adherent to best practices is not just a technical requirement but a strategic imperative for fostering innovation and maintaining competitive edge.</p>
+<p>The maintainability and flexibility of a codebase are crucial for the long-term health and scalability of solutions.</p>
 </div>
 <div class="paragraph">
-<p>In summary, the organization of a codebase for enterprise applications must address these critical concerns with diligence and foresight. By prioritizing alignment with the domain, reliability, stability, maintainability and flexibility, developers can lay a solid foundation for solutions that not only meets today&#8217;s challenges but is also poised to tackle tomorrow&#8217;s opportunities.</p>
+<p>A well-organized codebase enables developers to understand, modify, and extend the software efficiently, thereby adapting to new requirements or addressing issues as they arise.
+In contrast, a codebase that resembles a <em>nightmare</em> (i.e. difficult to decipher, modify or expand) poses numerous challenges.
+It can lead to regressions, performance issues, security vulnerabilities &#8230;&#8203;
+Moreover, a poorly maintained codebase can affect team morale, diminish job satisfaction, and hinder an organization&#8217;s ability to attract and retain talents.</p>
 </div>
 </div>
 </div>
@@ -560,29 +711,29 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_the_drivers">The drivers</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In the journey of crafting a robust codebase for custom enterprise solutions, several key drivers pave the way for addressing common concerns while fostering innovation and efficiency. Let&#8217;s dive into these drivers, sharing insights from a personal perspective on how they contribute significantly to overcoming the challenges identified in the earlier sections.</p>
+<p>In the journey of crafting a robust codebase for enterprise applications, several key drivers address the concerns described earlier.</p>
 </div>
 <div class="sect2">
-<h3 id="_domain_driven_design_ddd">Domain Driven Design (DDD)</h3>
+<h3 id="_domain_driven_design">Domain Driven Design</h3>
 <div class="paragraph">
-<p>Domain-Driven Design (DDD) <a href="#ddd">[ddd]</a> is a sophisticated approach to software development that prioritizes the core logic and functionality of the business domain it aims to serve. The essence of DDD lies in its focus on understanding the business domain deeply and modeling software that reflects this understanding, thereby bridging the gap between technical implementation and business strategy. This methodology is particularly beneficial in complex domains where the business rules and processes are intricate and subject to frequent changes.</p>
+<p>Domain-Driven Design (DDD) <a href="#ddd">[ddd]</a> is a sophisticated approach to software development that prioritizes the core logic and functionality of the business domain it aims to serve.
+The essence of DDD lies in its focus on understanding the business domain deeply and modeling software that reflects this understanding.
+This approach is particularly beneficial in complex domains where the business rules and processes are intricate and subject to frequent changes.
+About codebases, DDD is an excellent strategy for thoughtful coding because of the valuable tools offered such as the ubiquitous language, strategic patterns, and tactical patterns.</p>
 </div>
 <div class="paragraph">
-<p>In my opinion, DDD is an excellent strategy for thoughtful coding, which is crucial in the creation of complex solutions. It offers valuable tools such as the ubiquitous language, strategic patterns, and tactical patterns.</p>
-</div>
-<div class="paragraph">
-<p>From my point of view, Domain Driven Development helps to fulfilled the following patterns concerns:</p>
+<p>Domain Driven Development helps to fulfill the following patterns concerns:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Alignment between the business and implemented solutions: Encourages focus on the core business logic, keeping it separate from external concerns.</p>
+<p><strong>Alignment between the business and implemented solutions</strong>: Encourages focus on the core business logic, keeping it separate from external concerns.</p>
 </li>
 <li>
-<p>Reliability and stability of the solutions: Reduces dependencies on external systems and technologies, which can enhance stability.</p>
+<p><strong>Reliability and stability of the solutions</strong>: Reduces dependencies on external systems and technologies, which can enhance stability.</p>
 </li>
 <li>
-<p>Maintainability and flexibility of the codebase: Makes the application easier to test, maintain, and adapt to new requirements or technologies.</p>
+<p><strong>Maintainability and flexibility of the codebase</strong>: Makes the application easier to test, maintain, and adapt to new requirements or technologies.</p>
 </li>
 </ul>
 </div>
@@ -590,52 +741,54 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="_ports_and_adapters_architecture">Ports and Adapters Architecture</h3>
 <div class="paragraph">
-<p>The Ports and Adapters Architecture <a href="#hexa">[hexa]</a>, also known as the Hexagonal Architecture, divides an application into loosely connected components. This division allows the core application to remain unaffected by external technologies and services.</p>
+<p>The Ports and Adapters Architecture <a href="#hexa">[hexa]</a>, also known as the Hexagonal Architecture, divides an application into loosely connected components.
+This division allows the core application to remain unaffected by external technologies and services.
+It introduces valuable concepts like the Hexagon, Ports, and Adapters, which prevent entangled code and preserve the integrity of the core business logic from external interference.</p>
 </div>
 <div class="paragraph">
-<p>From my viewpoint, the Ports and Adapters Architecture is an exemplary method for devising and managing complex systems. It introduces valuable concepts like the Hexagon, Ports, and Adapters, which steer clear of entangled code and preserve the integrity of the core business logic from external interferences.</p>
+<p>This architectural style complements the Domain-Driven Design approach seamlessly.
+For instance, a DDD Module could correspond to a Hexagon, a DDD Repository might act as a Port, and the Repository&#8217;s implementation could serve as an Adapter.</p>
 </div>
 <div class="paragraph">
-<p>This architectural style complements the Domain-Driven Design (DDD) approach seamlessly. For instance, a DDD Module could correspond to a Hexagon, a DDD Repository might act as a Port, and the Repository&#8217;s implementation could serve as an Adapter.</p>
-</div>
-<div class="paragraph">
-<p>I believe the Ports and Adapters Architecture effectively addresses the following concerns:</p>
+<p>Ports and Adapters Architecture effectively addresses the following concerns:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Aligning business goals with implemented solutions: It emphasizes the importance of concentrating on core business logic while isolating it from external distractions.</p>
+<p><strong>Aligning business goals with implemented solutions</strong>: It emphasizes the importance of concentrating on core business logic while isolating it from external distractions.</p>
 </li>
 <li>
-<p>Enhancing the reliability and stability of solutions: By minimizing dependencies on external systems and technologies, it contributes to overall system stability.</p>
+<p><strong>Enhancing the reliability and stability of solutions</strong>: By minimizing dependencies on external systems and technologies, it contributes to overall system stability.</p>
 </li>
 <li>
-<p>Improving maintainability and adaptability of the codebase: The architecture simplifies testing, maintenance, and the integration of new requirements or technologies.</p>
+<p><strong>Improving maintainability and adaptability of the codebase</strong>: The architecture simplifies testing, maintenance, and the integration of new requirements or technologies.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_command_and_query_responsibility_segregation_cqrs">Command and Query Responsibility Segregation (CQRS)</h3>
+<h3 id="_command_and_query_responsibility_segregation">Command and Query Responsibility Segregation</h3>
 <div class="paragraph">
-<p>The Command and Query Responsibility Segregation (CQRS) pattern <a href="#cqrs">[cqrs]</a> is a strategic approach that delineates data operations into two distinct categories: queries for reading data and commands for updating it. This division promotes a more streamlined and efficient process for managing data interactions.</p>
+<p>The Command and Query Responsibility Segregation (CQRS) pattern <a href="#cqrs">[cqrs]</a> is a strategic approach that delineates data operations into two distinct categories: queries for reading data and commands for updating it.
+This division promotes a more streamlined and efficient process for managing data interactions.</p>
 </div>
 <div class="paragraph">
-<p>I view CQRS as a highly effective framework, particularly within the fast-paced, agile development environment where time is a critical factor. Considering commands and queries separately when planning the implementation of a feature facilitates a thorough evaluation and estimation of the feature&#8217;s impact on both the data and the system as a whole.</p>
+<p>CQRS is a highly effective framework, particularly within the fast-paced, agile development environment where time is a critical factor.
+Considering commands and queries separately when planning the implementation of a feature facilitates the evaluation of the impact on both the data and the system as a whole.</p>
 </div>
 <div class="paragraph">
-<p>From my perspective, CQRS addresses the following concerns:</p>
+<p>CQRS addresses the following concerns:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Alignment between the business and implemented solutions: Encourages a clear separation of concerns, making it easier to understand and implement business logic.</p>
+<p><strong>Alignment between the business and implemented solutions</strong>: Encourages a clear separation of concerns, making it easier to understand and implement business logic.</p>
 </li>
 <li>
-<p>Reliability and stability of the solutions: By separating reads and writes, CQRS can improve performance and reduce the risk of data corruption.</p>
+<p><strong>Reliability and stability of the solutions</strong>: By separating reads and writes, CQRS can improve performance and reduce the risk of data corruption.</p>
 </li>
 <li>
-<p>Maintainability and flexibility of the codebase: CQRS allows for scalability and simplicity in the data management, making them easier to maintain and evolve.</p>
+<p><strong>Maintainability and flexibility of the codebase</strong>: CQRS allows for scalability and simplicity in the data management, making them easier to maintain and evolve.</p>
 </li>
 </ul>
 </div>
@@ -643,21 +796,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="_location_transparency">Location Transparency</h3>
 <div class="paragraph">
-<p>Location Transparency <a href="#loctra">[loctra]</a> is a principle that enables software components to interact seamlessly without being aware of each other&#8217;s physical location on the network. This concept fosters decoupling and enhances scalability.</p>
+<p>Location Transparency <a href="#loctra">[loctra]</a> is a principle that enables software components to interact seamlessly without being aware of each other&#8217;s physical location on the network.
+This concept fosters decoupling and enhances scalability.</p>
 </div>
 <div class="paragraph">
-<p>I regard Location Transparency as an excellent strategy for avoiding tight coupling between components, such as the hexagons in the Ports and Adapters Architecture, and for simplifying integrations. Essentially, for any given hexagon, we can establish a contract (i.e., a port) and the implementation of a client (i.e., an adapter) that other hexagons can utilize. This client might employ remote communication methods like REST, AMQP, gRPC, or even local communication strategies such as Inversion of Control or in-process communication.</p>
+<p>Location Transparency as an excellent strategy for avoiding tight coupling between components, such as the hexagons in the Ports and Adapters Architecture, and for simplifying integrations.
+Essentially, for any given hexagon, we can establish a contract (i.e., a port) and the implementation of a client (i.e., an adapter) that other hexagons can utilize.
+This client might employ remote communication methods like REST, AMQP, gRPC, or even local communication strategies such as Inversion of Control or in-process communication.
+In any cases, the core of the hexagons remain unaware of the actual locations of the implementations.</p>
 </div>
 <div class="paragraph">
-<p>In my view, Location Transparency addresses the following concerns effectively:</p>
+<p>Location Transparency addresses the following concerns effectively:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Reliability and stability of the solutions: Enhances the system’s ability to recover from failures and balance loads effectively.</p>
+<p><strong>Reliability and stability of the solutions</strong>: Enhances the system’s ability to recover from failures and balance loads effectively.</p>
 </li>
 <li>
-<p>Maintainability and flexibility of the codebase: Facilitates easier changes and deployments, as components can be moved or scaled independently.</p>
+<p><strong>Maintainability and flexibility of the codebase</strong>: Facilitates easier changes and deployments, as components can be moved or scaled independently.</p>
 </li>
 </ul>
 </div>
@@ -665,24 +822,24 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="_very_high_code_coverage_level">Very High Code Coverage Level</h3>
 <div class="paragraph">
-<p>Maintaining a very high level of code coverage is a demanding requirement that pushes developers to write detailed tests for virtually every segment of the code. This demand not only challenges developers to deeply consider the architecture and testability of their code from the beginning but also instills a rigorous discipline in the development process.</p>
+<p>Maintaining a very high level of code coverage is a demanding requirement that pushes developers to write detailed tests for virtually every segment of the code.
+This demand not only challenges developers to deeply consider the architecture and testability of their code from the beginning but also instills a rigorous discipline in the development process.</p>
 </div>
 <div class="paragraph">
-<p>While the task of writing tests (unit, integration, end-to-end, performance &#8230;&#8203;) may initially seem tedious, my experience suggests that a higher code coverage level significantly enhances the quality of the codebase, particularly in terms of its reliability and stability. The stringent requirement for high code coverage serves as a powerful incentive for developers to produce code that is inherently testable.</p>
+<p>While the task of writing tests (unit, integration, end-to-end, performance &#8230;&#8203;) may initially seem tedious, experience suggests that a higher code coverage level significantly enhances the quality of the codebase, particularly in terms of its reliability and stability.
+The stringent requirement for high code coverage serves as a powerful incentive for developers to produce code that is inherently testable.
+Furthermore, this constraint often leads to the exploration and adoption of best practices, such as adherence to the SOLID principles and the implementation of Test-Driven Development (TDD).</p>
 </div>
 <div class="paragraph">
-<p>Furthermore, this constraint often leads to the exploration and adoption of best practices, such as adherence to the SOLID principles and the implementation of Test-Driven Development (TDD). I am convinced that a codebase designed to be easily testable and built upon such best practices is inherently more maintainable and adaptable. In other words, it tends to be well-structured, well-documented, and well-understood &#8230;&#8203;</p>
-</div>
-<div class="paragraph">
-<p>From my perspective, enforcing a very high code coverage level addresses the following concerns:</p>
+<p>Enforcing a very high code coverage level addresses the following concerns:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Reliability and stability of the solutions: High code coverage ensures thorough testing, leading to software that is more reliable and stable, as more code paths are verified against errors and regressions.</p>
+<p><strong>Reliability and stability of the solutions</strong>: High code coverage ensures thorough testing, leading to software that is more reliable and stable, as more code paths are verified against errors and regressions.</p>
 </li>
 <li>
-<p>Maintainability and flexibility of the codebase: The constraint of high code coverage guides developers towards better coding practices which ultimately results in a codebase that is easier to maintain and adapt, e.g. the SOLID principles, the Test-Driven Development (TDD) approach …</p>
+<p><strong>Maintainability and flexibility of the codebase</strong>: The constraint of high code coverage guides developers towards better coding practices which ultimately results in a codebase that is easier to maintain and adapt.</p>
 </li>
 </ul>
 </div>
@@ -693,20 +850,29 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_the_metamodel">The metamodel</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We previously discussed the concerns and the drivers, let&#8217;s dive into the organization of the codebase.</p>
+<p>A metamodel is a model that defines the structure and relationships of the elements within a model.
+Therefore, the metamodel of codebases is a model that defines the structure and relationships of the components within codebases.</p>
+</div>
+<div class="paragraph">
+<p>The first step is to break down the codebase into components.
+Once the components are identified, the relationships between them can be established.
+Finally, the patterns can be associated with the components to provide a clear understanding of the relationships between them.</p>
 </div>
 <div class="sect2">
 <h3 id="_divide_to_conquer">Divide to conquer</h3>
 <div class="paragraph">
-<p>The initial step involves breaking down the codebase.</p>
+<p>This section is about breaking down the codebase into components and establishing relationships between them.</p>
 </div>
 <div class="sect3">
 <h4 id="_ddd_modules">DDD Modules</h4>
 <div class="paragraph">
-<p>In Domain-Driven Design (DDD), a module functions as a method to divide a complicated system into smaller, more understandable segments. Each module usually embodies a particular segment of the domain, encompassing associated ideas and functions. For example, in an E-Commerce system, there might be a module dedicated to the catalog and another focused on orders, etc.</p>
+<p>In Domain-Driven Design (DDD), a DDD Module functions as a method to divide a complicated system into smaller, more understandable segments.
+Each module usually embodies a particular segment of the domain, encompassing associated ideas and functions.
+For example, in an E-Commerce system, there might be a module dedicated to the catalog and another focused on orders, etc.</p>
 </div>
 <div class="paragraph">
-<p>In the structure of the codebase, a DDD module is decomposed into individual components. Each component fulfills a specific function. These functions are defined by the drivers.</p>
+<p>In the structure of the codebase, a DDD module is decomposed into individual components.
+Each component fulfills a specific function. These functions are defined by the drivers.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -718,10 +884,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect3">
 <h4 id="_portadapter_architecture">Port/Adapter Architecture</h4>
 <div class="paragraph">
-<p>Typically, the definition of hexagons is influenced by business considerations, as they correspond to the DDD (Domain-Driven Design) Modules. Nonetheless, the internal organization of the hexagons leans towards a technology-centric approach. This includes, firstly, the architectural segregation into core components, ports, and adapters. Secondly, it encompasses the assembly of these hexagons into a cohesive unit: the deliverable.</p>
+<p>A DDD Module can be easily associated with the Ports and Adapters Architecture where the module is the hexagon because a hexagon is influenced by business considerations.</p>
 </div>
 <div class="paragraph">
-<p>The illustration below depicts the hexagon of the Port/Adapter Architecture, showcasing the core exposing ports which are used or implemented by the adapters. The driving adapters interact with external systems, while the driven adapters encapsulate the implementation of the core&#8217;s contracts.</p>
+<p>However, the internal organization of the hexagons leans towards a technology-centric approach.
+This includes, firstly, the architectural segregation into core components, ports, and adapters.
+Secondly, it encompasses the assembly of these hexagons into a cohesive unit: the deliverable.</p>
+</div>
+<div class="paragraph">
+<p>The illustration below depicts the hexagon of the Port/Adapter Architecture, showcasing the core exposing ports which are used or implemented by the adapters.
+The driving adapters interact with external systems, while the driven adapters encapsulate the implementation of the core&#8217;s contracts.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -730,7 +902,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Figure 5. Port/Adapter Architecture: the hexagon</div>
 </div>
 <div class="paragraph">
-<p>For instance, the implementation of the REST API exposing the services of the core is located in the driving adapter. On the other hand, the implementation of the RDBMS repository is located in the driven adapter.</p>
+<p>For instance, the implementation of the REST API exposing the services of the core is located in the driving adapter.
+On the other hand, the implementation of the RDBMS repository is located in the driven adapter.</p>
 </div>
 <div class="paragraph">
 <p>The usage of Port/Adapter Architecture leads to the definition of four main component kinds:</p>
@@ -738,16 +911,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p>Core: the core component contains the business logic and the domain model as well as the ports</p>
+<p><strong>Core</strong>: the core component contains the business logic and the domain model as well as the ports.</p>
 </li>
 <li>
-<p>Driving Adapter: the driving adapter contains implementation leveraging on the respective driving ports in the core</p>
+<p><strong>Driving Adapter</strong>: the driving adapter contains implementation leveraging on the respective driving ports in the core.</p>
 </li>
 <li>
-<p>Driven Adapter: the driven adapter contains the implementation of the respective driven ports in the core</p>
+<p><strong>Driven Adapter</strong>: the driven adapter contains the implementation of the respective driven ports in the core.</p>
 </li>
 <li>
-<p>Deliverable: the deliverable component embeds all the components of the hexagon and provides a cohesive unit as an executable or a library</p>
+<p><strong>Deliverable</strong>: the deliverable component embeds all the components of the hexagon and provides a cohesive unit as an executable or a library.</p>
 </li>
 </ul>
 </div>
@@ -761,10 +934,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect3">
 <h4 id="_service_providers_and_service_consumers">Service Providers and Service Consumers</h4>
 <div class="paragraph">
-<p>Typically, an enterprise application consists of various modules that interact with each other. To facilitate smoother integration among these modules, it&#8217;s common practice for a service provider to offer client implementations of its driving ports. This approach allows a service consumer to directly utilize these implementations, saving significant time. From the perspective of the service consumer, these clients serve as externally driven adapters.</p>
+<p>Usually, an enterprise application consists of various modules that interact with each other.
+To facilitate smoother integration among these modules, it&#8217;s common practice for a service provider to offer client implementations of its driving ports.
+This approach allows a service consumer to directly utilize these implementations, saving significant time.
+From the perspective of the service consumer, these clients serve as externally driven adapters.</p>
 </div>
 <div class="paragraph">
-<p>To further streamline integration, the service provider may also provide access to these driving ports through an API bundle. Consequently, a service consumer can integrate these directly into its core, leveraging the service provider&#8217;s client implementations for seamless interaction without the need for additional integration efforts.</p>
+<p>To further streamline integration, the service provider may also provide access to these driving ports through an API bundle.
+Consequently, a service consumer can integrate these directly into its core, leveraging the service provider&#8217;s client implementations for seamless interaction without the need for additional integration efforts.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -778,10 +955,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p>API: the api component contains the driving ports of the core</p>
+<p><strong>API</strong>: the api component contains the driving ports of the core.</p>
 </li>
 <li>
-<p>Client: the client component contains the implementation of the driving ports</p>
+<p><strong>Client</strong>: the client component contains the implementation of the driving ports.</p>
 </li>
 </ul>
 </div>
@@ -795,7 +972,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect3">
 <h4 id="_common_stuff">Common stuff</h4>
 <div class="paragraph">
-<p>Enterprise applications and their components frequently depend on standardized data structures and shared technical functionalities, such as data serialization, authentication &#8230;&#8203; To enhance reusability, it&#8217;s a common practice to establish standard modules according to the type and technology of adapters. For example, one might implement a module that includes the data structures and behaviors necessary for all core modules. Similarly, another module could be developed to incorporate data structures and behaviors specific to driven adapters that utilize RDBMS technology.</p>
+<p>Enterprise applications and their components frequently depend on standardized data structures and shared technical functionalities, such as data serialization, authentication &#8230;&#8203;
+To enhance reusability, it&#8217;s a common practice to establish standard modules according to the type and technology of adapters.
+For example, one might implement a module that includes the data structures and behaviors necessary for all core modules.
+Similarly, another module could be developed to incorporate data structures and behaviors specific to driven adapters that utilize RDBMS technology.</p>
 </div>
 <div class="paragraph">
 <p>This also lead to a new component kind:</p>
@@ -803,7 +983,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p>Common: the common component contains shared data structures and behaviors</p>
+<p><strong>Common</strong>: the common component contains shared data structures and behaviors.</p>
 </li>
 </ul>
 </div>
@@ -817,7 +997,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect3">
 <h4 id="_enterprise_integration">Enterprise Integration</h4>
 <div class="paragraph">
-<p>Enterprise applications frequently interface with technological components, systems, and software applications both within an organization and across different domains. Usually, these implementations adhere to Enterprise Integration Patterns <a href="#intpat">[intpat]</a> and may range from entirely custom solutions to configurations of pre-existing, off-the-shelf products.</p>
+<p>Enterprise applications frequently interface with technological components, systems, and software applications both within an organization and across different domains.
+Usually, these implementations adhere to Enterprise Integration Patterns <a href="#intpat">[intpat]</a> and may range from entirely custom solutions to configurations of pre-existing, off-the-shelf products.</p>
 </div>
 <div class="paragraph">
 <p>This lead to a new component kind:</p>
@@ -825,7 +1006,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p>Integration: the integration component contains the implementation of the integration with external systems</p>
+<p><strong>Integration</strong>: the integration component contains the implementation of the integration with external systems.</p>
 </li>
 </ul>
 </div>
@@ -836,19 +1017,24 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Figure 10. Metamodel of the codebase: with the integration component</div>
 </div>
 <div class="paragraph">
-<p>Most often, the development of integration components does not depend on the Port/Adapter Architecture. Instead, the creation of these components leans more towards scripting or configuration due to their technical nature rather than being driven by business concerns. This implies that the logic is closely linked to the specific technology and system being integrated.</p>
+<p>Most often, the development of integration components does not depend on the Port/Adapter Architecture.
+Instead, the creation of these components are more scripting or configuration to their technical nature rather than being driven by business concerns.
+This implies that the logic is closely linked to the specific technology and system being integrated.</p>
 </div>
 <div class="paragraph">
-<p>For example, in a Camel application designed for ETL processes, the development is significantly influenced by the Camel framework, particularly its routes and processor concepts. However, the codebase can still be organized in accordance with Domain-Driven Design (DDD) modules, allowing for smooth integration of client components. Ultimately, the final component can incorporate both the integration and client components, along with common elements, to form a unified solution.</p>
+<p>For example, in a Camel application designed for ETL processes, the development is significantly influenced by the Camel framework, particularly its routes and processor concepts.
+However, the codebase can still be organized in accordance with DDD modules, allowing for smooth integration of client components.
+Ultimately, the final component can incorporate both the integration and client components, along with common elements, to form a unified solution.</p>
 </div>
 <div class="paragraph">
-<p>This indicates that although the primary influence on the codebase of an integration component may not stem from the Port/Adapter Architecture, it can still effectively utilize components closely associated with DDD modules, such as common, client, and API components.</p>
+<p>This indicates that although the primary influence on the codebase of an integration component may not be the Port/Adapter Architecture, it can still effectively utilize components closely associated this architecture, such as common, client, and API components.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_relationship_between_components">Relationship between components</h4>
 <div class="paragraph">
-<p>Components interact with each other via relationships, which establish dependencies between them. For instance, a core component depends on an API component.</p>
+<p>Components interact with each other via relationships, which establish dependencies between them.
+For instance, a core component depends on an API component.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -863,7 +1049,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The common component acts as a shared resource, allowing any component to rely on it. To simplify the diagram and reduce its complexity, the common component is not shown.
+The common component acts as a shared resource, allowing any component to rely on it.
+To simplify the diagram and reduce its complexity, the common component is not shown.
 </td>
 </tr>
 </table>
@@ -873,10 +1060,15 @@ The common component acts as a shared resource, allowing any component to rely o
 <div class="sect2">
 <h3 id="_think_less_reuse_more">Think less, reuse more</h3>
 <div class="paragraph">
-<p>A codebase primarily consists of various programming elements such as data structures, functions, classes, interfaces, enums, annotations, configurations, scripts, tests, and more. These elements, or artifacts, are typically organized hierarchically; for example, methods are encapsulated within classes, and classes are grouped into packages. The structure and interrelationships of these artifacts shape the content of the components previously mentioned.</p>
+<p>A codebase primarily consists of various programming elements such as data structures, functions, classes, interfaces, enums, annotations, configurations, scripts, tests, and more.
+These elements, or artifacts, are typically organized hierarchically; for example, methods are encapsulated within classes, and classes are grouped into packages.
+The structure and interrelationships of these artifacts shape the content of the components previously mentioned.</p>
 </div>
 <div class="paragraph">
-<p>Fortunately, it&#8217;s possible to organize the codebase so that its components are easily identifiable and the relationships among them are clear. There are numerous methods to structure the codebase effectively. The drivers we&#8217;ve discussed offer a solid foundation for organizing the codebase. These drivers provide patterns for naming and defining the artifacts and their interactions within the codebase.</p>
+<p>Fortunately, it&#8217;s possible to organize the codebase so that its components are easily identifiable and the relationships among them are clear.
+There are numerous methods to structure the codebase effectively.
+The drivers we&#8217;ve discussed offer a solid foundation for organizing the codebase.
+These drivers provide patterns for naming and defining the artifacts and their interactions within the codebase.</p>
 </div>
 <div class="paragraph">
 <p>Patterns are a set of rules and guidelines that help in organizing the component content effectively.
@@ -894,10 +1086,12 @@ Moreover, patterns help to save time and effort by providing a structured approa
 <div class="sect3">
 <h4 id="_eventstorming_co">EventStorming &amp; co</h4>
 <div class="paragraph">
-<p>EventStorming provides excellent starting points to discover patterns because it provides a unified language of concepts primarily from Domain-Driven Design (DDD) and Command Query Responsibility Segregation (CQRS). Additionally, other concepts are defined to encompass common patterns.</p>
+<p>EventStorming provides excellent starting points to discover patterns because it provides a unified language of concepts primarily from Domain-Driven Design (DDD) and Command and Query Responsibility Segregation (CQRS).
+Additionally, other concepts are defined to encompass common patterns.</p>
 </div>
 <div class="paragraph">
-<p>The application of these concepts during the design phase is partially explored in this article: <a href="https://dev.to/tmorin/enhancing-business-logic-with-plantuml-and-eventstorming-de0">Enhancing Business Logic with PlantUML and EventStorming</a>. This resource provides insights into using these concepts effectively to enhance project architecture and workflow.</p>
+<p>The application of these concepts during the design phase is partially explored in this article: <a href="https://dev.to/tmorin/enhancing-business-logic-with-plantuml-and-eventstorming-de0">Enhancing Business Logic with PlantUML and EventStorming</a>.
+This resource provides insights to use these concepts effectively in order to enhance project architecture and workflow.</p>
 </div>
 </div>
 <div class="sect3">
@@ -906,10 +1100,16 @@ Moreover, patterns help to save time and effort by providing a structured approa
 <p>The purpose of the catalog is to associate patterns with components, providing a clear understanding of the relationships between them.</p>
 </div>
 <div class="paragraph">
-<p>From my point view, there isn&#8217;t a unique catalogue but there is a catalog by codebase owner. A codebase owner is a group of developers. It can be a team, a team of team, an organization &#8230;&#8203; Moreover, the culture of the codebase owner has a direct impact on the catalog. For instance, a team with a strong background Object-Oriented Programming (OOP) and Layered Architecture would have a different catalog than a team with a strong background in Functional Programming and Reactive Architecture.</p>
+<p>There isn&#8217;t a unique catalogue but there is a catalog by codebase owner.
+A codebase owner is a group of developers.
+It can be a team, a team of team, an organization &#8230;&#8203;
+Moreover, the culture of the codebase owner has a direct impact on the catalog.
+For instance, a team with a strong background Object-Oriented Programming (OOP) and Layered Architecture would have a different catalog than a team with a strong background in Functional Programming and Reactive Architecture.</p>
 </div>
 <div class="paragraph">
-<p>Therefore, the presented patterns are just a starting point. The catalog should be tailored to the codebase owner. The key is to identify the most relevant patterns and establish a consistent naming convention and description to ensure clarity and maintainability.</p>
+<p>Therefore, the presented patterns are just a starting point.
+The catalog should be tailored to the codebase owner.
+The key is to identify the most relevant patterns and establish a consistent naming convention and description to ensure clarity and maintainability.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -921,19 +1121,173 @@ Moreover, patterns help to save time and effort by providing a structured approa
 <div class="sect3">
 <h4 id="_command">Command</h4>
 <div class="paragraph">
-<p>The command pattern comes from the Command Query Responsibility Segregation (CQRS) driver. It is a directive that triggers a specific action, often resulting in changes to the state of an application.</p>
+<p>The Command pattern comes from the Command and Query Responsibility Segregation (CQRS) driver.
+It is an action (i.e. the command) that expects to change to the state of an application.
+Optionally, a result can be provided to the producer to inform of the command&#8217;s outcome.</p>
 </div>
 <div class="paragraph">
-<p>The data structure of the command is usually placed in the API component, while the behavior is located in the core component.</p>
+<p>The data structures for the command and the result are usually placed in the API component, while the behavior is located in the core component.</p>
+</div>
+<div class="paragraph">
+<p>The command&#8217;s behavior (i.e. the handler) can be tested in isolation using regular Unit Tests or Integration Tests linked solely to core artifacts.
+However, acceptance scenarios can be implemented based on the core component&#8217;s artifacts, allowing driven adapters to validate their implementations from the core component&#8217;s point of view.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="diag-plantuml-md5-36bb6fd7d0d0a11683db0d57d9f21249.png" alt="Diagram" width="318" height="274">
+</div>
+<div class="title">Figure 14. Relationships of the Command Pattern</div>
+</div>
+<div class="sect4">
+<h5 id="_examples">Examples</h5>
+<div class="paragraph">
+<p>The following snippet shows the definition of a command.</p>
+</div>
+<div class="listingblock">
+<div class="title">The data structure of a Command</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">todoapp.api</span>;
+
+<span class="keyword">import</span> <span class="include">lombok.Builder</span>;
+<span class="keyword">import</span> <span class="include">lombok.NonNull</span>;
+<span class="keyword">import</span> <span class="include">lombok.Value</span>;
+
+<span class="comment">/**
+ * A command to create a new TodoList.
+ */</span>
+<span class="annotation">@Value</span>
+<span class="annotation">@Builder</span>(toBuilder = <span class="predefined-constant">true</span>)
+<span class="directive">public</span> <span class="type">class</span> <span class="class">CreateTodoListCommand</span> {
+
+  <span class="comment">/**
+   * The ID of the TodoList.
+   */</span>
+  <span class="annotation">@NonNull</span>
+  TodoListId todoListId;
+
+  <span class="comment">/**
+   * The title of the TodoList.
+   */</span>
+  <span class="annotation">@NonNull</span>
+  <span class="predefined-type">String</span> title;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The command above is handled by the handler described below.</p>
+</div>
+<div class="listingblock">
+<div class="title">The behavior of a command</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">todoapp.core</span>;
+
+<span class="keyword">import</span> <span class="include">java.util.concurrent.CompletionStage</span>;
+<span class="keyword">import</span> <span class="include">lombok</span>.*;
+<span class="keyword">import</span> <span class="include">lombok.experimental.FieldDefaults</span>;
+<span class="keyword">import</span> <span class="include">lombok.extern.java.Log</span>;
+<span class="keyword">import</span> <span class="include">todoapp.api.CreateTodoListCommand</span>;
+<span class="keyword">import</span> <span class="include">todoapp.framework.CommandHandler</span>;
+
+<span class="comment">/**
+ * The handler of the command {@link CreateTodoListCommand}.
+ * &lt;p&gt;
+ * The handler creates and persists TodoList aggregates.
+ */</span>
+<span class="annotation">@Log</span>
+<span class="annotation">@Builder</span>
+<span class="annotation">@RequiredArgsConstructor</span>
+<span class="annotation">@FieldDefaults</span>(level = AccessLevel.PRIVATE, makeFinal = <span class="predefined-constant">true</span>)
+<span class="directive">final</span> <span class="type">class</span> <span class="class">CreateTodoListHandler</span>
+  <span class="directive">implements</span> CommandHandler&lt;CreateTodoListCommand, <span class="predefined-type">Void</span>&gt; {
+
+  <span class="comment">/**
+   * The repository of the TodoList Aggregate.
+   */</span>
+  <span class="annotation">@NonNull</span>
+  TodoListRepository todoListRepository;
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> CompletionStage&lt;Outcome&lt;<span class="predefined-type">Void</span>&gt;&gt; handle(
+    <span class="annotation">@NonNull</span> CreateTodoListCommand command
+  ) {
+    val todoList = TodoList.builder().title(command.getTitle()).build();
+    log.info(() -&gt; <span class="predefined-type">String</span>.format(<span class="string"><span class="delimiter">&quot;</span><span class="content">Creating todo list %s</span><span class="delimiter">&quot;</span></span>, todoList));
+    <span class="keyword">return</span> todoListRepository.persist(todoList).thenApply(Outcome::empty);
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As mentioned earlier, scenarios can be implemented by the core to validate the driven adapter behaviors.</p>
+</div>
+<div class="listingblock">
+<div class="title">A scenario validating the command behavior</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">todoapp.core</span>;
+
+<span class="keyword">import</span> <span class="include">java.util.Objects</span>;
+<span class="keyword">import</span> <span class="include">lombok</span>.*;
+<span class="keyword">import</span> <span class="include">lombok.experimental.FieldDefaults</span>;
+<span class="keyword">import</span> <span class="include">lombok.extern.java.Log</span>;
+<span class="keyword">import</span> <span class="include">todoapp.api.CreateTodoListCommand</span>;
+<span class="keyword">import</span> <span class="include">todoapp.framework.Scenario</span>;
+
+<span class="comment">/**
+ * The scenario validate the driven adapter implementations related to the {@link CreateTodoListCommand} command.
+ */</span>
+<span class="annotation">@Log</span>
+<span class="annotation">@Builder</span>
+<span class="annotation">@RequiredArgsConstructor</span>
+<span class="annotation">@FieldDefaults</span>(level = AccessLevel.PRIVATE, makeFinal = <span class="predefined-constant">true</span>)
+<span class="directive">public</span> <span class="directive">final</span> <span class="type">class</span> <span class="class">CreateTodoListScenario</span> <span class="directive">implements</span> Scenario {
+
+  <span class="comment">/**
+   * The repository of the TodoList Aggregate.
+   */</span>
+  <span class="annotation">@NonNull</span>
+  TodoListRepository todoListRepository;
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> <span class="type">void</span> validate() {
+    log.info(<span class="string"><span class="delimiter">&quot;</span><span class="content">Scenario: Create a todo list</span><span class="delimiter">&quot;</span></span>);
+    <span class="comment">// GIVEN a command</span>
+    val command = CreateTodoListCommand
+      .builder()
+      .title(<span class="string"><span class="delimiter">&quot;</span><span class="content">a simple title</span><span class="delimiter">&quot;</span></span>)
+      .build();
+    <span class="comment">// AND an handler</span>
+    val handler = CreateTodoListHandler
+      .builder()
+      .todoListRepository(todoListRepository)
+      .build();
+    <span class="comment">// WHEN the command is handled</span>
+    val fOutcome = handler.handle(command).toCompletableFuture();
+    <span class="comment">// THEN the outcome is successful</span>
+    val outcome = fOutcome.join();
+    <span class="comment">// AND the event are empty</span>
+    <span class="keyword">assert</span> outcome.getEvents().isEmpty();
+    <span class="comment">// AND the aggregate can be loaded</span>
+    val persistedAggregate = todoListRepository
+      .load(command.getTodoListId())
+      .toCompletableFuture()
+      .join();
+    <span class="keyword">assert</span> Objects.nonNull(persistedAggregate);
+    <span class="comment">// AND the title is persisted</span>
+    <span class="keyword">assert</span> Objects.equals(persistedAggregate.getTitle(), command.getTitle());
+  }
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_query">Query</h4>
 <div class="paragraph">
-<p>The query pattern comes from the Command Query Responsibility Segregation (CQRS) driver. It is a request for information or data from a system without changing the state of the system.</p>
+<p>The Query pattern comes from the Command and Query Responsibility Segregation (CQRS) driver.
+It is an action (i.e. the query) that request for information about to the state of an application. As a response, a result is provided to the producer.</p>
 </div>
 <div class="paragraph">
-<p>The data structure of the query is typically located in the API component, while the behavior is situated in the core component.</p>
+<p>The data structures for the query and the result are usually placed in the API component, while the behavior is located in the core component.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -942,52 +1296,285 @@ Moreover, patterns help to save time and effort by providing a structured approa
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-CQRS emphasizes the separation of commands and queries which can lead to the design of two distinct models: one for the command and another for the query. Therefore, the behavior of the query could be located into a different component than the behavior of the command.
+CQRS emphasizes the separation of commands and queries, which can lead to the design of two distinct models: one for commands and another for queries.
+Therefore, the behavior of the query could be located in a different component than the behavior of the command, such as a sibling core component designed specifically for query handling.
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p>Like for the commands, the query&#8217;s behavior (i.e. the handler) can be tested in isolation using regular Unit Tests or Integration Tests linked solely to core artifacts.
+However, acceptance scenarios can be implemented based on the core component&#8217;s artifacts, allowing driven adapters to validate their implementations from the core component&#8217;s point of view.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="diag-plantuml-md5-9e38bfc9f714e2b6135af8a17d4b4524.png" alt="Diagram" width="318" height="274">
+</div>
+<div class="title">Figure 15. Relationships of the Query Pattern</div>
+</div>
+<div class="sect4">
+<h5 id="_examples_2">Examples</h5>
+<div class="paragraph">
+<p>The following snippet shows the definition of a query.</p>
+</div>
+<div class="listingblock">
+<div class="title">The data structure of a Query</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">todoapp.api</span>;
+
+<span class="keyword">import</span> <span class="include">lombok.Builder</span>;
+<span class="keyword">import</span> <span class="include">lombok.Value</span>;
+
+<span class="comment">/**
+ * The query to list all TodoLists.
+ * &lt;p&gt;
+ * The query doesn't have criteria, so the data structure is empty.
+ */</span>
+<span class="annotation">@Value</span>
+<span class="annotation">@Builder</span>(toBuilder = <span class="predefined-constant">true</span>)
+<span class="directive">public</span> <span class="type">class</span> <span class="class">ListTodoListsQuery</span> {}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following snippet shows the definition of a result.</p>
+</div>
+<div class="listingblock">
+<div class="title">The data structure of a Result</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">todoapp.api</span>;
+
+<span class="keyword">import</span> <span class="include">java.util.Set</span>;
+<span class="keyword">import</span> <span class="include">lombok.Builder</span>;
+<span class="keyword">import</span> <span class="include">lombok.Singular</span>;
+<span class="keyword">import</span> <span class="include">lombok.Value</span>;
+
+<span class="comment">/**
+ * The result of the query {@link ListTodoListsQuery}.
+ * &lt;p&gt;
+ * The result contains a set of {@link TodoListView}s.
+ */</span>
+<span class="annotation">@Value</span>
+<span class="annotation">@Builder</span>(toBuilder = <span class="predefined-constant">true</span>)
+<span class="directive">public</span> <span class="type">class</span> <span class="class">ListTodoListsResult</span> {
+
+  <span class="comment">/**
+   * The set of TodoListViews.
+   */</span>
+  <span class="annotation">@Singular</span>
+  <span class="predefined-type">Set</span>&lt;TodoListView&gt; todoListViews;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The query above is handled by the handler described below.</p>
+</div>
+<div class="listingblock">
+<div class="title">The behavior of a query</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">todoapp.core</span>;
+
+<span class="keyword">import</span> <span class="include">java.util.concurrent.CompletionStage</span>;
+<span class="keyword">import</span> <span class="include">lombok.AccessLevel</span>;
+<span class="keyword">import</span> <span class="include">lombok.Builder</span>;
+<span class="keyword">import</span> <span class="include">lombok.NonNull</span>;
+<span class="keyword">import</span> <span class="include">lombok.RequiredArgsConstructor</span>;
+<span class="keyword">import</span> <span class="include">lombok.experimental.FieldDefaults</span>;
+<span class="keyword">import</span> <span class="include">lombok.extern.java.Log</span>;
+<span class="keyword">import</span> <span class="include">todoapp.api.ListTodoListsQuery</span>;
+<span class="keyword">import</span> <span class="include">todoapp.api.ListTodoListsResult</span>;
+<span class="keyword">import</span> <span class="include">todoapp.framework.QueryHandler</span>;
+
+<span class="comment">/**
+ * The handler of the query {@link ListTodoListsQuery}.
+ * &lt;p&gt;
+ * The handler lists the TodoList aggregates.
+ */</span>
+<span class="annotation">@Log</span>
+<span class="annotation">@Builder</span>
+<span class="annotation">@RequiredArgsConstructor</span>
+<span class="annotation">@FieldDefaults</span>(level = AccessLevel.PRIVATE, makeFinal = <span class="predefined-constant">true</span>)
+<span class="directive">public</span> <span class="directive">final</span> <span class="type">class</span> <span class="class">ListTodoListsHandler</span>
+  <span class="directive">implements</span> QueryHandler&lt;ListTodoListsQuery, ListTodoListsResult&gt; {
+
+  <span class="comment">/**
+   * The repository of the TodoList Aggregate.
+   */</span>
+  <span class="annotation">@NonNull</span>
+  TodoListRepository todoListRepository;
+
+  <span class="comment">/**
+   * The factory of the TodoListView.
+   */</span>
+  TodoListViewFactory todoListViewFactory = TodoListViewFactory
+    .builder()
+    .build();
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> CompletionStage&lt;ListTodoListsResult&gt; handle(ListTodoListsQuery query) {
+    log.info(() -&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">Handling query: </span><span class="delimiter">&quot;</span></span> + query);
+    <span class="keyword">return</span> todoListRepository
+      .list()
+      .thenApply(todoLists -&gt;
+        todoLists.stream().map(todoListViewFactory::createTodoListView).toList()
+      )
+      .thenApply(todoListViews -&gt;
+        ListTodoListsResult.builder().todoListViews(todoListViews).build()
+      );
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As mentioned earlier, scenarios can be implemented by the core to validate the driven adapter behaviors.</p>
+</div>
+<div class="listingblock">
+<div class="title">A scenario validating the query behavior</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">todoapp.core</span>;
+
+<span class="keyword">import</span> <span class="include">lombok</span>.*;
+<span class="keyword">import</span> <span class="include">lombok.experimental.FieldDefaults</span>;
+<span class="keyword">import</span> <span class="include">lombok.extern.java.Log</span>;
+<span class="keyword">import</span> <span class="include">todoapp.api.ListTodoListsQuery</span>;
+<span class="keyword">import</span> <span class="include">todoapp.framework.Scenario</span>;
+
+<span class="comment">/**
+ * The scenario validate the driven adapter implementations related to the {@link todoapp.api.ListTodoListsQuery} query.
+ */</span>
+<span class="annotation">@Log</span>
+<span class="annotation">@Builder</span>
+<span class="annotation">@RequiredArgsConstructor</span>
+<span class="annotation">@FieldDefaults</span>(level = AccessLevel.PRIVATE, makeFinal = <span class="predefined-constant">true</span>)
+<span class="directive">public</span> <span class="directive">final</span> <span class="type">class</span> <span class="class">ListTodoListsScenario</span> <span class="directive">implements</span> Scenario {
+
+  <span class="comment">/**
+   * The repository of the TodoList Aggregate.
+   */</span>
+  <span class="annotation">@NonNull</span>
+  TodoListRepository todoListRepository;
+
+  <span class="comment">/**
+   * The factory of the TodoListView.
+   */</span>
+  TodoListViewFactory todoListViewFactory = TodoListViewFactory
+    .builder()
+    .build();
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> <span class="type">void</span> validate() {
+    log.info(<span class="string"><span class="delimiter">&quot;</span><span class="content">Scenario: List todo lists</span><span class="delimiter">&quot;</span></span>);
+    <span class="comment">// GIVEN a query</span>
+    val query = ListTodoListsQuery.builder().build();
+    <span class="comment">// AND a persisted aggregate instance</span>
+    val todoList = TodoList.builder().title(<span class="string"><span class="delimiter">&quot;</span><span class="content">a simple title</span><span class="delimiter">&quot;</span></span>).build();
+    todoListRepository.persist(todoList).toCompletableFuture().join();
+    <span class="comment">// AND an handler</span>
+    val handler = ListTodoListsHandler
+      .builder()
+      .todoListRepository(todoListRepository)
+      .build();
+    <span class="comment">// WHEN the query is handled</span>
+    val fResult = handler.handle(query).toCompletableFuture();
+    <span class="comment">// THEN the result is successful</span>
+    val result = fResult.join();
+    <span class="comment">// AND the aggregate can be found</span>
+    <span class="keyword">assert</span> result
+      .getTodoListViews()
+      .contains(todoListViewFactory.createTodoListView(todoList));
+  }
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_result">Result</h4>
 <div class="paragraph">
-<p>The result pattern comes from the Command Query Responsibility Segregation (CQRS) driver. It is the output or outcome that is returned after the execution of a command or query.</p>
+<p>The Result pattern comes from the Command and Query Responsibility Segregation (CQRS) driver.
+It is the output or outcome that is returned after the execution of a command or query.</p>
 </div>
 <div class="paragraph">
 <p>The data structure of the result is typically located in the API component.</p>
+</div>
+<div class="paragraph">
+<p>A result is usually a container for views, also called Read Model.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="diag-plantuml-md5-0e3e52475b6b3dde5dbc92b9d4cfbbb3.png" alt="Diagram" width="261" height="152">
+</div>
+<div class="title">Figure 16. Relationships of the Result Pattern</div>
+</div>
+<div class="sect4">
+<h5 id="_examples_3">Examples</h5>
+<div class="paragraph">
+<p>The following snippet shows the definition of a result.</p>
+</div>
+<div class="listingblock">
+<div class="title">The data structure of a Result</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">todoapp.api</span>;
+
+<span class="keyword">import</span> <span class="include">java.util.Set</span>;
+<span class="keyword">import</span> <span class="include">lombok.Builder</span>;
+<span class="keyword">import</span> <span class="include">lombok.Singular</span>;
+<span class="keyword">import</span> <span class="include">lombok.Value</span>;
+
+<span class="comment">/**
+ * The result of the query {@link ListTodoListsQuery}.
+ * &lt;p&gt;
+ * The result contains a set of {@link TodoListView}s.
+ */</span>
+<span class="annotation">@Value</span>
+<span class="annotation">@Builder</span>(toBuilder = <span class="predefined-constant">true</span>)
+<span class="directive">public</span> <span class="type">class</span> <span class="class">ListTodoListsResult</span> {
+
+  <span class="comment">/**
+   * The set of TodoListViews.
+   */</span>
+  <span class="annotation">@Singular</span>
+  <span class="predefined-type">Set</span>&lt;TodoListView&gt; todoListViews;
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_event">Event</h4>
 <div class="paragraph">
-<p>The event pattern comes from the domain-driven design (DDD) driver. It is a notification that a significant change or action has occurred within the system.</p>
+<p>The Event pattern comes from the domain-driven design (DDD) driver.
+It is a notification that a significant change or action has occurred within the system.</p>
 </div>
 <div class="paragraph">
-<p>There is a distinction between Domain Events and Integration Events. Domain Events are internal to the system and are kept in the core component, while Integration Events are external and are placed in the API component for long-term use.</p>
+<p>There is a distinction between Domain Events and Integration Events.
+Domain Events are internal to the system and are kept in the core component, while Integration Events are external and are placed in the API component for long-term use.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_aggregate">Aggregate</h4>
 <div class="paragraph">
-<p>The aggregate pattern comes from the domain-driven design (DDD) driver. It is a cluster of domain objects that can be treated as a single unit, often with one of the objects being the aggregate root.</p>
+<p>The Aggregate pattern comes from the domain-driven design (DDD) driver.
+It is a cluster of domain objects that can be treated as a single unit, often with one of the objects being the Aggregate Root.</p>
 </div>
 <div class="paragraph">
-<p>The data structure of the aggregate is typically located in the core component.</p>
+<p>The data structure of the Aggregate is typically located in the core component.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_factory">Factory</h4>
 <div class="paragraph">
-<p>The factory pattern comes from the domain-driven design (DDD) driver. It is responsible for creating complex domain objects, ensuring that created objects are valid and in a consistent state.</p>
+<p>Despite the Gang of Four book <a href="#despat">[despat]</a> defining it a long time ago, the Factory concept used in this article&#8217;s context comes from the Domain-Driven Design (DDD) driver.
+It is responsible for creating complex domain objects, ensuring that created objects are valid and in a consistent state.</p>
 </div>
 <div class="paragraph">
-<p>The behavior of the factory is usually located near the data structure it is associated with.</p>
+<p>The behavior of the Factory is usually located near the data structure it is associated with.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_repository">Repository</h4>
 <div class="paragraph">
-<p>The repository pattern comes from the domain-driven design (DDD) driver. It provides methods to add, remove, and update objects within an Aggregate, abstracting the underlying data storage mechanism.</p>
+<p>The Repository pattern comes from the domain-driven design (DDD) driver.
+It provides methods to add, remove, and update objects within an Aggregate, abstracting the underlying data storage mechanism.</p>
 </div>
 <div class="paragraph">
 <p>The contract of the repository is defined in the core component, while the implementation is carried out in a driven adapter component.</p>
@@ -996,7 +1583,8 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 <div class="sect3">
 <h4 id="_service">Service</h4>
 <div class="paragraph">
-<p>The service pattern comes from the domain-driven design (DDD) driver. It is an operation offered as an interface that stands alone in the model, without encapsulating state, typically to perform calculations or processing activities.</p>
+<p>The service pattern comes from the domain-driven design (DDD) driver.
+It is an operation offered as an interface that stands alone in the model, without encapsulating state, typically to perform calculations or processing activities.</p>
 </div>
 <div class="paragraph">
 <p>The contract of the service is generally defined in the core component, with the implementation in a driven adapter component.</p>
@@ -1008,7 +1596,8 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 <div class="sect3">
 <h4 id="_policy">Policy</h4>
 <div class="paragraph">
-<p>The policy pattern comes from The domain-driven design (DDD) driver. It is a set of rules or guidelines that dictate how business decisions are made or how business processes are conducted.</p>
+<p>The policy pattern comes from The domain-driven design (DDD) driver.
+It is a set of rules or guidelines that dictate how business decisions are made or how business processes are conducted.</p>
 </div>
 <div class="paragraph">
 <p>The behavior of the policy is typically located in the core component.</p>
@@ -1017,7 +1606,8 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 <div class="sect3">
 <h4 id="_read_model">Read Model</h4>
 <div class="paragraph">
-<p>The read model pattern comes from the EventStorming concepts. It is a model designed specifically for read operations, optimized for querying and displaying data.</p>
+<p>The read model pattern comes from the EventStorming concepts and can be seen as a side effect of CQRS.
+It is a model designed specifically for read operations, optimized for querying and displaying data.</p>
 </div>
 <div class="paragraph">
 <p>The data structure of the read model is typically located in the API component.</p>
@@ -1026,7 +1616,9 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 <div class="sect3">
 <h4 id="_process">Process</h4>
 <div class="paragraph">
-<p>The process pattern comes from the EventStorming concepts. It is a sequence of actions or steps taken to achieve a particular end in the domain.</p>
+<p>The process pattern comes from the EventStorming concepts.
+It is a sequence of actions or steps taken to achieve a particular end in the domain.
+Usually, a process is implemented using the Business Process Model and Notation (BPMN) standard.</p>
 </div>
 <div class="paragraph">
 <p>The behavior of the process is located in the core component, with its orchestration managed by a driven adapter component.</p>
@@ -1035,7 +1627,8 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 <div class="sect3">
 <h4 id="_timer">Timer</h4>
 <div class="paragraph">
-<p>The timer pattern comes from the EventStorming concepts. It is a mechanism that triggers an event or command after a certain period of time or at specific intervals.</p>
+<p>The timer pattern comes from the EventStorming concepts.
+It is a mechanism that triggers an event or command after a certain period of time or at specific intervals.</p>
 </div>
 <div class="paragraph">
 <p>The contract for the timer is defined in the core component, with its implementation carried out in a driven adapter component.</p>
@@ -1044,7 +1637,9 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 <div class="sect3">
 <h4 id="_saga">Saga</h4>
 <div class="paragraph">
-<p>The saga pattern comes from the distributed system ecosystem <a href="#saga">[saga]</a>. It is a long-running process that handles events and commands, often involving multiple steps and managing the state across them.</p>
+<p>The saga pattern comes from the distributed system ecosystem <a href="#saga">[saga]</a>.
+It is a long-running process that handles events and commands, often involving multiple steps and managing the state across them.
+Saga differs from the process pattern in that it is designed to react to events and commands, while the process pattern is more deterministic.</p>
 </div>
 <div class="paragraph">
 <p>The behavior of the saga is located in the core component, with its orchestration managed by a driven adapter component.</p>
@@ -1053,40 +1648,53 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 <div class="sect3">
 <h4 id="_facade">Facade</h4>
 <div class="paragraph">
-<p>The facade pattern comes from the famous gang of four book <a href="#despat">[despat]</a>. It is an interface or abstraction layer that simplifies a set of interfaces or classes, often used to integrate systems or manage complexities.</p>
+<p>The facade pattern comes from the famous Gang of Four book <a href="#despat">[despat]</a>.
+It is an interface or abstraction layer that simplifies a set of interfaces or classes, often used to integrate systems or manage complexities.</p>
 </div>
 <div class="paragraph">
-<p>The contract for the facade is set up in the API component, while its implementation takes place in the core component. The contract is designed to be used by driving adapter components.</p>
+<p>The contract for the facade is set up in the API component, while its implementation takes place in the core component.
+The contract is designed to be used by driving adapter components.</p>
 </div>
 <div class="paragraph">
-<p>When implementing a client component, the Facade is contract of the client implementation.</p>
+<p>When implementing a client component, the Facade is the contract of the client implementation.</p>
 </div>
 <div class="paragraph">
-<p>From my perspective, the Facade pattern effectively supports Location Transparency. Essentially, when a core element relies solely on API components equipped with facades, it remains unaware of the actual locations of the implementations associated with those facades. This setup allows for an initial use of local implementations housed within library components, with the option to later transition to remote implementations contained in application components, accessible via client components. Consequently, for users of the facade, this transition merely appears as a shift from a library component to a client component.</p>
+<p>The Facade pattern is a Location Transparency enabler.
+Essentially, when a core element relies solely on API components equipped with facades, it remains unaware of the actual locations of the implementations associated with those facades.
+This setup allows for an initial use of local implementations housed within library components, with the option to later transition to remote implementations contained in application components, accessible via client components.
+Consequently, for users of the facade, this transition merely appears as a shift from a library component to a client component.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_usage_of_the_patterns">Usage of the patterns</h4>
 <div class="paragraph">
-<p>Patterns are essential to draft heuristics and guidelines for the development of a codebase. They provide a common language and a shared understanding among team members, ensuring consistency and clarity in the codebase.</p>
+<p>Patterns are essential to draft heuristics and guidelines for the development of a codebase.
+They provide a common language and a shared understanding among team members, ensuring consistency and clarity in the codebase.</p>
 </div>
 <div class="paragraph">
-<p>For example, the Command pattern is defined with a data structure and a behavior. That means, the programing artifacts associated with the Command pattern are already known. Therefore, when creation or updating a command, the team members know what to do and what to expect. Moreover, a pattern provides a systematic approach, therefore efforts can be estimated more accurately.</p>
+<p>For example, the Command pattern is defined with a data structure and a behavior.
+That means, the programing artifacts associated with the Command pattern are already known. Therefore, when creation or updating a command, the team members know what to do and what to expect. Moreover, a pattern provides a systematic approach, therefore efforts can be estimated more accurately.</p>
 </div>
 <div class="paragraph">
-<p>Moreover, a pattern doesn&#8217;t exist in isolation. It is often linked to other patterns. For instance, a Command can be linked to an Aggregate and an Aggregate can be linked to a Repository. Therefore, when dealing with an Aggregate, we can easily evaluate the impact of the changes on the Command and the Repository. Again, the predictability of the effort is better.</p>
+<p>Moreover, a pattern doesn&#8217;t exist in isolation. It is often linked to other patterns.
+For instance, a Command can be linked to an Aggregate and an Aggregate can be linked to a Repository.
+Therefore, when dealing with an Aggregate, we can easily evaluate the impact of the changes on the Command and the Repository.
+Again, the predictability of the effort is better.</p>
 </div>
 <div class="paragraph">
 <p>Finally, leveraging on the systematic approach of the patterns, the tests can be written more easily because the programing artifacts to test are already known. Therefore, the code coverage can be increased more easily.</p>
 </div>
 <div class="paragraph">
-<p>For instance, consider a diagram that outlines the design of a command and an aggregate. The objective of the command is to create an instance of an aggregate and then persist it. Four patterns are utilized in this design: Command, Aggregate, Factory, and Repository. This structured approach not only clarifies the roles and relationships within the system but also ensures a coherent and testable architecture.</p>
+<p>For instance, consider a diagram that outlines the design of a command and an aggregate.
+The objective of the command is to create an instance of an aggregate and then persist it.
+Four patterns are utilized in this design: Command, Aggregate, Factory, and Repository.
+This structured approach not only clarifies the roles and relationships within the system but also ensures a coherent and testable architecture.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="diag-plantuml-md5-e793d23bb3c8cbfc970a7caf8df48ee3.png" alt="Diagram" width="259" height="305">
 </div>
-<div class="title">Figure 14. The submission of notes</div>
+<div class="title">Figure 17. The submission of notes</div>
 </div>
 <div class="paragraph">
 <p>The implementation of these patterns is relatively straightforward:</p>
@@ -1094,27 +1702,29 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>define the data structure of the command in the API component</p>
+<p>Define the data structure of the command in the API component.</p>
 </li>
 <li>
-<p>define the behavior of the command in the core component</p>
+<p>Define the behavior of the command in the core component.</p>
 </li>
 <li>
-<p>define the data structure of the aggregate in the core component</p>
+<p>Define the data structure of the aggregate in the core component.</p>
 </li>
 <li>
-<p>define the behavior of the factory in the core component</p>
+<p>Define the behavior of the factory in the core component.</p>
 </li>
 <li>
-<p>define the contract of the repository in the core component</p>
+<p>Define the contract of the repository in the core component.</p>
 </li>
 <li>
-<p>define the realization of the repository in the driven adapter component</p>
+<p>Define the realization of the repository in the driven adapter component.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>As the system evolves, the aggregate will likely incorporate additional behaviors, and it may become necessary to introduce more patterns. This incremental development helps in making the implicit aspects of the system explicit, ensuring clarity and maintainability. By systematically expanding and refining these components, developers can effectively manage complexity and enhance the robustness of the application.</p>
+<p>As the system evolves, the aggregate will likely incorporate additional behaviors, and it may become necessary to introduce more patterns.
+This incremental development helps in making the implicit aspects of the system explicit, ensuring clarity and maintainability.
+By systematically expanding and refining these components, developers can effectively manage complexity and enhance the robustness of the application.</p>
 </div>
 </div>
 </div>
@@ -1124,46 +1734,69 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 <h2 id="_the_note_app_example">The Note app example</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To explain these concepts, let&#8217;s consider a simple Note App as an example. This application offers various functionalities centered around the concept of notes, which are organized into a Note module. As previously discussed, the Note module is made up of several components, and these components are implemented using different patterns.</p>
+<p>To explain these concepts, let&#8217;s consider a simple Note App as an example.
+This application offers various functionalities centered around the concept of notes, which are organized into a Note module.
+As previously discussed, the Note module is made up of several components, and these components are implemented using different patterns.</p>
 </div>
 <div class="paragraph">
 <p>We will explore the feature of submitting notes to understand this further.</p>
 </div>
 <div class="paragraph">
-<p>The feature we&#8217;re discussing is designed to either create a new note or update an existing one, and to update the indices that are associated with the notes. This functionality allows users to efficiently manage and retrieve their notes within the app.</p>
+<p>The feature we&#8217;re discussing is designed to either create a new note or update an existing one, and to update the indices that are associated with the notes.
+This functionality allows users to efficiently manage and retrieve their notes within the app.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="diag-plantuml-md5-c30faed64659c92a273e89a4e76156a0.png" alt="Diagram" width="329" height="797">
 </div>
-<div class="title">Figure 15. The submission of notes</div>
+<div class="title">Figure 18. The submission of notes</div>
 </div>
 <div class="paragraph">
-<p>On the server side, the functionality is exposed through a Facade Command named <code>SubmitNote</code>. A facade command acts as a coordinator, orchestrating the execution of other commands within the system.</p>
+<p>On the server side, the functionality is exposed through a Facade Command named <code>SubmitNote</code>.
+A Facade Command acts as a coordinator, orchestrating the execution of other commands within the system.</p>
 </div>
 <div class="paragraph">
-<p>Similar to other commands, a facade command comprises both a data structure and behavior. The data structure, along with the contract detailing the behavior, are located within the API component. The implementation of this behavior is managed in the core, and the application of the facade command occurs within the driving adapter.</p>
+<p>Similar to other commands, a Facade Command comprises both a data structure and behavior.
+The data structure, along with the contract detailing the behavior, are located within the API component.
+The implementation of this behavior is managed in the core, and the application of the Facade Command occurs within the driving adapter.</p>
 </div>
 <div class="paragraph">
-<p>For instance, various implementations might be developed to use this command: one could handle it synchronously via REST, while another might facilitate asynchronous operations using AMQP (Advanced Message Queuing Protocol). This setup provides flexibility in how the command is executed, catering to different operational needs.</p>
+<p>For instance, various implementations might be developed to use this command: one could handle it synchronously via REST, while another might facilitate asynchronous operations using AMQP (Advanced Message Queuing Protocol).
+This setup provides flexibility in how the command is executed, catering to different operational needs.</p>
 </div>
 <div class="paragraph">
-<p>The <code>CreateNote</code> and <code>UpdateNote</code> commands, which are orchestrated by the <code>SubmitNote</code> command, also consist of data structures and behaviors. However, unlike the facade command, these commands reside solely within the core component. This is because they are not exposed externally; they function internally to manage the creation and updating of notes as part of the system&#8217;s back-end operations. This setup ensures that these commands are encapsulated within the system, maintaining a clear separation between internal processing and external interfaces.</p>
+<p>The <code>CreateNote</code> and <code>UpdateNote</code> commands, which are orchestrated by the <code>SubmitNote</code> command, also consist of data structures and behaviors.
+However, unlike the Facade Command, these commands reside solely within the core component.
+This is because they are not exposed externally; they function internally to manage the creation and updating of notes as part of the system&#8217;s back-end operations.
+This setup ensures that these commands are encapsulated within the system, maintaining a clear separation between internal processing and external interfaces.</p>
 </div>
 <div class="paragraph">
-<p>The execution of the command involves managing the <code>Note</code> aggregate, which necessitates the use of a repository. The contract for this repository is defined within the core component, specifying how the Note aggregates are to be managed, accessed, and persisted. The actual implementation of the repository, however, takes place in a driven adapter component.</p>
+<p>The execution of the command involves managing the <code>Note</code> Aggregate, which necessitates the use of a Repository.
+The contract for this Repository is defined within the core component, specifying how the Note Aggregates are to be managed, accessed, and persisted.
+The actual implementation of the Repository, however, takes place in a driven adapter component.</p>
 </div>
 <div class="paragraph">
-<p>This structure allows for multiple implementations of the repository to suit different storage technologies and requirements. For example, one implementation might be designed for a Relational Database Management System (RDBMS), providing structured query capabilities and transaction support. Another implementation might be optimized for a NoSQL database, which can offer scalability and flexibility for unstructured data. This flexibility ensures that the application can adapt to various data storage strategies as needed.</p>
+<p>This structure allows for multiple implementations of the Repository to suit different storage technologies and requirements.
+For example, one implementation might be designed for a Relational Database Management System (RDBMS), providing structured query capabilities and transaction support.
+Another implementation might be optimized for a NoSQL database, which can offer scalability and flexibility for unstructured data.
+This flexibility ensures that the application can adapt to various data storage strategies as needed.</p>
 </div>
 <div class="paragraph">
-<p>The result of executing the command is the <code>NoteMutated</code> domain event. This domain event serves as a notification within the system, indicating that a significant change or action has taken place. Given their role in signaling internal system changes, domain events like <code>NoteMutated</code> are housed within the core component. This placement ensures that they are not exposed to or used by external modules, maintaining a clear boundary between the system&#8217;s internal operations and its external interfaces. This arrangement helps to encapsulate the system&#8217;s domain logic and maintain the integrity of its internal processes.</p>
+<p>The result of executing the command is the <code>NoteMutated</code> Domain Event.
+This domain event serves as a notification within the system, indicating that a significant change or action has taken place.
+Given their role in signaling internal system changes, Domain Events like <code>NoteMutated</code> are housed within the core component.
+This placement ensures that they are not exposed to or used by external modules, maintaining a clear boundary between the system&#8217;s internal operations and its external interfaces.
+This arrangement helps to encapsulate the system&#8217;s domain logic and maintain the integrity of its internal processes.</p>
 </div>
 <div class="paragraph">
-<p>The <code>NoteMutated</code> domain event serves as the catalyst for the <code>NoteIndexer</code> process, which is tasked with updating the indices related to the notes. This process is strategically housed within the core component of the system.</p>
+<p>The <code>NoteMutated</code> Domain Event serves as the catalyst for the <code>NoteIndexer</code> process, which is tasked with updating the indices related to the notes.
+This process is strategically housed within the core component of the system.</p>
 </div>
 <div class="paragraph">
-<p>The <code>NoteIndexer</code> process updates two read models, <code>NoteView</code> and <code>NotesView</code>, both of which are accessible to external users and therefore located in the API component. The state of these read models is managed by a repository. The specifications for how the repository should operate are outlined in the core component&#8217;s contract, while the actual implementation of this repository is carried out in a driven adapter component. This setup ensures that the read models are both accessible externally and reliably maintained, aligning with the system’s data integrity and accessibility requirements.</p>
+<p>The <code>NoteIndexer</code> process updates two read models, <code>NoteView</code> and <code>NotesView</code>, both of which are accessible to external users and therefore located in the API component.
+The state of these read models is managed by a repository.
+The specifications for how the repository should operate are outlined in the core component&#8217;s contract, while the actual implementation of this repository is carried out in a driven adapter component.
+This setup ensures that the read models are both accessible externally and reliably maintained, aligning with the system’s data integrity and accessibility requirements.</p>
 </div>
 <div class="paragraph">
 <p>The codebase can be structured as follows:</p>
@@ -1278,7 +1911,9 @@ CQRS emphasizes the separation of commands and queries which can lead to the des
 </div>
 <div class="paragraph">
 <p>Additional components can indeed be incorporated to enhance functionality and integration within the system.
-Furthermore, a deliverable component can be introduced to consolidate all the components of the Note module. This deliverable would encapsulate the functionality of the entire module, providing an executable that exposes both REST and AMQP interfaces. Such a component not only simplifies deployment but also ensures that all services related to the Note module are accessible through unified endpoints, enhancing the system&#8217;s interoperability and ease of use.</p>
+Furthermore, a deliverable component can be introduced to consolidate all the components of the Note module.
+This deliverable would encapsulate the functionality of the entire module, providing an executable that exposes both REST and AMQP interfaces.
+Such a component not only simplifies deployment but also ensures that all services related to the Note module are accessible through unified endpoints, enhancing the system&#8217;s interoperability and ease of use.</p>
 </div>
 <div class="paragraph">
 <p>A UML diagram can be designed according to the codebase to visualize the structure of the Note module.</p>
@@ -1287,7 +1922,7 @@ Furthermore, a deliverable component can be introduced to consolidate all the co
 <div class="content">
 <img src="diag-plantuml-md5-52ab723a5476de384c82291061dd0694.png" alt="Diagram" width="736" height="377">
 </div>
-<div class="title">Figure 16. The components of the Note module</div>
+<div class="title">Figure 19. The components of the Note module</div>
 </div>
 </div>
 </div>
@@ -1295,13 +1930,17 @@ Furthermore, a deliverable component can be introduced to consolidate all the co
 <h2 id="_conclusion">Conclusion</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In the journey of crafting robust, efficient, and adaptable enterprise applications, the organization of the codebase is paramount. This detailed guide has traversed the intricacies of designing and managing a codebase tailored for complex enterprise solutions, highlighting essential architectural patterns such as Domain Driven Design, Ports and Adapters Architecture, Command and Query Responsibility Segregation, and Location Transparency. By systematically applying these frameworks and maintaining high code coverage, developers can ensure alignment with business objectives while achieving a balance between reliability, maintainability, and flexibility.</p>
+<p>In the journey of crafting robust, efficient, and adaptable enterprise applications, the organization of the codebase is paramount.
+This detailed guide has traversed the intricacies of designing and managing a codebase tailored for complex enterprise solutions, highlighting essential architectural patterns such as Domain Driven Design, Ports and Adapters Architecture, Command and Query Responsibility Segregation, and Location Transparency.
+By systematically applying these frameworks and maintaining high code coverage, developers can ensure alignment with business objectives while achieving a balance between reliability, maintainability, and flexibility.</p>
 </div>
 <div class="paragraph">
-<p>The modular approach, utilizing well-defined patterns and strategic component associations, facilitates clear separation of concerns and promotes ease of testing and adaptability. This not only streamlines the development process but also positions the software to seamlessly integrate new functionalities and respond adeptly to evolving business needs.</p>
+<p>The modular approach, utilizing well-defined patterns and strategic component associations, facilitates clear separation of concerns and promotes ease of testing and adaptability.
+This not only streamlines the development process but also positions the software to seamlessly integrate new functionalities and respond adeptly to evolving business needs.</p>
 </div>
 <div class="paragraph">
-<p>As illustrated with the Note App example, even a simple feature such as submitting notes can benefit from a structured, methodical approach to design and implementation, ensuring that each component effectively fulfills its role within the overall system. This guide serves as a blueprint for developers and architects aiming to master the art of enterprise software development, fostering an environment where innovation thrives and software excellence is the norm.</p>
+<p>As illustrated with the Note App example, even a simple feature such as submitting notes can benefit from a structured, methodical approach to design and implementation, ensuring that each component effectively fulfills its role within the overall system.
+This guide serves as a blueprint for developers and architects aiming to master the art of enterprise software development, fostering an environment where innovation thrives and software excellence is the norm.</p>
 </div>
 </div>
 </div>
@@ -1310,6 +1949,10 @@ Furthermore, a deliverable component can be introduced to consolidate all the co
 <div class="sectionbody">
 <div class="ulist bibliography">
 <ul class="bibliography">
+<li>
+<p><a id="pbsol"></a>[pbsol] <a href="https://www.permaculture.org.uk/principles/problem-solution">
+The Permaculture Association: The problem is the solution</a></p>
+</li>
 <li>
 <p><a id="ddd"></a>[ddd] <a href="https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215">Domain-Driven Design: Tackling Complexity in the Heart of Software by  Eric Evans</a></p>
 </li>
@@ -1352,8 +1995,8 @@ Furthermore, a deliverable component can be introduced to consolidate all the co
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 7<br>
-Last updated 2024-05-05 18:53:47 UTC
+Version 8<br>
+Last updated 2024-05-05 18:53:50 UTC
 </div>
 </div>
 </body>
