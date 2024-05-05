@@ -97,69 +97,78 @@ Moreover, a poorly maintained codebase can affect team morale, diminish job sati
 
 == The drivers
 
-In the journey of crafting a robust codebase for custom enterprise solutions, several key drivers pave the way for addressing common concerns while fostering innovation and efficiency. Let's dive into these drivers, sharing insights from a personal perspective on how they contribute significantly to overcoming the challenges identified in the earlier sections.
+In the journey of crafting a robust codebase for enterprise applications, several key drivers address the concerns described earlier.
 
-=== Domain Driven Design (DDD)
+=== Domain Driven Design
 
-Domain-Driven Design (DDD) <<ddd>> is a sophisticated approach to software development that prioritizes the core logic and functionality of the business domain it aims to serve. The essence of DDD lies in its focus on understanding the business domain deeply and modeling software that reflects this understanding, thereby bridging the gap between technical implementation and business strategy. This methodology is particularly beneficial in complex domains where the business rules and processes are intricate and subject to frequent changes.
+Domain-Driven Design (DDD) <<ddd>> is a sophisticated approach to software development that prioritizes the core logic and functionality of the business domain it aims to serve.
+The essence of DDD lies in its focus on understanding the business domain deeply and modeling software that reflects this understanding.
+This approach is particularly beneficial in complex domains where the business rules and processes are intricate and subject to frequent changes.
+About codebases, DDD is an excellent strategy for thoughtful coding because of the valuable tools offered such as the ubiquitous language, strategic patterns, and tactical patterns.
 
-In my opinion, DDD is an excellent strategy for thoughtful coding, which is crucial in the creation of complex solutions. It offers valuable tools such as the ubiquitous language, strategic patterns, and tactical patterns.
+Domain Driven Development helps to fulfill the following patterns concerns:
 
-From my point of view, Domain Driven Development helps to fulfilled the following patterns concerns:
-
-- Alignment between the business and implemented solutions: Encourages focus on the core business logic, keeping it separate from external concerns.
-- Reliability and stability of the solutions: Reduces dependencies on external systems and technologies, which can enhance stability.
-- Maintainability and flexibility of the codebase: Makes the application easier to test, maintain, and adapt to new requirements or technologies.
+- *Alignment between the business and implemented solutions*: Encourages focus on the core business logic, keeping it separate from external concerns.
+- *Reliability and stability of the solutions*: Reduces dependencies on external systems and technologies, which can enhance stability.
+- *Maintainability and flexibility of the codebase*: Makes the application easier to test, maintain, and adapt to new requirements or technologies.
 
 === Ports and Adapters Architecture
 
-The Ports and Adapters Architecture <<hexa>>, also known as the Hexagonal Architecture, divides an application into loosely connected components. This division allows the core application to remain unaffected by external technologies and services.
+The Ports and Adapters Architecture <<hexa>>, also known as the Hexagonal Architecture, divides an application into loosely connected components.
+This division allows the core application to remain unaffected by external technologies and services.
+It introduces valuable concepts like the Hexagon, Ports, and Adapters, which prevent entangled code and preserve the integrity of the core business logic from external interference.
 
-From my viewpoint, the Ports and Adapters Architecture is an exemplary method for devising and managing complex systems. It introduces valuable concepts like the Hexagon, Ports, and Adapters, which steer clear of entangled code and preserve the integrity of the core business logic from external interferences.
+This architectural style complements the Domain-Driven Design approach seamlessly.
+For instance, a DDD Module could correspond to a Hexagon, a DDD Repository might act as a Port, and the Repository's implementation could serve as an Adapter.
 
-This architectural style complements the Domain-Driven Design (DDD) approach seamlessly. For instance, a DDD Module could correspond to a Hexagon, a DDD Repository might act as a Port, and the Repository's implementation could serve as an Adapter.
+Ports and Adapters Architecture effectively addresses the following concerns:
 
-I believe the Ports and Adapters Architecture effectively addresses the following concerns:
+- *Aligning business goals with implemented solutions*: It emphasizes the importance of concentrating on core business logic while isolating it from external distractions.
+- *Enhancing the reliability and stability of solutions*: By minimizing dependencies on external systems and technologies, it contributes to overall system stability.
+- *Improving maintainability and adaptability of the codebase*: The architecture simplifies testing, maintenance, and the integration of new requirements or technologies.
 
-- Aligning business goals with implemented solutions: It emphasizes the importance of concentrating on core business logic while isolating it from external distractions.
-- Enhancing the reliability and stability of solutions: By minimizing dependencies on external systems and technologies, it contributes to overall system stability.
-- Improving maintainability and adaptability of the codebase: The architecture simplifies testing, maintenance, and the integration of new requirements or technologies.
+=== Command and Query Responsibility Segregation
 
-=== Command and Query Responsibility Segregation (CQRS)
+The Command and Query Responsibility Segregation (CQRS) pattern <<cqrs>> is a strategic approach that delineates data operations into two distinct categories: queries for reading data and commands for updating it.
+This division promotes a more streamlined and efficient process for managing data interactions.
 
-The Command and Query Responsibility Segregation (CQRS) pattern <<cqrs>> is a strategic approach that delineates data operations into two distinct categories: queries for reading data and commands for updating it. This division promotes a more streamlined and efficient process for managing data interactions.
+CQRS is a highly effective framework, particularly within the fast-paced, agile development environment where time is a critical factor.
+Considering commands and queries separately when planning the implementation of a feature facilitates the evaluation of the impact on both the data and the system as a whole.
 
-I view CQRS as a highly effective framework, particularly within the fast-paced, agile development environment where time is a critical factor. Considering commands and queries separately when planning the implementation of a feature facilitates a thorough evaluation and estimation of the feature's impact on both the data and the system as a whole.
+CQRS addresses the following concerns:
 
-From my perspective, CQRS addresses the following concerns:
-
-- Alignment between the business and implemented solutions: Encourages a clear separation of concerns, making it easier to understand and implement business logic.
-- Reliability and stability of the solutions: By separating reads and writes, CQRS can improve performance and reduce the risk of data corruption.
-- Maintainability and flexibility of the codebase: CQRS allows for scalability and simplicity in the data management, making them easier to maintain and evolve.
+- *Alignment between the business and implemented solutions*: Encourages a clear separation of concerns, making it easier to understand and implement business logic.
+- *Reliability and stability of the solutions*: By separating reads and writes, CQRS can improve performance and reduce the risk of data corruption.
+- *Maintainability and flexibility of the codebase*: CQRS allows for scalability and simplicity in the data management, making them easier to maintain and evolve.
 
 === Location Transparency
 
-Location Transparency <<loctra>> is a principle that enables software components to interact seamlessly without being aware of each other's physical location on the network. This concept fosters decoupling and enhances scalability.
+Location Transparency <<loctra>> is a principle that enables software components to interact seamlessly without being aware of each other's physical location on the network.
+This concept fosters decoupling and enhances scalability.
 
-I regard Location Transparency as an excellent strategy for avoiding tight coupling between components, such as the hexagons in the Ports and Adapters Architecture, and for simplifying integrations. Essentially, for any given hexagon, we can establish a contract (i.e., a port) and the implementation of a client (i.e., an adapter) that other hexagons can utilize. This client might employ remote communication methods like REST, AMQP, gRPC, or even local communication strategies such as Inversion of Control or in-process communication.
+Location Transparency as an excellent strategy for avoiding tight coupling between components, such as the hexagons in the Ports and Adapters Architecture, and for simplifying integrations.
+Essentially, for any given hexagon, we can establish a contract (i.e., a port) and the implementation of a client (i.e., an adapter) that other hexagons can utilize.
+This client might employ remote communication methods like REST, AMQP, gRPC, or even local communication strategies such as Inversion of Control or in-process communication.
+In any cases, the core of the hexagons remain unaware of the actual locations of the implementations.
 
-In my view, Location Transparency addresses the following concerns effectively:
+Location Transparency addresses the following concerns effectively:
 
-- Reliability and stability of the solutions: Enhances the system’s ability to recover from failures and balance loads effectively.
-- Maintainability and flexibility of the codebase: Facilitates easier changes and deployments, as components can be moved or scaled independently.
+- *Reliability and stability of the solutions*: Enhances the system’s ability to recover from failures and balance loads effectively.
+- *Maintainability and flexibility of the codebase*: Facilitates easier changes and deployments, as components can be moved or scaled independently.
 
 === Very High Code Coverage Level
 
-Maintaining a very high level of code coverage is a demanding requirement that pushes developers to write detailed tests for virtually every segment of the code. This demand not only challenges developers to deeply consider the architecture and testability of their code from the beginning but also instills a rigorous discipline in the development process.
+Maintaining a very high level of code coverage is a demanding requirement that pushes developers to write detailed tests for virtually every segment of the code.
+This demand not only challenges developers to deeply consider the architecture and testability of their code from the beginning but also instills a rigorous discipline in the development process.
 
-While the task of writing tests (unit, integration, end-to-end, performance ...) may initially seem tedious, my experience suggests that a higher code coverage level significantly enhances the quality of the codebase, particularly in terms of its reliability and stability. The stringent requirement for high code coverage serves as a powerful incentive for developers to produce code that is inherently testable.
+While the task of writing tests (unit, integration, end-to-end, performance ...) may initially seem tedious, experience suggests that a higher code coverage level significantly enhances the quality of the codebase, particularly in terms of its reliability and stability.
+The stringent requirement for high code coverage serves as a powerful incentive for developers to produce code that is inherently testable.
+Furthermore, this constraint often leads to the exploration and adoption of best practices, such as adherence to the SOLID principles and the implementation of Test-Driven Development (TDD).
 
-Furthermore, this constraint often leads to the exploration and adoption of best practices, such as adherence to the SOLID principles and the implementation of Test-Driven Development (TDD). I am convinced that a codebase designed to be easily testable and built upon such best practices is inherently more maintainable and adaptable. In other words, it tends to be well-structured, well-documented, and well-understood ...
+Enforcing a very high code coverage level addresses the following concerns:
 
-From my perspective, enforcing a very high code coverage level addresses the following concerns:
-
-- Reliability and stability of the solutions: High code coverage ensures thorough testing, leading to software that is more reliable and stable, as more code paths are verified against errors and regressions.
-- Maintainability and flexibility of the codebase: The constraint of high code coverage guides developers towards better coding practices which ultimately results in a codebase that is easier to maintain and adapt, e.g. the SOLID principles, the Test-Driven Development (TDD) approach …
+- *Reliability and stability of the solutions*: High code coverage ensures thorough testing, leading to software that is more reliable and stable, as more code paths are verified against errors and regressions.
+- *Maintainability and flexibility of the codebase*: The constraint of high code coverage guides developers towards better coding practices which ultimately results in a codebase that is easier to maintain and adapt.
 
 == The metamodel
 
