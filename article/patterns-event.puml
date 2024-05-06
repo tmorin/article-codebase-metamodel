@@ -1,0 +1,13 @@
+ @startuml
+package codebase {
+    package api {
+        card event_api as "integration event"
+    }
+    package core {
+        card listener
+        card event_core as "domain event"
+    }
+    listener .u.> event_api : <<use>>
+    listener .r.> event_core : <<use>>
+}
+@enduml

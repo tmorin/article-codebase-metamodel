@@ -4,45 +4,52 @@ import java.time.Instant;
 import lombok.Builder;
 import lombok.NonNull;
 import lombok.Value;
+import todoapp.api.TodoItemId;
 import todoapp.api.TodoListId;
 
 /**
- * The aggregate of a TodoList.
+ * The aggregate of a TodoItem.
  */
 @Value
 @Builder(toBuilder = true)
-public class TodoList {
+public class TodoItem {
 
   /**
    * The identifier of the TodoList.
    */
   @NonNull
-  @Builder.Default
-  TodoListId todoListId = TodoListId.builder().build();
+  TodoListId todoListId;
 
   /**
-   * The creation date of the TodoList.
+   * The identifier of the TodoItem.
+   */
+  @NonNull
+  @Builder.Default
+  TodoItemId todoItemId = TodoItemId.builder().build();
+
+  /**
+   * The creation date of the TodoItem.
    */
   @NonNull
   @Builder.Default
   Instant createdAt = Instant.now();
 
   /**
-   * The last update date of the TodoList.
+   * The last update date of the TodoItem.
    */
   @NonNull
   @Builder.Default
   Instant updatedAt = createdAt;
 
   /**
-   * The title of the TodoList.
+   * The label of the TodoItem.
    */
   @NonNull
-  String title;
+  String label;
 
   /**
-   * The number of items in the TodoList.
+   * Whether the TodoItem is completed.
    */
   @NonNull
-  int itemCount;
+  boolean completed;
 }

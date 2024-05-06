@@ -492,6 +492,30 @@ It is a notification that a significant change or action has occurred within the
 There is a distinction between Domain Events and Integration Events.
 Domain Events are internal to the system and are kept in the core component, while Integration Events are external and are placed in the API component for long-term use.
 
+.Relationships of the Event Pattern
+[plantuml, format="png"]
+----
+include::patterns-event.puml[]
+----
+
+===== Examples
+
+The following snippet shows the definition of a Domain Event.
+
+.The data structure of a Domain Event
+[source,java]
+----
+include::../example/java/src/main/core/todoapp/core/TodoItemCreated.java[]
+----
+
+The Domain Event above is listened by the listener described below.
+
+.The behavior of a listener
+[source,java]
+----
+include::../example/java/src/main/core/todoapp/core/ItemCountUpdater.java[]
+----
+
 ==== Aggregate
 
 The Aggregate pattern comes from the domain-driven design (DDD) driver.

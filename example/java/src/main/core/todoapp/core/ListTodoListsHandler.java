@@ -20,7 +20,7 @@ import todoapp.framework.QueryHandler;
 @Builder
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public final class ListTodoListsHandler
+final class ListTodoListsHandler
   implements QueryHandler<ListTodoListsQuery, ListTodoListsResult> {
 
   /**
@@ -37,7 +37,9 @@ public final class ListTodoListsHandler
     .build();
 
   @Override
-  public CompletionStage<ListTodoListsResult> handle(ListTodoListsQuery query) {
+  public CompletionStage<ListTodoListsResult> handle(
+    @NonNull ListTodoListsQuery query
+  ) {
     log.info(() -> "Handling query: " + query);
     return todoListRepository
       .list()

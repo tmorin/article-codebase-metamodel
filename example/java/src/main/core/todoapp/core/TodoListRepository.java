@@ -30,4 +30,12 @@ public interface TodoListRepository {
    * @return a completion stage
    */
   CompletionStage<Void> persist(TodoList todoList);
+
+  /**
+   * Checks if a TodoList exists.
+   *
+   * @param todoListId the ID of the TodoList
+   * @return a completion stage with a boolean
+   */
+  CompletionStage<Boolean> contain(TodoListId todoListId);
 }
