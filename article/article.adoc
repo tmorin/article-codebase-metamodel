@@ -365,12 +365,12 @@ include::patterns-overview.puml[]
 ==== Command
 
 The Command pattern comes from the Command and Query Responsibility Segregation (CQRS) driver.
-It is an action (i.e. the command) that expects to change to the state of an application.
-Optionally, a result can be provided to the producer to inform of the command's outcome.
+It is an action (i.e. the Command) that expects to change to the state of an application.
+Optionally, a Result can be provided to the producer to inform of the Command's outcome.
 
-The data structures for the command and the result are usually placed in the API component, while the behavior is located in the core component.
+The data structures for the Command and the result are usually placed in the API component, while the behavior is located in the core component.
 
-The command's behavior (i.e. the handler) can be tested in isolation using regular Unit Tests or Integration Tests linked solely to core artifacts.
+The Command's behavior (i.e. the Handler) can be tested in isolation using regular Unit Tests or Integration Tests linked solely to core artifacts.
 However, acceptance scenarios can be implemented based on the core component's artifacts, allowing driven adapters to validate their implementations from the core component's point of view.
 
 .Relationships of the Command Pattern
@@ -381,7 +381,7 @@ include::patterns-command.puml[]
 
 ===== Examples
 
-The following snippet shows the definition of a command.
+The following snippet shows the definition of a Command.
 
 .The data structure of a Command
 [source,java]
@@ -389,7 +389,7 @@ The following snippet shows the definition of a command.
 include::../example/java/src/main/api/todoapp/api/CreateTodoListCommand.java[]
 ----
 
-The command above is handled by the handler described below.
+The Command above is handled by the Handler described below.
 
 .The behavior of a command
 [source,java]
@@ -399,7 +399,7 @@ include::../example/java/src/main/core/todoapp/core/CreateTodoListHandler.java[]
 
 As mentioned earlier, scenarios can be implemented by the core to validate the driven adapter behaviors.
 
-.A scenario validating the command behavior
+.A scenario validating the Command behavior
 [source,java]
 ----
 include::../example/java/src/main/core/todoapp/core/CreateTodoListScenario.java[]
@@ -408,15 +408,16 @@ include::../example/java/src/main/core/todoapp/core/CreateTodoListScenario.java[
 ==== Query
 
 The Query pattern comes from the Command and Query Responsibility Segregation (CQRS) driver.
-It is an action (i.e. the query) that request for information about to the state of an application. As a response, a result is provided to the producer.
+It is an action (i.e. the Query) that request for information about to the state of an application.
+As a response, a Result is provided to the producer.
 
-The data structures for the query and the result are usually placed in the API component, while the behavior is located in the core component.
+The data structures for the Query and the Result are usually placed in the API component, while the behavior is located in the core component.
 
 [NOTE]
 CQRS emphasizes the separation of commands and queries, which can lead to the design of two distinct models: one for commands and another for queries.
-Therefore, the behavior of the query could be located in a different component than the behavior of the command, such as a sibling core component designed specifically for query handling.
+Therefore, the behavior of the Query could be located in a different component than the behavior of the Command, such as a sibling core component designed specifically for query handling.
 
-Like for the commands, the query's behavior (i.e. the handler) can be tested in isolation using regular Unit Tests or Integration Tests linked solely to core artifacts.
+Like for the Commands, the Query's behavior (i.e. the Handler) can be tested in isolation using regular Unit Tests or Integration Tests linked solely to core artifacts.
 However, acceptance scenarios can be implemented based on the core component's artifacts, allowing driven adapters to validate their implementations from the core component's point of view.
 
 .Relationships of the Query Pattern
@@ -427,7 +428,7 @@ include::patterns-query.puml[]
 
 ===== Examples
 
-The following snippet shows the definition of a query.
+The following snippet shows the definition of a Query.
 
 .The data structure of a Query
 [source,java]
@@ -435,7 +436,7 @@ The following snippet shows the definition of a query.
 include::../example/java/src/main/api/todoapp/api/ListTodoListsQuery.java[]
 ----
 
-The following snippet shows the definition of a result.
+The following snippet shows the definition of a Result.
 
 .The data structure of a Result
 [source,java]
@@ -443,7 +444,7 @@ The following snippet shows the definition of a result.
 include::../example/java/src/main/api/todoapp/api/ListTodoListsResult.java[]
 ----
 
-The query above is handled by the handler described below.
+The Query above is handled by the Handler described below.
 
 .The behavior of a query
 [source,java]
@@ -453,7 +454,7 @@ include::../example/java/src/main/core/todoapp/core/ListTodoListsHandler.java[]
 
 As mentioned earlier, scenarios can be implemented by the core to validate the driven adapter behaviors.
 
-.A scenario validating the query behavior
+.A scenario validating the Query behavior
 [source,java]
 ----
 include::../example/java/src/main/core/todoapp/core/ListTodoListsScenario.java[]
@@ -462,11 +463,11 @@ include::../example/java/src/main/core/todoapp/core/ListTodoListsScenario.java[]
 ==== Result
 
 The Result pattern comes from the Command and Query Responsibility Segregation (CQRS) driver.
-It is the output or outcome that is returned after the execution of a command or query.
+It is the output or outcome that is returned after the execution of a Command or Query.
 
-The data structure of the result is typically located in the API component.
+The data structure of the Result is typically located in the API component.
 
-A result is usually a container for views, also called Read Model.
+A Result is usually a container for Views, also called Read Model.
 
 .Relationships of the Result Pattern
 [plantuml, format="png"]
@@ -476,7 +477,7 @@ include::patterns-result.puml[]
 
 ===== Examples
 
-The following snippet shows the definition of a result.
+The following snippet shows the definition of a Result.
 
 .The data structure of a Result
 [source,java]
