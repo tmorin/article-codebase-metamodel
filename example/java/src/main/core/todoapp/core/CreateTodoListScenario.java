@@ -47,7 +47,11 @@ public final class CreateTodoListScenario implements Scenario {
       .toCompletableFuture()
       .join();
     assert Objects.nonNull(persistedAggregate);
+    assert persistedAggregate.isPresent();
     // AND the title is persisted
-    assert Objects.equals(persistedAggregate.getTitle(), command.getTitle());
+    assert Objects.equals(
+      persistedAggregate.get().getTitle(),
+      command.getTitle()
+    );
   }
 }

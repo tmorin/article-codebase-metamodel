@@ -34,6 +34,16 @@ final class ItemCountUpdater implements EventListener<TodoItemCreated> {
   public CompletionStage<Void> on(@NonNull TodoItemCreated todoItemCreated) {
     return todoListRepository
       .load(todoItemCreated.getTodoListId())
+      .thenApply(optionalTodoList ->
+        optionalTodoList.orElseThrow(() ->
+          new IllegalArgumentException(
+            String.format(
+              "TodoList %s not found",
+              todoItemCreated.getTodoListId()
+            )
+          )
+        )
+      )
       .thenApply(todoList ->
         todoList.toBuilder().itemCount(todoList.getItemCount() + 1).build()
       )

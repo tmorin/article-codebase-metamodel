@@ -569,10 +569,18 @@ The contract of the repository is defined in the core component, while the imple
 
 The following snippet shows the definition of a Repository.
 
-.The behavior of a Factory
+.The definition of a Repository
 [source,java]
 ----
 include::../example/java/src/main/core/todoapp/core/TodoListRepository.java[]
+----
+
+The following snippet shows an in-memory implementation of the Repository.
+
+.An in-memory implementation of a Repository
+[source,java]
+----
+include::../example/java/src/main/adapter/todoapp/adapter/mem/TodoListRepositoryInMemory.java[]
 ----
 
 ==== Service
