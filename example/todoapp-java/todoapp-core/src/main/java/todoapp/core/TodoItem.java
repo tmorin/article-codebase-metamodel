@@ -39,7 +39,7 @@ public class TodoItem {
    */
   @NonNull
   @Builder.Default
-  Instant updatedAt = createdAt;
+  Instant updatedAt = Instant.now();
 
   /**
    * The label of the TodoItem.

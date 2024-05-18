@@ -386,7 +386,7 @@ The following snippet shows the definition of a Command.
 .The data structure of a Command
 [source,java]
 ----
-include::../example/java/src/main/api/todoapp/api/CreateTodoListCommand.java[]
+include::../example/todoapp-java/todoapp-api/src/main/java/todoapp/api/CreateTodoListCommand.java[]
 ----
 
 The Command above is handled by the Handler described below.
@@ -394,7 +394,7 @@ The Command above is handled by the Handler described below.
 .The behavior of a command
 [source,java]
 ----
-include::../example/java/src/main/core/todoapp/core/CreateTodoListHandler.java[]
+include::../example/todoapp-java/todoapp-core/src/main/java/todoapp/core/CreateTodoListHandler.java[]
 ----
 
 As mentioned earlier, scenarios can be implemented by the core to validate the driven adapter behaviors.
@@ -402,7 +402,7 @@ As mentioned earlier, scenarios can be implemented by the core to validate the d
 .A scenario validating the Command behavior
 [source,java]
 ----
-include::../example/java/src/main/core/todoapp/core/CreateTodoListScenario.java[]
+include::../example/todoapp-java/todoapp-core/src/main/java/todoapp/core/CreateTodoListScenario.java[]
 ----
 
 ==== Query
@@ -433,7 +433,7 @@ The following snippet shows the definition of a Query.
 .The data structure of a Query
 [source,java]
 ----
-include::../example/java/src/main/api/todoapp/api/ListTodoListsQuery.java[]
+include::../example/todoapp-java/todoapp-api/src/main/java/todoapp/api/ListTodoListsQuery.java[]
 ----
 
 The following snippet shows the definition of a Result.
@@ -441,7 +441,7 @@ The following snippet shows the definition of a Result.
 .The data structure of a Result
 [source,java]
 ----
-include::../example/java/src/main/api/todoapp/api/ListTodoListsResult.java[]
+include::../example/todoapp-java/todoapp-api/src/main/java/todoapp/api/ListTodoListsResult.java[]
 ----
 
 The Query above is handled by the Handler described below.
@@ -449,7 +449,7 @@ The Query above is handled by the Handler described below.
 .The behavior of a query
 [source,java]
 ----
-include::../example/java/src/main/core/todoapp/core/ListTodoListsHandler.java[]
+include::../example/todoapp-java/todoapp-core/src/main/java/todoapp/core/ListTodoListsHandler.java[]
 ----
 
 As mentioned earlier, scenarios can be implemented by the core to validate the driven adapter behaviors.
@@ -457,7 +457,7 @@ As mentioned earlier, scenarios can be implemented by the core to validate the d
 .A scenario validating the Query behavior
 [source,java]
 ----
-include::../example/java/src/main/core/todoapp/core/ListTodoListsScenario.java[]
+include::../example/todoapp-java/todoapp-core/src/main/java/todoapp/core/ListTodoListsScenario.java[]
 ----
 
 ==== Result
@@ -482,7 +482,7 @@ The following snippet shows the definition of a Result.
 .The data structure of a Result
 [source,java]
 ----
-include::../example/java/src/main/api/todoapp/api/ListTodoListsResult.java[]
+include::../example/todoapp-java/todoapp-api/src/main/java/todoapp/api/ListTodoListsResult.java[]
 ----
 
 ==== Event
@@ -506,7 +506,7 @@ The following snippet shows the definition of a Domain Event.
 .The data structure of a Domain Event
 [source,java]
 ----
-include::../example/java/src/main/core/todoapp/core/TodoItemCreated.java[]
+include::../example/todoapp-java/todoapp-core/src/main/java/todoapp/core/TodoItemCreated.java[]
 ----
 
 The Domain Event above is listened by the listener described below.
@@ -514,7 +514,7 @@ The Domain Event above is listened by the listener described below.
 .The behavior of a listener
 [source,java]
 ----
-include::../example/java/src/main/core/todoapp/core/ItemCountUpdater.java[]
+include::../example/todoapp-java/todoapp-core/src/main/java/todoapp/core/ItemCountUpdater.java[]
 ----
 
 ==== Aggregate
@@ -538,7 +538,7 @@ The following snippet shows the definition of an Aggregate following an Anemic D
 .The data structure of an Aggregate
 [source,java]
 ----
-include::../example/java/src/main/core/todoapp/core/TodoList.java[]
+include::../example/todoapp-java/todoapp-core/src/main/java/todoapp/core/TodoList.java[]
 ----
 
 ==== Factory
@@ -555,7 +555,7 @@ The following snippet shows the definition of a Factory to create view from an A
 .The behavior of a Factory
 [source,java]
 ----
-include::../example/java/src/main/core/todoapp/core/TodoListViewFactory.java[]
+include::../example/todoapp-java/todoapp-core/src/main/java/todoapp/core/TodoListViewFactory.java[]
 ----
 
 ==== Repository
@@ -572,7 +572,7 @@ The following snippet shows the definition of a Repository.
 .The definition of a Repository
 [source,java]
 ----
-include::../example/java/src/main/core/todoapp/core/TodoListRepository.java[]
+include::../example/todoapp-java/todoapp-core/src/main/java/todoapp/core/TodoListRepository.java[]
 ----
 
 The following snippet shows an in-memory implementation of the Repository.
@@ -580,7 +580,7 @@ The following snippet shows an in-memory implementation of the Repository.
 .An in-memory implementation of a Repository
 [source,java]
 ----
-include::../example/java/src/main/adapter/todoapp/adapter/mem/TodoListRepositoryInMemory.java[]
+include::../example/todoapp-java/todoapp-adapter-mem/src/main/java/todoapp/adapter/mem/TodoListRepositoryInMemory.java[]
 ----
 
 ==== Service
@@ -613,7 +613,7 @@ The following snippet shows the definition of a View.
 .The data structure of a View
 [source,java]
 ----
-include::../example/java/src/main/api/todoapp/api/TodoListView.java[]
+include::../example/todoapp-java/todoapp-api/src/main/java/todoapp/api/TodoListView.java[]
 ----
 
 ==== Process

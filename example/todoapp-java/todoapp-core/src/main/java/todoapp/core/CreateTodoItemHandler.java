@@ -52,7 +52,7 @@ final class CreateTodoItemHandler
     return todoListRepository
       .contain(command.getTodoListId())
       .thenApply(contain -> {
-        if (!contain) {
+        if (Boolean.FALSE.equals(contain)) {
           throw new IllegalArgumentException(
             String.format("TodoList %s not found", command.getTodoListId())
           );

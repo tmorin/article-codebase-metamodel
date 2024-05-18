@@ -32,7 +32,7 @@ public class TodoList {
    */
   @NonNull
   @Builder.Default
-  Instant updatedAt = createdAt;
+  Instant updatedAt = Instant.now();
 
   /**
    * The title of the TodoList.
@@ -43,6 +43,5 @@ public class TodoList {
   /**
    * The number of items in the TodoList.
    */
-  @NonNull
   int itemCount;
 }
