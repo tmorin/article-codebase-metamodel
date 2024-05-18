@@ -1,7 +1,7 @@
 = Enterprise Application: a metamodel to streamline codebase organization
 :author: Thibault Morin
-:revdate: 2024-05-04
-:revnumber: 8
+:revdate: 2024-05-18
+:revnumber: 9
 :toc:
 :icons: font
 :source-highlighter: coderay
@@ -524,6 +524,23 @@ It is a cluster of domain objects that can be treated as a single unit, often wi
 
 The data structure of the Aggregate is typically located in the core component.
 
+With the application of the CQRS pattern, the business logic is mainly handled by the command handlers.
+They are two strategies to implement the business logic: the Anemic Domain Model and the Rich Domain Model.
+The Anemic Domain Model is a model where the command handlers are implemented outside the domain objects.
+This strategy emphases a functional approach segregating the data structure from the behavior.
+The Rich Domain Model is a model where the command handlers are implemented inside the domain objects.
+This strategy emphases an object-oriented approach where the data structure and the behavior are encapsulated in the domain objects.
+
+===== Examples
+
+The following snippet shows the definition of an Aggregate following an Anemic Domain Model.
+
+.The data structure of an Aggregate
+[source,java]
+----
+include::../example/java/src/main/core/todoapp/core/TodoList.java[]
+----
+
 ==== Factory
 
 Despite the Gang of Four book <<despat>> defining it a long time ago, the Factory concept used in this article's context comes from the Domain-Driven Design (DDD) driver.
@@ -531,12 +548,32 @@ It is responsible for creating complex domain objects, ensuring that created obj
 
 The behavior of the Factory is usually located near the data structure it is associated with.
 
+===== Examples
+
+The following snippet shows the definition of a Factory to create view from an Aggregate.
+
+.The behavior of a Factory
+[source,java]
+----
+include::../example/java/src/main/core/todoapp/core/TodoListViewFactory.java[]
+----
+
 ==== Repository
 
 The Repository pattern comes from the domain-driven design (DDD) driver.
 It provides methods to add, remove, and update objects within an Aggregate, abstracting the underlying data storage mechanism.
 
 The contract of the repository is defined in the core component, while the implementation is carried out in a driven adapter component.
+
+===== Examples
+
+The following snippet shows the definition of a Repository.
+
+.The behavior of a Factory
+[source,java]
+----
+include::../example/java/src/main/core/todoapp/core/TodoListRepository.java[]
+----
 
 ==== Service
 
@@ -560,6 +597,16 @@ The read model pattern comes from the EventStorming concepts and can be seen as 
 It is a model designed specifically for read operations, optimized for querying and displaying data.
 
 The data structure of the read model is typically located in the API component.
+
+===== Examples
+
+The following snippet shows the definition of a View.
+
+.The data structure of a View
+[source,java]
+----
+include::../example/java/src/main/api/todoapp/api/TodoListView.java[]
+----
 
 ==== Process
 
