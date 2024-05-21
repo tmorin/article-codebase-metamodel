@@ -532,8 +532,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h1>Enterprise Application: a metamodel to streamline codebase organization</h1>
 <div class="details">
 <span id="author" class="author">Thibault Morin</span><br>
-<span id="revnumber">version 8,</span>
-<span id="revdate">2024-05-04</span>
+<span id="revnumber">version 9,</span>
+<span id="revdate">2024-05-21</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -574,7 +574,10 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <h2 id="_abstract">Abstract</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The article presents a metamodel of a codebase organization and a pattern catalog to streamline the thought processes involved in the development of enterprise applications. The metamodel is based on Domain Driven Design, Ports and Adapters Architecture, Command and Query Responsibility Segregation, and Location Transparency. It aims to solve prevalent issues in software development such as ensuring business alignment with solutions, enhancing solution reliability and stability, and improving the codebase&#8217;s maintainability and flexibility. Finally, the article provides an exploration of the metamodel usage through practical application examples.</p>
+<p>The article presents a metamodel of a codebase organization and a pattern catalog to streamline the thought processes involved in the development of enterprise applications.
+The metamodel is based on Domain Driven Design, Ports and Adapters Architecture, Command and Query Responsibility Segregation, and Location Transparency.
+It aims to solve prevalent issues in software development such as ensuring business alignment with solutions, enhancing solution reliability and stability, and improving the codebase&#8217;s maintainability and flexibility.
+Finally, the article provides an exploration of the metamodel usage through practical application examples.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1122,14 +1125,14 @@ The key is to identify the most relevant patterns and establish a consistent nam
 <h4 id="_command">Command</h4>
 <div class="paragraph">
 <p>The Command pattern comes from the Command and Query Responsibility Segregation (CQRS) driver.
-It is an action (i.e. the command) that expects to change to the state of an application.
-Optionally, a result can be provided to the producer to inform of the command&#8217;s outcome.</p>
+It is an action (i.e. the Command) that expects to change to the state of an application.
+Optionally, a Result can be provided to the producer to inform of the Command&#8217;s outcome.</p>
 </div>
 <div class="paragraph">
-<p>The data structures for the command and the result are usually placed in the API component, while the behavior is located in the core component.</p>
+<p>The data structures for the Command and the result are usually placed in the API component, while the behavior is located in the core component.</p>
 </div>
 <div class="paragraph">
-<p>The command&#8217;s behavior (i.e. the handler) can be tested in isolation using regular Unit Tests or Integration Tests linked solely to core artifacts.
+<p>The Command&#8217;s behavior (i.e. the Handler) can be tested in isolation using regular Unit Tests or Integration Tests linked solely to core artifacts.
 However, acceptance scenarios can be implemented based on the core component&#8217;s artifacts, allowing driven adapters to validate their implementations from the core component&#8217;s point of view.</p>
 </div>
 <div class="imageblock">
@@ -1141,7 +1144,7 @@ However, acceptance scenarios can be implemented based on the core component&#82
 <div class="sect4">
 <h5 id="_examples">Examples</h5>
 <div class="paragraph">
-<p>The following snippet shows the definition of a command.</p>
+<p>The following snippet shows the definition of a Command.</p>
 </div>
 <div class="listingblock">
 <div class="title">The data structure of a Command</div>
@@ -1163,7 +1166,8 @@ However, acceptance scenarios can be implemented based on the core component&#82
    * The ID of the TodoList.
    */</span>
   <span class="annotation">@NonNull</span>
-  TodoListId todoListId;
+  <span class="annotation">@Builder</span>.Default
+  TodoListId todoListId = TodoListId.builder().build();
 
   <span class="comment">/**
    * The title of the TodoList.
@@ -1174,7 +1178,7 @@ However, acceptance scenarios can be implemented based on the core component&#82
 </div>
 </div>
 <div class="paragraph">
-<p>The command above is handled by the handler described below.</p>
+<p>The Command above is handled by the Handler described below.</p>
 </div>
 <div class="listingblock">
 <div class="title">The behavior of a command</div>
@@ -1210,8 +1214,12 @@ However, acceptance scenarios can be implemented based on the core component&#82
   <span class="directive">public</span> CompletionStage&lt;Outcome&lt;<span class="predefined-type">Void</span>&gt;&gt; handle(
     <span class="annotation">@NonNull</span> CreateTodoListCommand command
   ) {
-    val todoList = TodoList.builder().title(command.getTitle()).build();
-    log.info(() -&gt; <span class="predefined-type">String</span>.format(<span class="string"><span class="delimiter">&quot;</span><span class="content">Creating todo list %s</span><span class="delimiter">&quot;</span></span>, todoList));
+    val todoList = TodoList
+      .builder()
+      .todoListId(command.getTodoListId())
+      .title(command.getTitle())
+      .build();
+    log.info(() -&gt; <span class="predefined-type">String</span>.format(<span class="string"><span class="delimiter">&quot;</span><span class="content">Creating TodoList %s</span><span class="delimiter">&quot;</span></span>, todoList));
     <span class="keyword">return</span> todoListRepository.persist(todoList).thenApply(Outcome::empty);
   }
 }</code></pre>
@@ -1221,7 +1229,7 @@ However, acceptance scenarios can be implemented based on the core component&#82
 <p>As mentioned earlier, scenarios can be implemented by the core to validate the driven adapter behaviors.</p>
 </div>
 <div class="listingblock">
-<div class="title">A scenario validating the command behavior</div>
+<div class="title">A scenario validating the Command behavior</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">todoapp.core</span>;
 
@@ -1249,7 +1257,7 @@ However, acceptance scenarios can be implemented based on the core component&#82
 
   <span class="annotation">@Override</span>
   <span class="directive">public</span> <span class="type">void</span> validate() {
-    log.info(<span class="string"><span class="delimiter">&quot;</span><span class="content">Scenario: Create a todo list</span><span class="delimiter">&quot;</span></span>);
+    log.info(<span class="string"><span class="delimiter">&quot;</span><span class="content">Scenario: Create a TodoList</span><span class="delimiter">&quot;</span></span>);
     <span class="comment">// GIVEN a command</span>
     val command = CreateTodoListCommand
       .builder()
@@ -1272,8 +1280,12 @@ However, acceptance scenarios can be implemented based on the core component&#82
       .toCompletableFuture()
       .join();
     <span class="keyword">assert</span> Objects.nonNull(persistedAggregate);
+    <span class="keyword">assert</span> persistedAggregate.isPresent();
     <span class="comment">// AND the title is persisted</span>
-    <span class="keyword">assert</span> Objects.equals(persistedAggregate.getTitle(), command.getTitle());
+    <span class="keyword">assert</span> Objects.equals(
+      persistedAggregate.get().getTitle(),
+      command.getTitle()
+    );
   }
 }</code></pre>
 </div>
@@ -1284,10 +1296,11 @@ However, acceptance scenarios can be implemented based on the core component&#82
 <h4 id="_query">Query</h4>
 <div class="paragraph">
 <p>The Query pattern comes from the Command and Query Responsibility Segregation (CQRS) driver.
-It is an action (i.e. the query) that request for information about to the state of an application. As a response, a result is provided to the producer.</p>
+It is an action (i.e. the Query) that request for information about to the state of an application.
+As a response, a Result is provided to the producer.</p>
 </div>
 <div class="paragraph">
-<p>The data structures for the query and the result are usually placed in the API component, while the behavior is located in the core component.</p>
+<p>The data structures for the Query and the Result are usually placed in the API component, while the behavior is located in the core component.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1297,13 +1310,13 @@ It is an action (i.e. the query) that request for information about to the state
 </td>
 <td class="content">
 CQRS emphasizes the separation of commands and queries, which can lead to the design of two distinct models: one for commands and another for queries.
-Therefore, the behavior of the query could be located in a different component than the behavior of the command, such as a sibling core component designed specifically for query handling.
+Therefore, the behavior of the Query could be located in a different component than the behavior of the Command, such as a sibling core component designed specifically for query handling.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Like for the commands, the query&#8217;s behavior (i.e. the handler) can be tested in isolation using regular Unit Tests or Integration Tests linked solely to core artifacts.
+<p>Like for the Commands, the Query&#8217;s behavior (i.e. the Handler) can be tested in isolation using regular Unit Tests or Integration Tests linked solely to core artifacts.
 However, acceptance scenarios can be implemented based on the core component&#8217;s artifacts, allowing driven adapters to validate their implementations from the core component&#8217;s point of view.</p>
 </div>
 <div class="imageblock">
@@ -1315,7 +1328,7 @@ However, acceptance scenarios can be implemented based on the core component&#82
 <div class="sect4">
 <h5 id="_examples_2">Examples</h5>
 <div class="paragraph">
-<p>The following snippet shows the definition of a query.</p>
+<p>The following snippet shows the definition of a Query.</p>
 </div>
 <div class="listingblock">
 <div class="title">The data structure of a Query</div>
@@ -1336,7 +1349,7 @@ However, acceptance scenarios can be implemented based on the core component&#82
 </div>
 </div>
 <div class="paragraph">
-<p>The following snippet shows the definition of a result.</p>
+<p>The following snippet shows the definition of a Result.</p>
 </div>
 <div class="listingblock">
 <div class="title">The data structure of a Result</div>
@@ -1366,7 +1379,7 @@ However, acceptance scenarios can be implemented based on the core component&#82
 </div>
 </div>
 <div class="paragraph">
-<p>The query above is handled by the handler described below.</p>
+<p>The Query above is handled by the Handler described below.</p>
 </div>
 <div class="listingblock">
 <div class="title">The behavior of a query</div>
@@ -1393,7 +1406,7 @@ However, acceptance scenarios can be implemented based on the core component&#82
 <span class="annotation">@Builder</span>
 <span class="annotation">@RequiredArgsConstructor</span>
 <span class="annotation">@FieldDefaults</span>(level = AccessLevel.PRIVATE, makeFinal = <span class="predefined-constant">true</span>)
-<span class="directive">public</span> <span class="directive">final</span> <span class="type">class</span> <span class="class">ListTodoListsHandler</span>
+<span class="directive">final</span> <span class="type">class</span> <span class="class">ListTodoListsHandler</span>
   <span class="directive">implements</span> QueryHandler&lt;ListTodoListsQuery, ListTodoListsResult&gt; {
 
   <span class="comment">/**
@@ -1410,7 +1423,9 @@ However, acceptance scenarios can be implemented based on the core component&#82
     .build();
 
   <span class="annotation">@Override</span>
-  <span class="directive">public</span> CompletionStage&lt;ListTodoListsResult&gt; handle(ListTodoListsQuery query) {
+  <span class="directive">public</span> CompletionStage&lt;ListTodoListsResult&gt; handle(
+    <span class="annotation">@NonNull</span> ListTodoListsQuery query
+  ) {
     log.info(() -&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">Handling query: </span><span class="delimiter">&quot;</span></span> + query);
     <span class="keyword">return</span> todoListRepository
       .list()
@@ -1428,7 +1443,7 @@ However, acceptance scenarios can be implemented based on the core component&#82
 <p>As mentioned earlier, scenarios can be implemented by the core to validate the driven adapter behaviors.</p>
 </div>
 <div class="listingblock">
-<div class="title">A scenario validating the query behavior</div>
+<div class="title">A scenario validating the Query behavior</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">todoapp.core</span>;
 
@@ -1462,7 +1477,7 @@ However, acceptance scenarios can be implemented based on the core component&#82
 
   <span class="annotation">@Override</span>
   <span class="directive">public</span> <span class="type">void</span> validate() {
-    log.info(<span class="string"><span class="delimiter">&quot;</span><span class="content">Scenario: List todo lists</span><span class="delimiter">&quot;</span></span>);
+    log.info(<span class="string"><span class="delimiter">&quot;</span><span class="content">Scenario: List TodoLists</span><span class="delimiter">&quot;</span></span>);
     <span class="comment">// GIVEN a query</span>
     val query = ListTodoListsQuery.builder().build();
     <span class="comment">// AND a persisted aggregate instance</span>
@@ -1491,13 +1506,13 @@ However, acceptance scenarios can be implemented based on the core component&#82
 <h4 id="_result">Result</h4>
 <div class="paragraph">
 <p>The Result pattern comes from the Command and Query Responsibility Segregation (CQRS) driver.
-It is the output or outcome that is returned after the execution of a command or query.</p>
+It is the output or outcome that is returned after the execution of a Command or Query.</p>
 </div>
 <div class="paragraph">
-<p>The data structure of the result is typically located in the API component.</p>
+<p>The data structure of the Result is typically located in the API component.</p>
 </div>
 <div class="paragraph">
-<p>A result is usually a container for views, also called Read Model.</p>
+<p>A Result is usually a container for Views, also called Read Model.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1508,7 +1523,7 @@ It is the output or outcome that is returned after the execution of a command or
 <div class="sect4">
 <h5 id="_examples_3">Examples</h5>
 <div class="paragraph">
-<p>The following snippet shows the definition of a result.</p>
+<p>The following snippet shows the definition of a Result.</p>
 </div>
 <div class="listingblock">
 <div class="title">The data structure of a Result</div>
@@ -1549,6 +1564,127 @@ It is a notification that a significant change or action has occurred within the
 <p>There is a distinction between Domain Events and Integration Events.
 Domain Events are internal to the system and are kept in the core component, while Integration Events are external and are placed in the API component for long-term use.</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="diag-plantuml-md5-4e653a92593933d2b0ae527d497f38cf.png" alt="Diagram" width="352" height="274">
+</div>
+<div class="title">Figure 17. Relationships of the Event Pattern</div>
+</div>
+<div class="sect4">
+<h5 id="_examples_4">Examples</h5>
+<div class="paragraph">
+<p>The following snippet shows the definition of a Domain Event.</p>
+</div>
+<div class="listingblock">
+<div class="title">The data structure of a Domain Event</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">todoapp.core</span>;
+
+<span class="keyword">import</span> <span class="include">java.time.Instant</span>;
+<span class="keyword">import</span> <span class="include">java.util.UUID</span>;
+<span class="keyword">import</span> <span class="include">lombok.Builder</span>;
+<span class="keyword">import</span> <span class="include">lombok.NonNull</span>;
+<span class="keyword">import</span> <span class="include">lombok.Value</span>;
+<span class="keyword">import</span> <span class="include">todoapp.api.TodoItemId</span>;
+<span class="keyword">import</span> <span class="include">todoapp.api.TodoListId</span>;
+
+<span class="comment">/**
+ * The event emitted when a TodoItem is created.
+ */</span>
+<span class="annotation">@Value</span>
+<span class="annotation">@Builder</span>(toBuilder = <span class="predefined-constant">true</span>)
+<span class="type">class</span> <span class="class">TodoItemCreated</span> {
+
+  <span class="comment">/**
+   * The identifier of the event.
+   */</span>
+  <span class="annotation">@NonNull</span>
+  <span class="annotation">@Builder</span>.Default
+  <span class="predefined-type">UUID</span> eventId = <span class="predefined-type">UUID</span>.randomUUID();
+
+  <span class="comment">/**
+   * The instant when the event occurred.
+   */</span>
+  <span class="annotation">@NonNull</span>
+  <span class="annotation">@Builder</span>.Default
+  Instant occurredOn = Instant.now();
+
+  <span class="comment">/**
+   * The identifier of the TodoList.
+   */</span>
+  <span class="annotation">@NonNull</span>
+  TodoListId todoListId;
+
+  <span class="comment">/**
+   * The identifier of the TodoItem.
+   */</span>
+  <span class="annotation">@NonNull</span>
+  TodoItemId todoItemId;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The Domain Event above is listened by the listener described below.</p>
+</div>
+<div class="listingblock">
+<div class="title">The behavior of a listener</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">todoapp.core</span>;
+
+<span class="keyword">import</span> <span class="include">java.util.concurrent.CompletionStage</span>;
+<span class="keyword">import</span> <span class="include">lombok.AccessLevel</span>;
+<span class="keyword">import</span> <span class="include">lombok.Builder</span>;
+<span class="keyword">import</span> <span class="include">lombok.NonNull</span>;
+<span class="keyword">import</span> <span class="include">lombok.RequiredArgsConstructor</span>;
+<span class="keyword">import</span> <span class="include">lombok.experimental.FieldDefaults</span>;
+<span class="keyword">import</span> <span class="include">lombok.extern.java.Log</span>;
+<span class="keyword">import</span> <span class="include">todoapp.framework.EventListener</span>;
+
+<span class="comment">/**
+ * The updater of the item count of the TodoList.
+ */</span>
+<span class="annotation">@Log</span>
+<span class="annotation">@Builder</span>
+<span class="annotation">@RequiredArgsConstructor</span>
+<span class="annotation">@FieldDefaults</span>(level = AccessLevel.PRIVATE, makeFinal = <span class="predefined-constant">true</span>)
+<span class="directive">final</span> <span class="type">class</span> <span class="class">ItemCountUpdater</span> <span class="directive">implements</span> <span class="predefined-type">EventListener</span>&lt;TodoItemCreated&gt; {
+
+  <span class="comment">/**
+   * The repository of the TodoList Aggregate.
+   */</span>
+  <span class="annotation">@NonNull</span>
+  TodoListRepository todoListRepository;
+
+  <span class="comment">/**
+   * Updates the item count of the TodoList when a TodoItem is created.
+   *
+   * @param todoItemCreated the event emitted when a TodoItem is created.
+   * @return a completion stage that indicates when the item count is updated.
+   */</span>
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> CompletionStage&lt;<span class="predefined-type">Void</span>&gt; on(<span class="annotation">@NonNull</span> TodoItemCreated todoItemCreated) {
+    <span class="keyword">return</span> todoListRepository
+      .load(todoItemCreated.getTodoListId())
+      .thenApply(optionalTodoList -&gt;
+        optionalTodoList.orElseThrow(() -&gt;
+          <span class="keyword">new</span> <span class="exception">IllegalArgumentException</span>(
+            <span class="predefined-type">String</span>.format(
+              <span class="string"><span class="delimiter">&quot;</span><span class="content">TodoList %s not found</span><span class="delimiter">&quot;</span></span>,
+              todoItemCreated.getTodoListId()
+            )
+          )
+        )
+      )
+      .thenApply(todoList -&gt;
+        todoList.toBuilder().itemCount(todoList.getItemCount() + <span class="integer">1</span>).build()
+      )
+      .thenCompose(todoListRepository::persist)
+      .thenAccept(v -&gt; log.info(<span class="string"><span class="delimiter">&quot;</span><span class="content">Item count updated</span><span class="delimiter">&quot;</span></span>));
+  }
+}</code></pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_aggregate">Aggregate</h4>
@@ -1558,6 +1694,72 @@ It is a cluster of domain objects that can be treated as a single unit, often wi
 </div>
 <div class="paragraph">
 <p>The data structure of the Aggregate is typically located in the core component.</p>
+</div>
+<div class="paragraph">
+<p>With the application of the CQRS pattern, the business logic is mainly handled by the command handlers.
+They are two strategies to implement the business logic: the Anemic Domain Model and the Rich Domain Model.
+The Anemic Domain Model is a model where the command handlers are implemented outside the domain objects.
+This strategy emphases a functional approach segregating the data structure from the behavior.
+The Rich Domain Model is a model where the command handlers are implemented inside the domain objects.
+This strategy emphases an object-oriented approach where the data structure and the behavior are encapsulated in the domain objects.</p>
+</div>
+<div class="sect4">
+<h5 id="_examples_5">Examples</h5>
+<div class="paragraph">
+<p>The following snippet shows the definition of an Aggregate following an Anemic Domain Model.</p>
+</div>
+<div class="listingblock">
+<div class="title">The data structure of an Aggregate</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">todoapp.core</span>;
+
+<span class="keyword">import</span> <span class="include">java.time.Instant</span>;
+<span class="keyword">import</span> <span class="include">lombok.Builder</span>;
+<span class="keyword">import</span> <span class="include">lombok.NonNull</span>;
+<span class="keyword">import</span> <span class="include">lombok.Value</span>;
+<span class="keyword">import</span> <span class="include">todoapp.api.TodoListId</span>;
+
+<span class="comment">/**
+ * The aggregate of a TodoList.
+ */</span>
+<span class="annotation">@Value</span>
+<span class="annotation">@Builder</span>(toBuilder = <span class="predefined-constant">true</span>)
+<span class="directive">public</span> <span class="type">class</span> <span class="class">TodoList</span> {
+
+  <span class="comment">/**
+   * The identifier of the TodoList.
+   */</span>
+  <span class="annotation">@NonNull</span>
+  <span class="annotation">@Builder</span>.Default
+  TodoListId todoListId = TodoListId.builder().build();
+
+  <span class="comment">/**
+   * The creation date of the TodoList.
+   */</span>
+  <span class="annotation">@NonNull</span>
+  <span class="annotation">@Builder</span>.Default
+  Instant createdAt = Instant.now();
+
+  <span class="comment">/**
+   * The last update date of the TodoList.
+   */</span>
+  <span class="annotation">@NonNull</span>
+  <span class="annotation">@Builder</span>.Default
+  Instant updatedAt = Instant.now();
+
+  <span class="comment">/**
+   * The title of the TodoList.
+   */</span>
+  <span class="annotation">@NonNull</span>
+  <span class="predefined-type">String</span> title;
+
+  <span class="comment">/**
+   * The number of items in the TodoList.
+   */</span>
+  <span class="type">int</span> itemCount;
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -1569,6 +1771,50 @@ It is responsible for creating complex domain objects, ensuring that created obj
 <div class="paragraph">
 <p>The behavior of the Factory is usually located near the data structure it is associated with.</p>
 </div>
+<div class="sect4">
+<h5 id="_examples_6">Examples</h5>
+<div class="paragraph">
+<p>The following snippet shows the definition of a Factory to create view from an Aggregate.</p>
+</div>
+<div class="listingblock">
+<div class="title">The behavior of a Factory</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">todoapp.core</span>;
+
+<span class="keyword">import</span> <span class="include">lombok.AccessLevel</span>;
+<span class="keyword">import</span> <span class="include">lombok.Builder</span>;
+<span class="keyword">import</span> <span class="include">lombok.NonNull</span>;
+<span class="keyword">import</span> <span class="include">lombok.RequiredArgsConstructor</span>;
+<span class="keyword">import</span> <span class="include">lombok.experimental.FieldDefaults</span>;
+<span class="keyword">import</span> <span class="include">todoapp.api.TodoListView</span>;
+
+<span class="comment">/**
+ * The factory of the TodoListView.
+ */</span>
+<span class="annotation">@Builder</span>
+<span class="annotation">@RequiredArgsConstructor</span>
+<span class="annotation">@FieldDefaults</span>(level = AccessLevel.PRIVATE, makeFinal = <span class="predefined-constant">true</span>)
+<span class="directive">final</span> <span class="type">class</span> <span class="class">TodoListViewFactory</span> {
+
+  <span class="comment">/**
+   * Creates a TodoListView from a TodoList.
+   *
+   * @param todoList the TodoList to create the view from.
+   * @return the created TodoListView.
+   */</span>
+  TodoListView createTodoListView(<span class="annotation">@NonNull</span> TodoList todoList) {
+    <span class="keyword">return</span> TodoListView
+      .builder()
+      .todoListId(todoList.getTodoListId())
+      .title(todoList.getTitle())
+      .updatedAt(todoList.getUpdatedAt())
+      .itemCount(todoList.getItemCount())
+      .build();
+  }
+}</code></pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_repository">Repository</h4>
@@ -1578,6 +1824,130 @@ It provides methods to add, remove, and update objects within an Aggregate, abst
 </div>
 <div class="paragraph">
 <p>The contract of the repository is defined in the core component, while the implementation is carried out in a driven adapter component.</p>
+</div>
+<div class="sect4">
+<h5 id="_examples_7">Examples</h5>
+<div class="paragraph">
+<p>The following snippet shows the definition of a Repository.</p>
+</div>
+<div class="listingblock">
+<div class="title">The definition of a Repository</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">todoapp.core</span>;
+
+<span class="keyword">import</span> <span class="include">java.util.Optional</span>;
+<span class="keyword">import</span> <span class="include">java.util.Set</span>;
+<span class="keyword">import</span> <span class="include">java.util.concurrent.CompletionStage</span>;
+<span class="keyword">import</span> <span class="include">todoapp.api.TodoListId</span>;
+
+<span class="comment">/**
+ * Repository for {@link TodoList}.
+ */</span>
+<span class="directive">public</span> <span class="type">interface</span> <span class="class">TodoListRepository</span> {
+  <span class="comment">/**
+   * Persists a TodoList.
+   *
+   * @param todoList the TodoList to persist
+   * @return a completion stage
+   */</span>
+  CompletionStage&lt;<span class="predefined-type">Void</span>&gt; persist(TodoList todoList);
+
+  <span class="comment">/**
+   * Loads a TodoList by its ID.
+   *
+   * @param todoListId the ID of the TodoList
+   * @return a completion stage with the TodoList
+   */</span>
+  CompletionStage&lt;Optional&lt;TodoList&gt;&gt; load(TodoListId todoListId);
+
+  <span class="comment">/**
+   * Checks if a TodoList exists.
+   *
+   * @param todoListId the ID of the TodoList
+   * @return a completion stage with a boolean
+   */</span>
+  CompletionStage&lt;<span class="predefined-type">Boolean</span>&gt; contain(TodoListId todoListId);
+
+  <span class="comment">/**
+   * Lists all TodoList.
+   *
+   * @return a completion stage with the set of TodoLists
+   */</span>
+  CompletionStage&lt;<span class="predefined-type">Set</span>&lt;TodoList&gt;&gt; list();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following snippet shows an in-memory implementation of the Repository.</p>
+</div>
+<div class="listingblock">
+<div class="title">An in-memory implementation of a Repository</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">todoapp.adapter.mem</span>;
+
+<span class="keyword">import</span> <span class="include">java.util.HashMap</span>;
+<span class="keyword">import</span> <span class="include">java.util.Map</span>;
+<span class="keyword">import</span> <span class="include">java.util.Optional</span>;
+<span class="keyword">import</span> <span class="include">java.util.Set</span>;
+<span class="keyword">import</span> <span class="include">java.util.concurrent.CompletableFuture</span>;
+<span class="keyword">import</span> <span class="include">java.util.concurrent.CompletionStage</span>;
+<span class="keyword">import</span> <span class="include">lombok.AccessLevel</span>;
+<span class="keyword">import</span> <span class="include">lombok.Builder</span>;
+<span class="keyword">import</span> <span class="include">lombok.NonNull</span>;
+<span class="keyword">import</span> <span class="include">lombok.RequiredArgsConstructor</span>;
+<span class="keyword">import</span> <span class="include">lombok.experimental.FieldDefaults</span>;
+<span class="keyword">import</span> <span class="include">lombok.extern.java.Log</span>;
+<span class="keyword">import</span> <span class="include">todoapp.api.TodoListId</span>;
+<span class="keyword">import</span> <span class="include">todoapp.core.TodoList</span>;
+<span class="keyword">import</span> <span class="include">todoapp.core.TodoListRepository</span>;
+
+<span class="comment">/**
+ * An in-memory implementation of {@link TodoListRepository}.
+ */</span>
+<span class="annotation">@Log</span>
+<span class="annotation">@Builder</span>
+<span class="annotation">@RequiredArgsConstructor</span>
+<span class="annotation">@FieldDefaults</span>(level = AccessLevel.PRIVATE, makeFinal = <span class="predefined-constant">true</span>)
+<span class="directive">final</span> <span class="type">class</span> <span class="class">InMemoryTodoListRepository</span> <span class="directive">implements</span> TodoListRepository {
+
+  <span class="comment">/**
+   * The store of the TodoList instances.
+   */</span>
+  <span class="annotation">@NonNull</span>
+  <span class="annotation">@Builder</span>.Default
+  <span class="predefined-type">Map</span>&lt;TodoListId, TodoList&gt; store = <span class="keyword">new</span> <span class="predefined-type">HashMap</span>&lt;&gt;();
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> CompletionStage&lt;<span class="predefined-type">Void</span>&gt; persist(<span class="annotation">@NonNull</span> TodoList todoList) {
+    log.info(<span class="predefined-type">String</span>.format(<span class="string"><span class="delimiter">&quot;</span><span class="content">Persisting TodoList: %s</span><span class="delimiter">&quot;</span></span>, todoList));
+    store.put(todoList.getTodoListId(), todoList);
+    <span class="keyword">return</span> CompletableFuture.completedFuture(<span class="predefined-constant">null</span>);
+  }
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> CompletionStage&lt;Optional&lt;TodoList&gt;&gt; load(
+    <span class="annotation">@NonNull</span> TodoListId todoListId
+  ) {
+    log.info(<span class="predefined-type">String</span>.format(<span class="string"><span class="delimiter">&quot;</span><span class="content">Loading TodoList: %s</span><span class="delimiter">&quot;</span></span>, todoListId));
+    <span class="keyword">return</span> CompletableFuture.completedFuture(
+      Optional.ofNullable(store.get(todoListId))
+    );
+  }
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> CompletionStage&lt;<span class="predefined-type">Boolean</span>&gt; contain(<span class="annotation">@NonNull</span> TodoListId todoListId) {
+    log.info(<span class="predefined-type">String</span>.format(<span class="string"><span class="delimiter">&quot;</span><span class="content">Checking if TodoList exists: %s</span><span class="delimiter">&quot;</span></span>, todoListId));
+    <span class="keyword">return</span> CompletableFuture.completedFuture(store.containsKey(todoListId));
+  }
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> CompletionStage&lt;<span class="predefined-type">Set</span>&lt;TodoList&gt;&gt; list() {
+    log.info(<span class="string"><span class="delimiter">&quot;</span><span class="content">Listing all TodoLists</span><span class="delimiter">&quot;</span></span>);
+    <span class="keyword">return</span> CompletableFuture.completedFuture(<span class="predefined-type">Set</span>.copyOf(store.values()));
+  }
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -1611,6 +1981,54 @@ It is a model designed specifically for read operations, optimized for querying 
 </div>
 <div class="paragraph">
 <p>The data structure of the read model is typically located in the API component.</p>
+</div>
+<div class="sect4">
+<h5 id="_examples_8">Examples</h5>
+<div class="paragraph">
+<p>The following snippet shows the definition of a View.</p>
+</div>
+<div class="listingblock">
+<div class="title">The data structure of a View</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">todoapp.api</span>;
+
+<span class="keyword">import</span> <span class="include">java.time.Instant</span>;
+<span class="keyword">import</span> <span class="include">lombok.Builder</span>;
+<span class="keyword">import</span> <span class="include">lombok.NonNull</span>;
+<span class="keyword">import</span> <span class="include">lombok.Value</span>;
+
+<span class="comment">/**
+ * A view of a TodoList.
+ */</span>
+<span class="annotation">@Value</span>
+<span class="annotation">@Builder</span>(toBuilder = <span class="predefined-constant">true</span>)
+<span class="directive">public</span> <span class="type">class</span> <span class="class">TodoListView</span> {
+
+  <span class="comment">/**
+   * The ID of the TodoList.
+   */</span>
+  <span class="annotation">@NonNull</span>
+  TodoListId todoListId;
+
+  <span class="comment">/**
+   * The title of the TodoList.
+   */</span>
+  <span class="annotation">@NonNull</span>
+  <span class="predefined-type">String</span> title;
+
+  <span class="comment">/**
+   * The timestamp when the TodoList was last updated.
+   */</span>
+  <span class="annotation">@NonNull</span>
+  Instant updatedAt;
+
+  <span class="comment">/**
+   * The number of items in the TodoList.
+   */</span>
+  <span class="type">int</span> itemCount;
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -1694,7 +2112,7 @@ This structured approach not only clarifies the roles and relationships within t
 <div class="content">
 <img src="diag-plantuml-md5-e793d23bb3c8cbfc970a7caf8df48ee3.png" alt="Diagram" width="259" height="305">
 </div>
-<div class="title">Figure 17. The submission of notes</div>
+<div class="title">Figure 18. The submission of notes</div>
 </div>
 <div class="paragraph">
 <p>The implementation of these patterns is relatively straightforward:</p>
@@ -1749,7 +2167,7 @@ This functionality allows users to efficiently manage and retrieve their notes w
 <div class="content">
 <img src="diag-plantuml-md5-c30faed64659c92a273e89a4e76156a0.png" alt="Diagram" width="329" height="797">
 </div>
-<div class="title">Figure 18. The submission of notes</div>
+<div class="title">Figure 19. The submission of notes</div>
 </div>
 <div class="paragraph">
 <p>On the server side, the functionality is exposed through a Facade Command named <code>SubmitNote</code>.
@@ -1922,7 +2340,7 @@ Such a component not only simplifies deployment but also ensures that all servic
 <div class="content">
 <img src="diag-plantuml-md5-52ab723a5476de384c82291061dd0694.png" alt="Diagram" width="736" height="377">
 </div>
-<div class="title">Figure 19. The components of the Note module</div>
+<div class="title">Figure 20. The components of the Note module</div>
 </div>
 </div>
 </div>
@@ -1995,8 +2413,8 @@ The Permaculture Association: The problem is the solution</a></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 8<br>
-Last updated 2024-05-05 18:53:50 UTC
+Version 9<br>
+Last updated 2024-05-21 20:45:55 UTC
 </div>
 </div>
 </body>
