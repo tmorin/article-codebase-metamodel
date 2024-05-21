@@ -1,6 +1,6 @@
 = Enterprise Application: a metamodel to streamline codebase organization
 :author: Thibault Morin
-:revdate: 2024-05-18
+:revdate: 2024-05-21
 :revnumber: 9
 :toc:
 :icons: font
@@ -402,7 +402,7 @@ As mentioned earlier, scenarios can be implemented by the core to validate the d
 .A scenario validating the Command behavior
 [source,java]
 ----
-include::../example/todoapp-java/todoapp-core/src/main/java/todoapp/core/CreateTodoListScenario.java[]
+include::../example/todoapp-java/todoapp-scenarios/src/main/java/todoapp/core/CreateTodoListScenario.java[]
 ----
 
 ==== Query
@@ -457,7 +457,7 @@ As mentioned earlier, scenarios can be implemented by the core to validate the d
 .A scenario validating the Query behavior
 [source,java]
 ----
-include::../example/todoapp-java/todoapp-core/src/main/java/todoapp/core/ListTodoListsScenario.java[]
+include::../example/todoapp-java/todoapp-scenarios/src/main/java/todoapp/core/ListTodoListsScenario.java[]
 ----
 
 ==== Result
@@ -580,7 +580,7 @@ The following snippet shows an in-memory implementation of the Repository.
 .An in-memory implementation of a Repository
 [source,java]
 ----
-include::../example/todoapp-java/todoapp-adapter-mem/src/main/java/todoapp/adapter/mem/TodoListRepositoryInMemory.java[]
+include::../example/todoapp-java/todoapp-adapter-mem/src/main/java/todoapp/adapter/mem/InMemoryTodoListRepository.java[]
 ----
 
 ==== Service
