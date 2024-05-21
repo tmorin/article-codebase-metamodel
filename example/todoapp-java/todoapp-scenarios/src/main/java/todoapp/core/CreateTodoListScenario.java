@@ -24,7 +24,7 @@ public final class CreateTodoListScenario implements Scenario {
 
   @Override
   public void validate() {
-    log.info("Scenario: Create a todo list");
+    log.info("Scenario: Create a TodoList");
     // GIVEN a command
     val command = CreateTodoListCommand
       .builder()

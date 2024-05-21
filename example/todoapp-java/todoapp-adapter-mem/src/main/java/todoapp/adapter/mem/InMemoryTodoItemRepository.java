@@ -21,7 +21,7 @@ import todoapp.core.TodoItemRepository;
 @Builder
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class TodoItemRepositoryInMemory implements TodoItemRepository {
+final class InMemoryTodoItemRepository implements TodoItemRepository {
 
   /**
    * The store of the TodoItem instances.
@@ -31,7 +31,7 @@ public class TodoItemRepositoryInMemory implements TodoItemRepository {
   Map<TodoListId, Map<TodoItemId, TodoItem>> store = new HashMap<>();
 
   @Override
-  public CompletionStage<Void> persist(TodoItem todoItem) {
+  public CompletionStage<Void> persist(@NonNull TodoItem todoItem) {
     store
       .computeIfAbsent(todoItem.getTodoListId(), unused -> new HashMap<>())
       .put(todoItem.getTodoItemId(), todoItem);
@@ -40,8 +40,8 @@ public class TodoItemRepositoryInMemory implements TodoItemRepository {
 
   @Override
   public CompletionStage<Optional<TodoItem>> load(
-    TodoListId todoListId,
-    TodoItemId todoItemId
+    @NonNull TodoListId todoListId,
+    @NonNull TodoItemId todoItemId
   ) {
     return CompletableFuture.completedFuture(
       Optional.ofNullable(

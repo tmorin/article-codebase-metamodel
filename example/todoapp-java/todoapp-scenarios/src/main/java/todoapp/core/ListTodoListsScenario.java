@@ -30,7 +30,7 @@ public final class ListTodoListsScenario implements Scenario {
 
   @Override
   public void validate() {
-    log.info("Scenario: List todo lists");
+    log.info("Scenario: List TodoLists");
     // GIVEN a query
     val query = ListTodoListsQuery.builder().build();
     // AND a persisted aggregate instance

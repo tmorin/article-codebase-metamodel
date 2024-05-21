@@ -29,8 +29,12 @@ final class CreateTodoListHandler
   public CompletionStage<Outcome<Void>> handle(
     @NonNull CreateTodoListCommand command
   ) {
-    val todoList = TodoList.builder().title(command.getTitle()).build();
-    log.info(() -> String.format("Creating todo list %s", todoList));
+    val todoList = TodoList
+      .builder()
+      .todoListId(command.getTodoListId())
+      .title(command.getTitle())
+      .build();
+    log.info(() -> String.format("Creating TodoList %s", todoList));
     return todoListRepository.persist(todoList).thenApply(Outcome::empty);
   }
 }

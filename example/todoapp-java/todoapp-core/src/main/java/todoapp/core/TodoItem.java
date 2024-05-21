@@ -50,6 +50,5 @@ public class TodoItem {
   /**
    * Whether the TodoItem is completed.
    */
-  @NonNull
   boolean completed;
 }

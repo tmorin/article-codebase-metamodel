@@ -21,7 +21,8 @@ public class CreateTodoItemCommand {
    * The ID of the TodoList.
    */
   @NonNull
-  TodoItemId todoItemId;
+  @Builder.Default
+  TodoItemId todoItemId = TodoItemId.builder().build();
 
   /**
    * The label of the TodoItem.

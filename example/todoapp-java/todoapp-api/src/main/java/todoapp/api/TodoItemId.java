@@ -16,5 +16,6 @@ public class TodoItemId {
    * The value of the ID.
    */
   @NonNull
-  UUID value;
+  @Builder.Default
+  UUID value = UUID.randomUUID();
 }

@@ -15,7 +15,8 @@ public class CreateTodoListCommand {
    * The ID of the TodoList.
    */
   @NonNull
-  TodoListId todoListId;
+  @Builder.Default
+  TodoListId todoListId = TodoListId.builder().build();
 
   /**
    * The title of the TodoList.
