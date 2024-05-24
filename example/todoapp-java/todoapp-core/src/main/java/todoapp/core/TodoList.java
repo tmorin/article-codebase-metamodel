@@ -2,6 +2,7 @@ package todoapp.core;
 
 import java.time.Instant;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.Value;
 import todoapp.api.TodoListId;
@@ -11,6 +12,7 @@ import todoapp.api.TodoListId;
  */
 @Value
 @Builder(toBuilder = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class TodoList {
 
   /**
@@ -18,6 +20,7 @@ public class TodoList {
    */
   @NonNull
   @Builder.Default
+  @EqualsAndHashCode.Include
   TodoListId todoListId = TodoListId.builder().build();
 
   /**
