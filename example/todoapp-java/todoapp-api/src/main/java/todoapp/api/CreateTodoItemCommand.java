@@ -29,4 +29,9 @@ public class CreateTodoItemCommand {
    */
   @NonNull
   String label;
+
+  /**
+   * The status of the TodoItem.
+   */
+  boolean completed;
 }

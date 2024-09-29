@@ -35,6 +35,12 @@ public interface CommandHandler<C, R> {
     List<Object> events;
 
     /**
+     * The commands to execute after handling the command.
+     */
+    @Singular
+    List<Object> commands;
+
+    /**
      * Creates an empty outcome.
      *
      * @return an empty outcome
