@@ -23,12 +23,12 @@ jobs:
       - name: Build article-pdf
         run: asciidoctor-pdf -r asciidoctor-diagram article/article.adoc -D dist -o codebase-metamodel-article.pdf
       - name: Upload article-pdf
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: article-pdf
           path: dist/codebase-metamodel-article.pdf
       - name: Upload article-website
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: article-website
           path: dist/article
